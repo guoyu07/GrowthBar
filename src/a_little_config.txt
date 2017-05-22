@@ -1,0 +1,4 @@
+jdbcUrl = jdbc:mysql://localhost/GrowthBar?characterEncoding=utf8&zeroDateTimeBehavior=convertToNull
+user = root
+password =
+devMode = true
