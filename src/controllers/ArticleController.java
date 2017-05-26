@@ -12,11 +12,9 @@ import utils.TimeUtils;
 
 public class ArticleController extends Controller {
 
-	private ArticleServices articleServices;
+	private ArticleServices articleServices = new ArticleServices();
 
 	public void index() {
-		// 分页查询，前端故需分页显示
-		//setAttr("articles", Article.dao.paginate(getParaToInt(0, 1), 10));
 		render("Art_index.html");
 	}
 
@@ -27,30 +25,39 @@ public class ArticleController extends Controller {
 
 	public void save() {
 		Article article = new Article();
+		
+		// TODO 从session中读取用户信息
 		article.setUserId(getPara("user_id"));
 		article.setArtContent(getPara("art_content"));
 		article.setArtName(getPara("art_name"));
-		article.setPostTime(TimeUtils.getFormatTime());
+		article.setPostTime(TimeUtils.getCurrentTime());
 		article.save();
-		render("Art_index.html");
+		
+		setAttr("status", 1);
+		renderJson();
 	}
 
 	public void query() {
 		// 均使用分页查询
 		String artName = getPara("artName");
-		setAttr("queryResults", articleServices.queryByArtName(artName));
-
+		if(null != artName){
+			setAttr("queryResults", articleServices.queryByArtName(artName));
+		}
+		
 		String userId = getPara("userId");
-		setAttr("queryResults", articleServices.queryByUserId(userId));
+		if(null != userId){
+			setAttr("queryResults", articleServices.queryByUserId(userId));
+		}
+		renderJson();
 	}
 	
 	public void viewArticles(){
 		Page<Article> articlesPage = null;
 		if(null != getParaToInt("pageNum")){
 			int pageNumber = getParaToInt("pageNum");
-			articlesPage = Article.dao.paginate(pageNumber, 5);
+			articlesPage = articleServices.paginate(pageNumber, 5);
 		}else{
-			articlesPage = Article.dao.paginate(1, 5);
+			articlesPage = articleServices.paginate(1, 5);
 		}
 		List<Article> articleList = articlesPage.getList();
 		setAttr("articles", articleList);
@@ -59,9 +66,9 @@ public class ArticleController extends Controller {
 	
 	public void viewArticle(){
 		int artId = getParaToInt("artId");
-		Article article = Article.dao.findArticleById(artId);
+		Article article = articleServices.findArticleById(artId);
 		setAttr("article", article);
-		renderJson();;
+		renderJson();
 	}
 
 	public static void main(String[] args) {

@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.jfinal.core.Controller;
 import com.jfinal.core.JFinal;
+import com.jfinal.plugin.activerecord.Page;
 
 import common.model.Article;
 import services.ArticleServices;
@@ -60,9 +61,16 @@ public class AdminArticleController extends Controller{
 	}
 	
 	public void viewArticles(){
-		List<Article> articles = Article.dao.findArticles();
-		setAttr("articles", articles);
-		renderJson();
+		Page<Article> articlesPage = null;
+		if(null != getParaToInt("pageNum")){
+			int pageNumber = getParaToInt("pageNum");
+			articlesPage = articleServices.paginate(pageNumber, 5);
+		}else{
+			articlesPage = articleServices.paginate(1, 5);
+		}
+		List<Article> articleList = articlesPage.getList();
+		setAttr("articles", articleList);
+		renderJson();	
 	}
 
 	public static void main(String[] args) {

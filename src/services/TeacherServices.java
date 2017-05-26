@@ -9,10 +9,21 @@
  */
 package services;
 
+import java.util.List;
+
+import common.model.Teacher;
 
 /**
  * 
  */
 public class TeacherServices {
+	
+	public List<Teacher> findTeachers(){
+		return Teacher.dao.find("SELECT * FROM teacher");
+	}
+	
+	public Teacher findTeacher(int teacherId){
+		return Teacher.dao.findById(teacherId);
+	}
 
 }

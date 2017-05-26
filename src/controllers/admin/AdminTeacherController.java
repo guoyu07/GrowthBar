@@ -10,7 +10,6 @@ import common.model.Teacher;
 public class AdminTeacherController extends Controller {
 
 	public void index() {
-		setAttr("teachers", Teacher.dao.findTeachers());
 		render("viewTeachers.html");
 	}
 
@@ -42,7 +41,6 @@ public class AdminTeacherController extends Controller {
 	}
 	
 	public void viewTeachers(){
-		setAttr("teachers", Teacher.dao.findTeachers());
 		renderJson();
 	}
 }
