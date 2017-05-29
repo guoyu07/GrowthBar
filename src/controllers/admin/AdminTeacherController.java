@@ -1,13 +1,18 @@
 package controllers.admin;
 
+import java.util.List;
+
 import com.jfinal.core.Controller;
 
 import common.model.Teacher;
+import services.TeacherServices;
 
 /**
  * 
  */
 public class AdminTeacherController extends Controller {
+	
+	private TeacherServices teacherServices = new TeacherServices();
 
 	public void index() {
 		render("viewTeachers.html");
@@ -17,30 +22,43 @@ public class AdminTeacherController extends Controller {
 	}
 
 	public void save() {
-		getModel(Teacher.class).save();
-		redirect("/admin/teacher");
+		if(getModel(Teacher.class).save()){
+			setAttr("status", true);
+		}else{
+			setAttr("status", false);
+		}
+		renderJson();
 	}
 
 	public void update() {
-		getModel(Teacher.class).update();
-		redirect("/admin/teacher");
-	}
-
-	public void edit() {
-		setAttr("teacher", Teacher.dao.findById(getParaToInt()));
-		render("admin_Teacher_edit.html");
+		if(getModel(Teacher.class).update()){
+			setAttr("status",true);
+		}else{
+			setAttr("status", false);
+		}
+		renderJson();
 	}
 
 	public void delete() {
-		Teacher.dao.deleteById(getParaToInt());
-		redirect("/admin/teacher");
+		if(Teacher.dao.deleteById(getParaToInt("teacherId"))){
+			setAttr("status", true);
+		}else{
+			setAttr("status", false);
+		}
+		renderJson();
+		
 	}
 
-	public void query() {
-
+	public void getTeachers(){
+		List<Teacher> teachers = teacherServices.findTeachers();
+		setAttr("teachers", teachers);
+		renderJson();
 	}
 	
-	public void viewTeachers(){
+	public void getTeacher(){
+		int teacherId = getParaToInt("teacherId");
+		Teacher teacher = teacherServices.findTeacher(teacherId);
+		setAttr("teacher", teacher);
 		renderJson();
 	}
 }

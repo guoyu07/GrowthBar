@@ -31,33 +31,37 @@ public class AdminArticleController extends Controller{
 		Article article = getModel(Article.class);
 		article.setPostTime(TimeUtils.getFormatTime());
 		article.save();
-		redirect("/admin/article");
+		setAttr("article", article);
+		setAttr("status", true);
+		renderJson();
 	}
 
 	public void delete() {
-		Article.dao.deleteById(getParaToInt());
-		redirect("/admin/article");
+		Article.dao.deleteById(getParaToInt("artId"));
+		setAttr("status", true);
+		renderJson();
 	}
 
 	public void update() {
 		Article article = getModel(Article.class);
 		article.setPostTime(TimeUtils.getFormatTime());
 		article.update();
-		redirect("/admin/article");
-	}
-
-	public void edit() {
-		setAttr("article", Article.dao.findById(getParaToInt()));
-		render("admin_Article_edit.html");
+		setAttr("status", true);
+		renderJson();
 	}
 
 	public void query() {
 		// 均使用分页查询
 		String artName = getPara("artName");
-		setAttr("queryResults", articleServices.queryByArtName(artName));
-
+		if(null != artName){
+			setAttr("queryResults", articleServices.queryByArtName(artName));
+		}
+		
 		String userId = getPara("userId");
-		setAttr("queryResults", articleServices.queryByUserId(userId));
+		if(null != userId){
+			setAttr("queryResults", articleServices.queryByUserId(userId));
+		}
+		renderJson();
 	}
 	
 	public void viewArticles(){
