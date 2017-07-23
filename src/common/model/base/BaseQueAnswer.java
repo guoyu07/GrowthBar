@@ -18,40 +18,40 @@ public abstract class BaseQueAnswer<M extends BaseQueAnswer<M>> extends Model<M>
 		return get("que_id");
 	}
 
-	public M setAnswerOne(java.lang.String answerOne) {
-		set("answer_one", answerOne);
+	public M setOne(java.lang.String one) {
+		set("one", one);
 		return (M)this;
 	}
 
-	public java.lang.String getAnswerOne() {
-		return get("answer_one");
+	public java.lang.String getOne() {
+		return get("one");
 	}
 
-	public M setAnswerTwo(java.lang.String answerTwo) {
-		set("answer_two", answerTwo);
+	public M setTwo(java.lang.String two) {
+		set("two", two);
 		return (M)this;
 	}
 
-	public java.lang.String getAnswerTwo() {
-		return get("answer_two");
+	public java.lang.String getTwo() {
+		return get("two");
 	}
 
-	public M setAnswerThree(java.lang.String answerThree) {
-		set("answer_three", answerThree);
+	public M setThree(java.lang.String three) {
+		set("three", three);
 		return (M)this;
 	}
 
-	public java.lang.String getAnswerThree() {
-		return get("answer_three");
+	public java.lang.String getThree() {
+		return get("three");
 	}
 
-	public M setAnswerFour(java.lang.String answerFour) {
-		set("answer_four", answerFour);
+	public M setFour(java.lang.String four) {
+		set("four", four);
 		return (M)this;
 	}
 
-	public java.lang.String getAnswerFour() {
-		return get("answer_four");
+	public java.lang.String getFour() {
+		return get("four");
 	}
 
 }

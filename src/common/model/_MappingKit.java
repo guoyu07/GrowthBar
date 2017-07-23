@@ -22,8 +22,10 @@ public class _MappingKit {
 		// Composite Primary Key order: comment_time,post_id,user_id
 		arp.addMapping("postbar_comment", "comment_time,post_id,user_id", PostbarComment.class);
 		arp.addMapping("que_answer", "que_id", QueAnswer.class);
-		arp.addMapping("query", "que_id", Query.class);
+		arp.addMapping("question", "que_id", Question.class);
 		arp.addMapping("teacher", "teacher_id", Teacher.class);
+		arp.addMapping("user_appointment", "appointment_id", UserAppointment.class);
+		arp.addMapping("user_information", "id", UserInformation.class);
 	}
 }
 

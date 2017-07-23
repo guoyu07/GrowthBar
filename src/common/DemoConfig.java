@@ -21,7 +21,7 @@ public class DemoConfig extends JFinalConfig {
 	@Override
 	public void configConstant(Constants me) {
 		me.setEncoding("utf-8");
-		PropKit.use("a_little_config.txt");
+		PropKit.use("a_little_config.properties");
 		me.setDevMode(PropKit.getBoolean("devMode", true));
 	}
 
