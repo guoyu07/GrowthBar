@@ -51,30 +51,39 @@ public class AdminArticleController extends Controller{
 	}
 
 	public void query() {
-		// 均使用分页查询
+		Integer pageNum = getParaToInt("pageNum");
+		int pageNumber = null == pageNum ? 1 : pageNum;
 		String artName = getPara("artName");
-		if(null != artName){
-			setAttr("queryResults", articleServices.queryByArtName(artName));
+		if (null != artName) {
+			setAttr("queryResults", articleServices.queryByArtName(artName, pageNumber, 5));
 		}
-		
+
 		String userId = getPara("userId");
-		if(null != userId){
-			setAttr("queryResults", articleServices.queryByUserId(userId));
+		if (null != userId && !"".equals(userId)) {
+			setAttr("queryResults", articleServices.queryByUserId(userId, pageNumber, 5));
 		}
 		renderJson();
 	}
-	
-	public void viewArticles(){
+
+	public void viewArticles() {
+
 		Page<Article> articlesPage = null;
-		if(null != getParaToInt("pageNum")){
-			int pageNumber = getParaToInt("pageNum");
-			articlesPage = articleServices.paginate(pageNumber, 5);
-		}else{
-			articlesPage = articleServices.paginate(1, 5);
-		}
+		Integer pageNum = getParaToInt("pageNum");
+		int pageNumber = null == pageNum ? 1 : pageNum;
+		articlesPage = articleServices.paginate(pageNumber, 5);
+
 		List<Article> articleList = articlesPage.getList();
 		setAttr("articles", articleList);
-		renderJson();	
+		renderJson();
+	}
+
+	public void viewArticle() {
+		Integer artId = getParaToInt("artId");
+		if (null != artId) {
+			Article article = articleServices.findArticleById(artId);
+			setAttr("article", article);
+		}
+		renderJson();
 	}
 
 	public static void main(String[] args) {

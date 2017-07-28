@@ -7,7 +7,5 @@ import common.model.base.BaseTeacher;
  */
 @SuppressWarnings("serial")
 public class Teacher extends BaseTeacher<Teacher> {
-	
 	public static final Teacher dao = new Teacher().dao();
-	
 }

@@ -9,22 +9,49 @@ import com.jfinal.plugin.activerecord.IBean;
 @SuppressWarnings({"serial", "unchecked"})
 public abstract class BaseActivity<M extends BaseActivity<M>> extends Model<M> implements IBean {
 
-	public M setActivityId(java.lang.Integer activityId) {
+	public M setActivityId(Integer activityId) {
 		set("activity_id", activityId);
 		return (M)this;
 	}
 
-	public java.lang.Integer getActivityId() {
+	public Integer getActivityId() {
 		return get("activity_id");
 	}
 
-	public M setActivityContent(java.lang.String activityContent) {
+	public M setActivityContent(String activityContent) {
 		set("activity_content", activityContent);
 		return (M)this;
 	}
 
-	public java.lang.String getActivityContent() {
+	public String getActivityContent() {
 		return get("activity_content");
+	}
+
+	public M setActivityPlace(String activityPlace) {
+		set("activity_place", activityPlace);
+		return (M)this;
+	}
+
+	public String getActivityPlace() {
+		return get("activity_place");
+	}
+
+	public M setActivityTime(Integer activityTime) {
+		set("activity_time", activityTime);
+		return (M)this;
+	}
+
+	public Integer getActivityTime() {
+		return get("activity_time");
+	}
+
+	public M setStatus(Integer status) {
+		set("status", status);
+		return (M)this;
+	}
+
+	public Integer getStatus() {
+		return get("status");
 	}
 
 }

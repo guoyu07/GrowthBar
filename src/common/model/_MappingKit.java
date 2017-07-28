@@ -17,15 +17,14 @@ public class _MappingKit {
 
 	public static void mapping(ActiveRecordPlugin arp) {
 		arp.addMapping("activity", "activity_id", Activity.class);
-		arp.addMapping("article", "art_id", Article.class);
-		arp.addMapping("postbar", "postbar_id", Postbar.class);
-		// Composite Primary Key order: comment_time,post_id,user_id
-		arp.addMapping("postbar_comment", "comment_time,post_id,user_id", PostbarComment.class);
+		arp.addMapping("appointment", "appointment_id", Appointment.class);
+		arp.addMapping("article", "article_id", Article.class);
+		arp.addMapping("comment", "comment_id", Comment.class);
+		arp.addMapping("post", "post_id", Post.class);
 		arp.addMapping("que_answer", "que_id", QueAnswer.class);
-		arp.addMapping("question", "que_id", Question.class);
+		arp.addMapping("question", "question_id", Question.class);
 		arp.addMapping("teacher", "teacher_id", Teacher.class);
-		arp.addMapping("user_appointment", "appointment_id", UserAppointment.class);
-		arp.addMapping("user_information", "id", UserInformation.class);
+		arp.addMapping("user_information", "user_id", UserInformation.class);
 	}
 }
 

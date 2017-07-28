@@ -4,9 +4,8 @@ package services;
 import com.jfinal.plugin.activerecord.Page;
 
 import common.model.Article;
-/**
- * 
- */
+
+
 public class ArticleServices {
 	
 	public Page<Article> paginate(int pageNumber, int pageSize) {
@@ -14,15 +13,16 @@ public class ArticleServices {
 	}
 	
 	public Article findArticleById(int artId){
+
 		return Article.dao.findById(artId);
 	}
 	
-	public Page<Article> queryByUserId(String userId) {
-		return Article.dao.paginate(1, 10, "select * ", "from article where user_id = ?", userId);
+	public Page<Article> queryByUserId(String userId,int pageNum, int pageSize) {
+		return Article.dao.paginate(pageNum, pageSize, "select * ", "from article where user_id = ?", userId);
 	}
 
-	public Page<Article> queryByArtName(String artName) {
-		return Article.dao.paginate(1, 10, "select * ", "from article where art_name like ?", artName);
+	public Page<Article> queryByArtName(String artName,int pageNum,int pageSize) {
+		return Article.dao.paginate(pageNum, pageSize, "select * ", "from article where art_name like ?", artName);
 	}
 	
 }

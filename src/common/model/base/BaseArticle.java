@@ -9,49 +9,58 @@ import com.jfinal.plugin.activerecord.IBean;
 @SuppressWarnings({"serial", "unchecked"})
 public abstract class BaseArticle<M extends BaseArticle<M>> extends Model<M> implements IBean {
 
-	public M setArtId(java.lang.Integer artId) {
-		set("art_id", artId);
+	public M setArticleId(Integer articleId) {
+		set("article_id", articleId);
 		return (M)this;
 	}
 
-	public java.lang.Integer getArtId() {
-		return get("art_id");
+	public Integer getArticleId() {
+		return get("article_id");
 	}
 
-	public M setArtName(java.lang.String artName) {
-		set("art_name", artName);
+	public M setArticleTitle(String articleTitle) {
+		set("article_title", articleTitle);
 		return (M)this;
 	}
 
-	public java.lang.String getArtName() {
-		return get("art_name");
+	public String getArticleTitle() {
+		return get("article_title");
 	}
 
-	public M setUserId(java.lang.String userId) {
-		set("user_id", userId);
+	public M setUserAccount(String userAccount) {
+		set("user_account", userAccount);
 		return (M)this;
 	}
 
-	public java.lang.String getUserId() {
-		return get("user_id");
+	public String getUserAccount() {
+		return get("user_account");
 	}
 
-	public M setArtContent(java.lang.String artContent) {
-		set("art_content", artContent);
+	public M setArticleContent(String articleContent) {
+		set("article_content", articleContent);
 		return (M)this;
 	}
 
-	public java.lang.String getArtContent() {
-		return get("art_content");
+	public String getArticleContent() {
+		return get("article_content");
 	}
 
-	public M setPostTime(java.lang.String postTime) {
+	public M setPostTime(String postTime) {
 		set("post_time", postTime);
 		return (M)this;
 	}
 
-	public java.lang.String getPostTime() {
+	public String getPostTime() {
 		return get("post_time");
+	}
+
+	public M setStatus(Integer status) {
+		set("status", status);
+		return (M)this;
+	}
+
+	public Integer getStatus() {
+		return get("status");
 	}
 
 }
