@@ -46,33 +46,14 @@ public class AdminArticleController extends Controller{
 		Article article = getModel(Article.class);
 		article.setPostTime(TimeUtils.getFormatTime());
 		article.update();
+		setAttr("article",article);
 		setAttr("status", true);
-		renderJson();
-	}
-
-	public void query() {
-		Integer pageNum = getParaToInt("pageNum");
-		int pageNumber = null == pageNum ? 1 : pageNum;
-		String artName = getPara("artName");
-		if (null != artName) {
-			setAttr("queryResults", articleServices.queryByArtName(artName, pageNumber, 5));
-		}
-
-		String userId = getPara("userId");
-		if (null != userId && !"".equals(userId)) {
-			setAttr("queryResults", articleServices.queryByUserId(userId, pageNumber, 5));
-		}
 		renderJson();
 	}
 
 	public void viewArticles() {
 
-		Page<Article> articlesPage = null;
-		Integer pageNum = getParaToInt("pageNum");
-		int pageNumber = null == pageNum ? 1 : pageNum;
-		articlesPage = articleServices.paginate(pageNumber, 5);
-
-		List<Article> articleList = articlesPage.getList();
+		List<Article> articleList = articleServices.findAllArticles();
 		setAttr("articles", articleList);
 		renderJson();
 	}

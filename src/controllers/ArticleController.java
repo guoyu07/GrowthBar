@@ -30,13 +30,14 @@ public class ArticleController extends Controller {
 		Article article = new Article();
 
 		// TODO 从session中读取用户信息
-		article.setUserId(getPara("user_id"));
-		article.setArtContent(getPara("art_content"));
-		article.setArtName(getPara("art_name"));
+		article.setUserAccount(getPara("user_id"));
+		article.setArticleContent(getPara("art_content"));
+		article.setArticleTitle(getPara("art_name"));
 		article.setPostTime(TimeUtils.getCurrentTime());
 		article.save();
 
-		setAttr("status", 1);
+		setAttr("status", true);
+		setAttr("article",article);
 		renderJson();
 	}
 

@@ -5,6 +5,7 @@ import com.jfinal.plugin.activerecord.Page;
 
 import common.model.Article;
 
+import java.util.List;
 
 public class ArticleServices {
 	
@@ -23,6 +24,10 @@ public class ArticleServices {
 
 	public Page<Article> queryByArtName(String artName,int pageNum,int pageSize) {
 		return Article.dao.paginate(pageNum, pageSize, "select * ", "from article where art_name like ?", artName);
+	}
+
+	public List<Article> findAllArticles() {
+		return paginate(1,10000).getList();
 	}
 	
 }
