@@ -34,7 +34,7 @@ public class ArticleController extends Controller {
 		article.setArticleContent(getPara("art_content"));
 		article.setArticleTitle(getPara("art_name"));
 		article.setPostTime(TimeUtils.getCurrentTime());
-		article.save();
+		articleServices.save(article);
 
 		setAttr("status", true);
 		setAttr("article",article);
@@ -71,7 +71,7 @@ public class ArticleController extends Controller {
 	public void viewArticle() {
 		Integer artId = getParaToInt("artId");
 		if (null != artId) {
-			Article article = articleServices.findArticleById(artId);
+			Article article = articleServices.select(artId);
 			setAttr("article", article);
 		}
 		renderJson();

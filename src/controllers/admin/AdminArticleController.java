@@ -53,7 +53,7 @@ public class AdminArticleController extends Controller{
 
 	public void viewArticles() {
 
-		List<Article> articleList = articleServices.findAllArticles();
+		List<Article> articleList = articleServices.selectList();
 		setAttr("articles", articleList);
 		renderJson();
 	}
@@ -61,7 +61,7 @@ public class AdminArticleController extends Controller{
 	public void viewArticle() {
 		Integer artId = getParaToInt("artId");
 		if (null != artId) {
-			Article article = articleServices.findArticleById(artId);
+			Article article = articleServices.select(artId);
 			setAttr("article", article);
 		}
 		renderJson();
