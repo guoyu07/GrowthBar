@@ -9,49 +9,58 @@ import com.jfinal.plugin.activerecord.IBean;
 @SuppressWarnings({"serial", "unchecked"})
 public abstract class BasePost<M extends BasePost<M>> extends Model<M> implements IBean {
 
-	public M setPostId(Integer postId) {
+	public M setPostId(java.lang.Integer postId) {
 		set("post_id", postId);
 		return (M)this;
 	}
 
-	public Integer getPostId() {
+	public java.lang.Integer getPostId() {
 		return get("post_id");
 	}
 
-	public M setPostTitle(String postTitle) {
+	public M setPostTitle(java.lang.String postTitle) {
 		set("post_title", postTitle);
 		return (M)this;
 	}
 
-	public String getPostTitle() {
+	public java.lang.String getPostTitle() {
 		return get("post_title");
 	}
 
-	public M setPostContent(String postContent) {
+	public M setPostContent(java.lang.String postContent) {
 		set("post_content", postContent);
 		return (M)this;
 	}
 
-	public String getPostContent() {
+	public java.lang.String getPostContent() {
 		return get("post_content");
 	}
 
-	public M setPostTime(Integer postTime) {
+	public M setPostTime(java.lang.Integer postTime) {
 		set("post_time", postTime);
 		return (M)this;
 	}
 
-	public Integer getPostTime() {
+	public java.lang.Integer getPostTime() {
 		return get("post_time");
 	}
 
-	public M setUserAccount(String userAccount) {
+	public M setUserAccount(java.lang.String userAccount) {
 		set("user_account", userAccount);
 		return (M)this;
 	}
 
-	public String getUserAccount() {
+	public java.lang.String getUserAccount() {
 		return get("user_account");
+	}
+
+	public M setPostStatus(java.lang.Integer postStatus) {
+		set("post_status", postStatus);
+		return (M)this;
+	}
+
+	public java.lang.Integer getPostStatus() {
+		return get("post_status");
 	}
 
 }

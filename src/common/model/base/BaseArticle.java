@@ -9,57 +9,57 @@ import com.jfinal.plugin.activerecord.IBean;
 @SuppressWarnings({"serial", "unchecked"})
 public abstract class BaseArticle<M extends BaseArticle<M>> extends Model<M> implements IBean {
 
-	public M setArticleId(Integer articleId) {
+	public M setArticleId(java.lang.Integer articleId) {
 		set("article_id", articleId);
 		return (M)this;
 	}
 
-	public Integer getArticleId() {
+	public java.lang.Integer getArticleId() {
 		return get("article_id");
 	}
 
-	public M setArticleTitle(String articleTitle) {
+	public M setArticleTitle(java.lang.String articleTitle) {
 		set("article_title", articleTitle);
 		return (M)this;
 	}
 
-	public String getArticleTitle() {
+	public java.lang.String getArticleTitle() {
 		return get("article_title");
 	}
 
-	public M setUserAccount(String userAccount) {
+	public M setUserAccount(java.lang.String userAccount) {
 		set("user_account", userAccount);
 		return (M)this;
 	}
 
-	public String getUserAccount() {
+	public java.lang.String getUserAccount() {
 		return get("user_account");
 	}
 
-	public M setArticleContent(String articleContent) {
+	public M setArticleContent(java.lang.String articleContent) {
 		set("article_content", articleContent);
 		return (M)this;
 	}
 
-	public String getArticleContent() {
+	public java.lang.String getArticleContent() {
 		return get("article_content");
 	}
 
-	public M setPostTime(String postTime) {
+	public M setPostTime(java.lang.String postTime) {
 		set("post_time", postTime);
 		return (M)this;
 	}
 
-	public String getPostTime() {
+	public java.lang.String getPostTime() {
 		return get("post_time");
 	}
 
-	public M setStatus(Integer status) {
+	public M setStatus(java.lang.Integer status) {
 		set("status", status);
 		return (M)this;
 	}
 
-	public Integer getStatus() {
+	public java.lang.Integer getStatus() {
 		return get("status");
 	}
 

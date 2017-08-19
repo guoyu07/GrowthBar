@@ -9,57 +9,57 @@ import com.jfinal.plugin.activerecord.IBean;
 @SuppressWarnings({"serial", "unchecked"})
 public abstract class BaseTeacher<M extends BaseTeacher<M>> extends Model<M> implements IBean {
 
-	public M setTeacherId(Integer teacherId) {
+	public M setTeacherId(java.lang.Integer teacherId) {
 		set("teacher_id", teacherId);
 		return (M)this;
 	}
 
-	public Integer getTeacherId() {
+	public java.lang.Integer getTeacherId() {
 		return get("teacher_id");
 	}
 
-	public M setTeacherName(String teacherName) {
+	public M setTeacherName(java.lang.String teacherName) {
 		set("teacher_name", teacherName);
 		return (M)this;
 	}
 
-	public String getTeacherName() {
+	public java.lang.String getTeacherName() {
 		return get("teacher_name");
 	}
 
-	public M setTeacherMotto(String teacherMotto) {
+	public M setTeacherMotto(java.lang.String teacherMotto) {
 		set("teacher_motto", teacherMotto);
 		return (M)this;
 	}
 
-	public String getTeacherMotto() {
+	public java.lang.String getTeacherMotto() {
 		return get("teacher_motto");
 	}
 
-	public M setTeacherTel(String teacherTel) {
+	public M setTeacherTel(java.lang.String teacherTel) {
 		set("teacher_tel", teacherTel);
 		return (M)this;
 	}
 
-	public String getTeacherTel() {
+	public java.lang.String getTeacherTel() {
 		return get("teacher_tel");
 	}
 
-	public M setTeacherEmail(String teacherEmail) {
+	public M setTeacherEmail(java.lang.String teacherEmail) {
 		set("teacher_email", teacherEmail);
 		return (M)this;
 	}
 
-	public String getTeacherEmail() {
+	public java.lang.String getTeacherEmail() {
 		return get("teacher_email");
 	}
 
-	public M setTeacherDesc(String teacherDesc) {
+	public M setTeacherDesc(java.lang.String teacherDesc) {
 		set("teacher_desc", teacherDesc);
 		return (M)this;
 	}
 
-	public String getTeacherDesc() {
+	public java.lang.String getTeacherDesc() {
 		return get("teacher_desc");
 	}
 

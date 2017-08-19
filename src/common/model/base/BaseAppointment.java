@@ -9,58 +9,67 @@ import com.jfinal.plugin.activerecord.IBean;
 @SuppressWarnings({"serial", "unchecked"})
 public abstract class BaseAppointment<M extends BaseAppointment<M>> extends Model<M> implements IBean {
 
-	public M setAppointmentId(Integer appointmentId) {
+	public M setAppointmentId(java.lang.Integer appointmentId) {
 		set("appointment_id", appointmentId);
 		return (M)this;
 	}
 
-	public Integer getAppointmentId() {
+	public java.lang.Integer getAppointmentId() {
 		return get("appointment_id");
 	}
 
-	public M setActivityId(Integer activityId) {
+	public M setActivityId(java.lang.Integer activityId) {
 		set("activity_id", activityId);
 		return (M)this;
 	}
 
-	public Integer getActivityId() {
+	public java.lang.Integer getActivityId() {
 		return get("activity_id");
 	}
 
-	public M setUserAccount(String userAccount) {
+	public M setUserAccount(java.lang.String userAccount) {
 		set("user_account", userAccount);
 		return (M)this;
 	}
 
-	public String getUserAccount() {
+	public java.lang.String getUserAccount() {
 		return get("user_account");
 	}
 
-	public M setUserNum(Integer userNum) {
-		set("user_num", userNum);
+	public M setDescription(java.lang.String description) {
+		set("description", description);
 		return (M)this;
 	}
 
-	public Integer getUserNum() {
-		return get("user_num");
+	public java.lang.String getDescription() {
+		return get("description");
 	}
 
-	public M setUserTel(String userTel) {
+	public M setUserTel(java.lang.String userTel) {
 		set("user_tel", userTel);
 		return (M)this;
 	}
 
-	public String getUserTel() {
+	public java.lang.String getUserTel() {
 		return get("user_tel");
 	}
 
-	public M setStatus(Integer status) {
+	public M setStatus(java.lang.Integer status) {
 		set("status", status);
 		return (M)this;
 	}
 
-	public Integer getStatus() {
+	public java.lang.Integer getStatus() {
 		return get("status");
+	}
+
+	public M setTime(java.lang.Integer time) {
+		set("time", time);
+		return (M)this;
+	}
+
+	public java.lang.Integer getTime() {
+		return get("time");
 	}
 
 }

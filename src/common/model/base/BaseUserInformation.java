@@ -9,67 +9,76 @@ import com.jfinal.plugin.activerecord.IBean;
 @SuppressWarnings({"serial", "unchecked"})
 public abstract class BaseUserInformation<M extends BaseUserInformation<M>> extends Model<M> implements IBean {
 
-	public M setUserId(Integer userId) {
+	public M setUserId(java.lang.Integer userId) {
 		set("user_id", userId);
 		return (M)this;
 	}
 
-	public Integer getUserId() {
+	public java.lang.Integer getUserId() {
 		return get("user_id");
 	}
 
-	public M setUserAccount(String userAccount) {
+	public M setUserAccount(java.lang.String userAccount) {
 		set("user_account", userAccount);
 		return (M)this;
 	}
 
-	public String getUserAccount() {
+	public java.lang.String getUserAccount() {
 		return get("user_account");
 	}
 
-	public M setUserPassword(String userPassword) {
+	public M setUserPassword(java.lang.String userPassword) {
 		set("user_password", userPassword);
 		return (M)this;
 	}
 
-	public String getUserPassword() {
+	public java.lang.String getUserPassword() {
 		return get("user_password");
 	}
 
-	public M setUserPhone(String userPhone) {
+	public M setUserPhone(java.lang.String userPhone) {
 		set("user_phone", userPhone);
 		return (M)this;
 	}
 
-	public String getUserPhone() {
+	public java.lang.String getUserPhone() {
 		return get("user_phone");
 	}
 
-	public M setUserSex(Integer userSex) {
+	public M setUserSex(java.lang.Integer userSex) {
 		set("user_sex", userSex);
 		return (M)this;
 	}
 
-	public Integer getUserSex() {
+	public java.lang.Integer getUserSex() {
 		return get("user_sex");
 	}
 
-	public M setUserDescription(String userDescription) {
+	public M setUserDescription(java.lang.String userDescription) {
 		set("user_description", userDescription);
 		return (M)this;
 	}
 
-	public String getUserDescription() {
+	public java.lang.String getUserDescription() {
 		return get("user_description");
 	}
 
-	public M setUserTruename(String userTruename) {
+	public M setUserTruename(java.lang.String userTruename) {
 		set("user_truename", userTruename);
 		return (M)this;
 	}
 
-	public String getUserTruename() {
+	public java.lang.String getUserTruename() {
 		return get("user_truename");
+	}
+
+	public M setUserStatus(java.lang.Integer userStatus) {
+		set("user_status", userStatus);
+		return (M)this;
+	}
+
+	public java.lang.Integer getUserStatus() {
+		return get("user_status");
 	}
 
 }

@@ -21,14 +21,14 @@ public class TeacherController extends Controller{
 	}
 	
 	public void getTeachers(){
-		List<Teacher> teachers = teacherServices.findTeachers();
+		List<Teacher> teachers = teacherServices.selectList();
 		setAttr("teachers", teachers);
 		renderJson();
 	}
 	
 	public void getTeacher(){
 		int teacherId = getParaToInt("teacherId");
-		Teacher teacher = teacherServices.findTeacher(teacherId);
+		Teacher teacher = teacherServices.select(teacherId);
 		setAttr("teacher", teacher);
 		renderJson();
 	}

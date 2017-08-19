@@ -9,49 +9,58 @@ import com.jfinal.plugin.activerecord.IBean;
 @SuppressWarnings({"serial", "unchecked"})
 public abstract class BaseActivity<M extends BaseActivity<M>> extends Model<M> implements IBean {
 
-	public M setActivityId(Integer activityId) {
+	public M setActivityId(java.lang.Integer activityId) {
 		set("activity_id", activityId);
 		return (M)this;
 	}
 
-	public Integer getActivityId() {
+	public java.lang.Integer getActivityId() {
 		return get("activity_id");
 	}
 
-	public M setActivityContent(String activityContent) {
+	public M setActivityContent(java.lang.String activityContent) {
 		set("activity_content", activityContent);
 		return (M)this;
 	}
 
-	public String getActivityContent() {
+	public java.lang.String getActivityContent() {
 		return get("activity_content");
 	}
 
-	public M setActivityPlace(String activityPlace) {
+	public M setActivityPlace(java.lang.String activityPlace) {
 		set("activity_place", activityPlace);
 		return (M)this;
 	}
 
-	public String getActivityPlace() {
+	public java.lang.String getActivityPlace() {
 		return get("activity_place");
 	}
 
-	public M setActivityTime(Integer activityTime) {
+	public M setActivityTime(java.lang.Integer activityTime) {
 		set("activity_time", activityTime);
 		return (M)this;
 	}
 
-	public Integer getActivityTime() {
+	public java.lang.Integer getActivityTime() {
 		return get("activity_time");
 	}
 
-	public M setStatus(Integer status) {
+	public M setStatus(java.lang.Integer status) {
 		set("status", status);
 		return (M)this;
 	}
 
-	public Integer getStatus() {
+	public java.lang.Integer getStatus() {
 		return get("status");
+	}
+
+	public M setActivityCompere(java.lang.String activityCompere) {
+		set("activity_compere", activityCompere);
+		return (M)this;
+	}
+
+	public java.lang.String getActivityCompere() {
+		return get("activity_compere");
 	}
 
 }

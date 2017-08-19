@@ -9,58 +9,67 @@ import com.jfinal.plugin.activerecord.IBean;
 @SuppressWarnings({"serial", "unchecked"})
 public abstract class BaseComment<M extends BaseComment<M>> extends Model<M> implements IBean {
 
-	public M setCommentId(Integer commentId) {
+	public M setCommentId(java.lang.Integer commentId) {
 		set("comment_id", commentId);
 		return (M)this;
 	}
 
-	public Integer getCommentId() {
+	public java.lang.Integer getCommentId() {
 		return get("comment_id");
 	}
 
-	public M setPostId(Integer postId) {
+	public M setPostId(java.lang.Integer postId) {
 		set("post_id", postId);
 		return (M)this;
 	}
 
-	public Integer getPostId() {
+	public java.lang.Integer getPostId() {
 		return get("post_id");
 	}
 
-	public M setUserAccount(String userAccount) {
+	public M setUserAccount(java.lang.String userAccount) {
 		set("user_account", userAccount);
 		return (M)this;
 	}
 
-	public String getUserAccount() {
+	public java.lang.String getUserAccount() {
 		return get("user_account");
 	}
 
-	public M setCommentContent(String commentContent) {
+	public M setCommentContent(java.lang.String commentContent) {
 		set("comment_content", commentContent);
 		return (M)this;
 	}
 
-	public String getCommentContent() {
+	public java.lang.String getCommentContent() {
 		return get("comment_content");
 	}
 
-	public M setCommentTime(Integer commentTime) {
+	public M setCommentTime(java.lang.Integer commentTime) {
 		set("comment_time", commentTime);
 		return (M)this;
 	}
 
-	public Integer getCommentTime() {
+	public java.lang.Integer getCommentTime() {
 		return get("comment_time");
 	}
 
-	public M setStatus(Integer status) {
+	public M setStatus(java.lang.Integer status) {
 		set("status", status);
 		return (M)this;
 	}
 
-	public Integer getStatus() {
+	public java.lang.Integer getStatus() {
 		return get("status");
+	}
+
+	public M setParentId(java.lang.Integer parentId) {
+		set("parent_id", parentId);
+		return (M)this;
+	}
+
+	public java.lang.Integer getParentId() {
+		return get("parent_id");
 	}
 
 }

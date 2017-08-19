@@ -9,30 +9,30 @@ import com.jfinal.plugin.activerecord.IBean;
 @SuppressWarnings({"serial", "unchecked"})
 public abstract class BaseQuestion<M extends BaseQuestion<M>> extends Model<M> implements IBean {
 
-	public M setQuestionId(Integer questionId) {
+	public M setQuestionId(java.lang.Integer questionId) {
 		set("question_id", questionId);
 		return (M)this;
 	}
 
-	public Integer getQuestionId() {
+	public java.lang.Integer getQuestionId() {
 		return get("question_id");
 	}
 
-	public M setQuestionContent(String questionContent) {
+	public M setQuestionContent(java.lang.String questionContent) {
 		set("question_content", questionContent);
 		return (M)this;
 	}
 
-	public String getQuestionContent() {
+	public java.lang.String getQuestionContent() {
 		return get("question_content");
 	}
 
-	public M setQuestionTrueAnswer(Integer questionTrueAnswer) {
+	public M setQuestionTrueAnswer(java.lang.Integer questionTrueAnswer) {
 		set("question_true_answer", questionTrueAnswer);
 		return (M)this;
 	}
 
-	public Integer getQuestionTrueAnswer() {
+	public java.lang.Integer getQuestionTrueAnswer() {
 		return get("question_true_answer");
 	}
 
