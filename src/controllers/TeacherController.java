@@ -20,16 +20,23 @@ public class TeacherController extends Controller{
 		render("teacher_info.html");
 	}
 	
-	public void getTeachers(){
+	public void viewTeachers(){
 		List<Teacher> teachers = teacherServices.selectList();
 		setAttr("teachers", teachers);
+		setAttr("status",true);
 		renderJson();
 	}
 	
-	public void getTeacher(){
-		int teacherId = getParaToInt("teacherId");
-		Teacher teacher = teacherServices.select(teacherId);
-		setAttr("teacher", teacher);
+	public void viewTeacher(){
+		Integer teacherId = getParaToInt("teacherId");
+		if(null == teacherId) {
+			setAttr("status",false);
+		} else {
+			Teacher teacher = teacherServices.select(teacherId);
+			setAttr("teacher", teacher);
+			setAttr("status",true);
+
+		}
 		renderJson();
 	}
 	

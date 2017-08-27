@@ -26,21 +26,28 @@ public class ArticleController extends Controller {
 		render("Art_edit.html");
 	}
 
+	/**
+	 * 发表文章
+	 */
 	public void save() {
 		Article article = new Article();
 
 		// TODO 从session中读取用户信息
-		article.setUserAccount(getPara("user_id"));
-		article.setArticleContent(getPara("art_content"));
-		article.setArticleTitle(getPara("art_name"));
-		article.setPostTime(TimeUtils.getCurrentTime());
-		articleServices.save(article);
+		//article.setUserAccount(getPara("user_id"));
 
-		setAttr("status", true);
+		article.setArticleContent(getPara("art_content"));
+		article.setArticleTitle(getPara("art_title"));
+		article.setPostTime(TimeUtils.getCurrentTime());
+		boolean saveSuccess = articleServices.save(article);
+
+		setAttr("status", saveSuccess);
 		setAttr("article",article);
 		renderJson();
 	}
 
+	/**
+	 * 查询相关文章
+	 */
 	public void query() {
 		Integer pageNum = getParaToInt("pageNum");
 		int pageNumber = null == pageNum ? 1 : pageNum;
@@ -56,6 +63,9 @@ public class ArticleController extends Controller {
 		renderJson();
 	}
 
+	/**
+	 * 预览文章列表
+	 */
 	public void viewArticles() {
 
 		Page<Article> articlesPage = null;
@@ -65,14 +75,21 @@ public class ArticleController extends Controller {
 
 		List<Article> articleList = articlesPage.getList();
 		setAttr("articles", articleList);
+		setAttr("status",true);
 		renderJson();
 	}
 
+	/**
+	 * 查看某篇文章
+	 */
 	public void viewArticle() {
 		Integer artId = getParaToInt("artId");
 		if (null != artId) {
 			Article article = articleServices.select(artId);
 			setAttr("article", article);
+			setAttr("false",true);
+		} else {
+			setAttr("status",false);
 		}
 		renderJson();
 	}

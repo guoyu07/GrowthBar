@@ -9,7 +9,7 @@ import java.util.List;
 public class ArticleServices implements BaseService<Article> {
 
 	public Page<Article> paginate(int pageNumber, int pageSize) {
-		return Article.dao.paginate(pageNumber, pageSize, "select article_id,article_name",
+		return Article.dao.paginate(pageNumber, pageSize, "select article_id,article_title",
 				"from article order by post_time desc");
 	}
 
