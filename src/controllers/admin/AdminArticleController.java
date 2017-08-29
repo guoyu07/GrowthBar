@@ -23,50 +23,6 @@ public class AdminArticleController extends Controller{
 		render("viewArticles.html");
 	}
 
-	public void add() {
-		render("admin_Article_add.html");
-	}
-
-	public void save() {
-		Article article = getModel(Article.class);
-		article.setPostTime(TimeUtils.getFormatTime());
-		article.save();
-		setAttr("article", article);
-		setAttr("status", true);
-		renderJson();
-	}
-
-	public void delete() {
-		Article.dao.deleteById(getParaToInt("artId"));
-		setAttr("status", true);
-		renderJson();
-	}
-
-	public void update() {
-		Article article = getModel(Article.class);
-		article.setPostTime(TimeUtils.getFormatTime());
-		article.update();
-		setAttr("article",article);
-		setAttr("status", true);
-		renderJson();
-	}
-
-	public void viewArticles() {
-
-		List<Article> articleList = articleServices.selectList();
-		setAttr("articles", articleList);
-		renderJson();
-	}
-
-	public void viewArticle() {
-		Integer artId = getParaToInt("artId");
-		if (null != artId) {
-			Article article = articleServices.select(artId);
-			setAttr("article", article);
-		}
-		renderJson();
-	}
-
 	public static void main(String[] args) {
 		JFinal.start("WebRoot", 80, "/", 5);
 	}

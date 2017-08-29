@@ -9,19 +9,24 @@ import java.util.List;
 public class ArticleServices implements BaseService<Article> {
 
 	public Page<Article> paginate(int pageNumber, int pageSize) {
-		return Article.dao.paginate(pageNumber, pageSize, "select article_id,article_title",
-				"from article order by post_time desc");
+		return Article.dao
+				.paginate(pageNumber, pageSize, "select article_id,article_title,user_account",
+						"from article order by post_time desc");
 	}
 
 	public Page<Article> queryByUserId(String userId, int pageNum, int pageSize) {
-		return Article.dao
-				.paginate(pageNum, pageSize, "select * ", "from article where user_id = ?", userId);
+		return Article.dao.paginate(pageNum, pageSize, "select * ",
+				"from article where status = 1 and user_account = ?", userId);
+	}
+
+	public Page<Article> queryOwnSavedArticles(String userId, int pageNum, int pageSize) {
+		return Article.dao.paginate(pageNum, pageSize, "select * ",
+				"from article where status = 0 and user_account = ?",userId);
 	}
 
 	public Page<Article> queryByArtName(String artName, int pageNum, int pageSize) {
-		return Article.dao
-				.paginate(pageNum, pageSize, "select * ", "from article where art_name like ?",
-						artName);
+		return Article.dao.paginate(pageNum, pageSize, "select * ",
+				"from article where status = 1 and art_name like ?", artName);
 	}
 
 	@Override
