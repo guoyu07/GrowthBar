@@ -10,8 +10,24 @@
     <script type="text/javascript" src="js/jquery.js"></script>
     <script type="text/javascript">
     $(document).on('click','.register',function () {
-    window.location.href='index.html'
-    })
+      alert(1);
+      var dataInf = $("#formInf").serialize();
+      $.ajax({
+        url:'',
+        type:'POST',
+        dataType:'JSON',
+        data:dataInf,
+        success:function(){
+            alert(text);
+            window.location.href='index.html';
+        },
+        error: function(XMLHttpRequest, textStatus, errorThrown) {
+            alert(XMLHttpRequest.responseText);
+            alert(XMLHttpRequest.readyState);
+            alert(textStatus);
+        },
+      })
+    });
     </script>
   </head>
   <body>
@@ -64,44 +80,44 @@
     <div class="container-fluid">
     <div class="thumbnail Czb_borderBlank row">
       <div class="caption Czb_login_width" style="border: none;">
-        <form class="form-horizontal">
+        <form class="form-horizontal" id="formInf">
           <div class="form-group">
             <label for="inputEmail3" class="col-xs-3 control-label">用户名</label>
             <div class="col-xs-9">
-              <input type="user_id" class="form-control" id="inputEmail3" placeholder="Account">
+              <input type="text" class="form-control" name="userId" placeholder="Account">
             </div>
           </div>
           <div class="form-group">
             <label for="inputPassword3" class="col-xs-3 control-label">密码</label>
             <div class="col-xs-9">
-              <input type="user_password" class="form-control" id="inputPassword3" placeholder="Password">
+              <input type="password" class="form-control" name="userPassword" placeholder="Password">
             </div>
           </div>
           <div class="form-group">
             <label for="inputPassword3" class="col-xs-3 control-label">真实姓名</label>
             <div class="col-xs-9">
-              <input type="user_trueName" class="form-control" id="inputPassword3" placeholder="TrueName">
+              <input type="text" class="form-control" name="userName" placeholder="TrueName">
             </div>
           </div>
           <div class="form-group">
             <label for="inputPassword3" class="col-xs-3 control-label">联系方式</label>
             <div class="col-xs-9">
-              <input type="user_phone" class="form-control" id="inputPassword3" placeholder="Phone number">
+              <input type="text" class="form-control" name="userTel" placeholder="Phone number">
             </div>
           </div>
           <div class="form-group">
             <label for="inputPassword3" class="col-xs-3 control-label">性别</label>
             <div class="col-xs-9">
-              <select class="form-control">
-                <option>男</option>
-                <option>女</option>
+              <select class="form-control" name="userGender">
+                <option value="M">男</option>
+                <option value="F">女</option>
               </select>
             </div>
           </div>
           <div class="form-group">
             <label for="inputPassword3" class="col-xs-3 control-label">个人简介</label>
             <div class="col-xs-9">
-              <textarea class="form-control" rows="3" placeholder="Personal Information"></textarea>
+              <textarea class="form-control" rows="3" name="userDesc" placeholder="Personal Information"></textarea>
             </div>
           </div>
         </form>
