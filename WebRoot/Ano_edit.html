@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>匿名贴吧</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/Cheng_Zhangba.css" rel="stylesheet">
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="js/AnoEdit.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function(){
+      var str=''
+      str +=('<li class="list-group-item"><a href="#">'+'在电子科大就读是怎么样一种体验'+'</a></li>')
+      $("#addAnoTopic").html(str)
+    })
+      $(document).on("click","#submitTopic",function(){
+        var anoTopic=$("#anoTopic").val()
+        var userId=$("#userId").html()
+        window.location.href='Ano_index.html'
+      })
+    </script>
+</head>
+<body>
+  <nav class="navbar navbar-default">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="index.html">主页</a>
+      </div>
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav">
+          <li><a href="Art_index.html">美文鉴赏</a></li>
+          <li><a href="Ano_index.html">匿名贴吧</a></li>
+          <li><a href="#">心理测试</a></li>
+          <li><a href="Online_index.html">在线预约</a></li>
+          <li><a href="teacher_info.html">心灵导师</a></li>
+        </ul>
+        <form class="navbar-form navbar-left">
+          <div class="form-group">
+            <input type="text" class="form-control" placeholder="帖子">
+          </div>
+          <button type="submit" class="btn btn-default">搜索</button>
+        </form>
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="Ano_talk.html" id="postMeg">发帖</a></li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+</div>
+</nav>
+<div class="row Czb_margin_padding">
+<div class="col-sm-1 col-xs-1">
+</div>
+<div>
+  <div class="col-sm-2 col-xs-2">
+    <img src="image/Ano14.jpg" alt="..." class="img-thumbnail Czb_borderBlank Czb_usetcFormat">
+  </div>
+  <div class="col-sm-1 col-xs-1">
+    <img src="image/Ano15.jpg" alt="..." class="img-thumbnail Czb_borderBlank Czb_usetcFormat">
+  </div>
+  <div class="col-sm-4 col-xs-4 Czb_text">
+    <h3 class="text-center"><small>敞开心扉，畅所欲言</small></h3>
+  </div>
+  <div class="col-sm-2 col-xs-2">
+    <img src="image/Ano17.jpg" alt="..." class="img-thumbnail Czb_borderBlank Czb_usetcFormat">
+  </div>
+  <div class="col-sm-2 col-xs-2">
+    <img src="image/Ano18.jpg" alt="..." class="img-thumbnail Czb_borderBlank Czb_usetcFormat">
+  </div>
+</div>
+</div>
+<div class="Czb_Submit_blank"></div>
+<h2 id="userId" hidden>userId</h2>
+<div>
+  <div class="col-sm-3 col-xs-3">
+    <h2 class="Czb_margin_padding text-right"><small>发起话题</small></h2>
+  </div>
+  <div class="col-sm-6 col-xs-6">
+  <textarea class="form-control" rows="1" id="anoTopic"></textarea>
+  </div>
+  <div class="col-sm-3 col-xs-3">
+    <button class="btn btn-default" id="submitTopic">提交</button>
+  </div>
+</div>
+<div class="Czb_Ano_editblank"></div>
+<div class="col-sm-3 col-xs-3"><h2 class="text-right Czb_margin_padding"><small>热门讨论帖</small></h2></div>
+<div class="col-sm-6 col-xs-6">
+  <ul class="list-group" id="addAnoTopic">
+  </ul>
+</div>
+</body>
+</html>

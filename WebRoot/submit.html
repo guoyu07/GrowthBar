@@ -7,111 +7,109 @@
     <title>成长吧注册页面</title>
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/Cheng_Zhangba.css" rel="stylesheet">
-        <script>
-        document.getElementById('btn').onclick = function(){
-            var text1 = document.getElementById('userId').innerHTML;
-            var text2 = document.getElementById('userPassword').innerHTML;
-            var str = text1 + ',' + text2;
-            alert(text1+text2)
-            setCookie('result',str,365);
-        };
-         
-        document.getElementById('btn2').onclick = function(){
-            if(checkCookie()){
-                var str = getCookie('result');
-                var arr = str.split(',');
-                 
-                document.getElementById('userId').innerHTML = arr[0];
-                document.getElementById('userPassword').innerHTML = arr[1];
-            }
-        };
-     
-        function setCookie(c_name,value,expiredays){
-            var exdate=new Date();
-            exdate.setDate(exdate.getDate()+expiredays);
-            document.cookie=c_name+ "=" +escape(value)+((expiredays==null) ? "" : ";expires="+exdate.toGMTString());
-        }
-         
-        function getCookie(c_name){
-            if(document.cookie.length>0){
-                c_start=document.cookie.indexOf(c_name + "=");
-                  if(c_start!=-1){ 
-                    c_start=c_start + c_name.length+1;
-                    c_end=document.cookie.indexOf(";",c_start);
-                if(c_end==-1) c_end=document.cookie.length;
-                    return unescape(document.cookie.substring(c_start,c_end));
-                } 
-              }
-            return "";
-        }
-         
-        function checkCookie(){
-            var username=getCookie('result')
-            if(username!=null && username!=""){return true;}
-            else{
-                return false;
-            }
-        }
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript">
+    $(document).on('click','.register',function () {
+    window.location.href='index.html'
+    })
     </script>
   </head>
-<body class="Czb_backColor">
-<div>
-	<img src="image/25.jpg" alt="logo" class="Czb_firstImage">
-</div>
-<div class="Czb_signFormat Czb_backColor">
-  <p class="Czb_font_center">注册界面</p>
-</div>
-<div class="thumbnail Czb_borderBlank Czb_backColor">
-      <div class="caption Czb_login_width">
-      <form class="form-horizontal">
-  <div class="form-group">
-    <label for="inputEmail3" class="col-sm-3 control-label" id="userId">用户名</label>
-    <div class="col-sm-9">
-      <input type="user_id" class="form-control" id="inputEmail3" placeholder="Account">
-    </div>
-  </div>
-  <div class="form-group">
-    <label for="inputPassword3" class="col-sm-3 control-label" id="userPassword">密码</label>
-    <div class="col-sm-9">
-      <input type="user_password" class="form-control" id="inputPassword3" placeholder="Password">
-    </div>
-  </div>
-    <div class="form-group">
-    <label for="inputPassword3" class="col-sm-3 control-label">真实姓名</label>
-    <div class="col-sm-9">
-      <input type="user_trueName" class="form-control" id="inputPassword3" placeholder="TrueName">
-    </div>
-  </div>
-    <div class="form-group">
-    <label for="inputPassword3" class="col-sm-3 control-label">联系方式</label>
-    <div class="col-sm-9">
-      <input type="user_phone" class="form-control" id="inputPassword3" placeholder="Phone number">
-    </div>
-  </div>
-    <div class="form-group">
-    <label for="inputPassword3" class="col-sm-3 control-label">性别</label>
-    <div class="col-sm-9">
-      <select class="form-control">
-      <option>男</option>
-      <option>女</option>
-</select>
-    </div>
-  </div>
-      <div class="form-group">
-    <label for="inputPassword3" class="col-sm-3 control-label">个人简介</label>
-    <div class="col-sm-9">
-    <textarea class="form-control" rows="3" placeholder="Personal Information"></textarea>
-    </div>
-  </div>
-  <div class="form-group">
-    <div class="col-sm-offset-3 col-sm-9">
-      <button type="submit" class="btn btn-default" id="btn">注册</button>
-      <button type="submit" class="btn btn-default" id="btn2">查看</button>
-    </div>
-  </div>
-</form>
+  <body>
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="index.html">主页</a>
+        </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav">
+            <li><a href="Art_index.html">美文鉴赏</a></li>
+            <li><a href="Ano_index.html">匿名贴吧</a></li>
+            <li><a href="Exam_index.html">心理测试</a></li>
+            <li><a href="Online_index.html">在线预约</a></li>
+            <li><a href="teacher_info.html">心灵导师</a></li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li id="getUserID"><a>昵称</a></li>
+          </ul>
+        </div>
+        </div>
+    </nav>
+    <div class="row Czb_margin_padding" id="#artMeg">
+      <div class="col-xs-1 col-md-1">
+      </div>
+      <div>
+        <div class="col-xs-2 col-md-2">
+          <img src="image/online1.jpg" alt="..." class="img-thumbnail Czb_borderBlank Czb_usetcFormat">
+        </div>
+        <div class="col-xs-1 col-md-1">
+          <img src="image/online2.jpg" alt="..." class="img-thumbnail Czb_borderBlank Czb_usetcFormat">
+        </div>
+        <div class="col-xs-4 col-md-4 Czb_text">
+          <h3 class="text-center"><small>欢迎注册</small></h3>
+        </div>
+        <div class="col-xs-2 col-md-2">
+          <img src="image/online5.jpg" alt="..." class="img-thumbnail Czb_borderBlank Czb_usetcFormat">
+        </div>
+        <div class="col-xs-2 col-md-2">
+          <img src="image/online4.jpg" alt="..." class="img-thumbnail Czb_borderBlank Czb_usetcFormat">
+        </div>
       </div>
     </div>
-
-</body>
+    <div class="container-fluid">
+    <div class="thumbnail Czb_borderBlank row">
+      <div class="caption Czb_login_width" style="border: none;">
+        <form class="form-horizontal">
+          <div class="form-group">
+            <label for="inputEmail3" class="col-xs-3 control-label">用户名</label>
+            <div class="col-xs-9">
+              <input type="user_id" class="form-control" id="inputEmail3" placeholder="Account">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="inputPassword3" class="col-xs-3 control-label">密码</label>
+            <div class="col-xs-9">
+              <input type="user_password" class="form-control" id="inputPassword3" placeholder="Password">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="inputPassword3" class="col-xs-3 control-label">真实姓名</label>
+            <div class="col-xs-9">
+              <input type="user_trueName" class="form-control" id="inputPassword3" placeholder="TrueName">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="inputPassword3" class="col-xs-3 control-label">联系方式</label>
+            <div class="col-xs-9">
+              <input type="user_phone" class="form-control" id="inputPassword3" placeholder="Phone number">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="inputPassword3" class="col-xs-3 control-label">性别</label>
+            <div class="col-xs-9">
+              <select class="form-control">
+                <option>男</option>
+                <option>女</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="inputPassword3" class="col-xs-3 control-label">个人简介</label>
+            <div class="col-xs-9">
+              <textarea class="form-control" rows="3" placeholder="Personal Information"></textarea>
+            </div>
+          </div>
+        </form>
+        <div class="col-xs-12" style="text-align: center;">
+            <button type="submit" class="btn btn-default register">注册</button>    
+        </div>
+      </div>
+    </div>
+  </div>
+  </body>
 </html>

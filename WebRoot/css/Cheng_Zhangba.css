@@ -153,3 +153,22 @@ src:url('font/fzmw.ttf');
 .Czb_editBackground{
   background-color:#FFFFF0;
 }
+
+.Czb_Artapp_blank{
+  width:100%;
+  height: 100px;
+  position: relative;
+}
+
+.Czb_Ano_blank{
+  padding: 2px;
+}
+
+.Czb_Ano_editblank{
+  width:100%;
+  height: 80px;
+}
+
+.Czb_btn_unback{
+  border: none;
+}
