@@ -9,26 +9,17 @@
     <link href="css/Cheng_Zhangba.css" rel="stylesheet">
     <script type="text/javascript" src="js/jquery.js"></script>
     <script type="text/javascript">
-      $(document).ready(function($){
-        var str='<li class="list-group-item col-xs-12" style="text-align:center;">'
-          var queStr=''
-          for (var i = 1; i <= 20; i++) {
-            queStr+=str+i+'.问题XXXXX'+'<br><label><input type="radio" name="ans'+i+'" value=1> A:轻度 <input type="radio" name="ans'+i+'" value=2> B:重度 <input type="radio" name="ans'+i+'" value=3> C：重度 <input type="radio" name="ans'+i+'" value=4> D：你完了 </label></li>'
-          }
-      var str2='<div class="col-sm-12 col-xs-12" style="text-align: center;"><button class="btn btn-default submitAnswer">提交</button></div>'
-      $('#ansAdd').html(queStr+str2)
-        })
       $(document).on('click','.submitAnswer',function(){
       var val=new Array()
       var flag=false
-      for (var i = 0; i < 20; i++) {
+      for (var i = 0; i < 90; i++) {
       str='ans'+(i+1)
       val[i]=$('input[name='+str+']:checked').val()
       if(val[i]==undefined){
       flag=true
       }
       }
-      if (flag) {alert('请检查你的所有选项')} else {
+      if (flag) {alert('请检查你的第几'+(i+1)+'选项')} else {
       alert('恭喜你完成测试，请等待测试结果。')
       window.location.href='index.html'}
       })
@@ -94,10 +85,17 @@
     <div class="thumbnail" style="border: none;">
       <div class="caption">
         <ul class="list-group" id="ansAdd">
+        <li class="list-group-item col-xs-12" style="text-align:center;">
+         1.问题XXXXX<br><label><input type="radio" name="ans1" value=1> A:无影响<input type="radio" name="ans1" value=2> B:轻度 <input type="radio" name="ans1" value=3> C:中度 <input type="radio" name="ans1" value=4> D：重度 <input type="radio" name="ans1" value=5> E：你完了 </label> 
+        </li>
         </ul>
+      </div>
+      <div class="col-xs-12" style="text-align: center;">
+          <button class="btn btn-default">提交</button>
       </div>
     </div>
   </div>
-  <div class="col-xs-2 col-sm-2" id="add"></div>
+  <div class="col-xs-2 col-sm-2">
+  </div>
 </body>
 </html>
