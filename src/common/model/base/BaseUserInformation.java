@@ -45,12 +45,12 @@ public abstract class BaseUserInformation<M extends BaseUserInformation<M>> exte
 		return get("user_phone");
 	}
 
-	public M setUserSex(java.lang.Integer userSex) {
+	public M setUserSex(java.lang.String userSex) {
 		set("user_sex", userSex);
 		return (M)this;
 	}
 
-	public java.lang.Integer getUserSex() {
+	public java.lang.String getUserSex() {
 		return get("user_sex");
 	}
 

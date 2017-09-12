@@ -2,12 +2,7 @@ package routes;
 
 import com.jfinal.config.Routes;
 
-import controllers.ActivityController;
-import controllers.ArticleController;
-import controllers.IndexController;
-import controllers.PostBarCommentController;
-import controllers.PostBarController;
-import controllers.TeacherController;
+import controllers.*;
 
 /**
  * 
@@ -22,7 +17,7 @@ public class FrontRoutes extends Routes{
 		add("/activity",ActivityController.class);
 		add("/postbar",PostBarController.class);
 		add("/postbar-comment",PostBarCommentController.class);
-		
+	    add("/User",UserInformationController.class);
 	}
 
 }

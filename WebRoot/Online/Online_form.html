@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>在线预约</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>在线预约</title>
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/Cheng_Zhangba.css" rel="stylesheet">
+    <script type="text/javascript" src="../js/jquery.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function(){
+      var url = window.location.href.split('?');
+      var str=url[1].split('=');
+      var activityNum=str[1];
+    var activity_id=0;
+      if (activityNum==1) {
+        $("#insertTopic").html('成长吧活动预约');
+        activity_id=1;
+      }
+      else if(activityNum==2){
+        $("#insertTopic").html('525活动预约');
+        activity_id=2;
+      }
+      else if(activityNum==3){
+        $("#insertTopic").html('狼人杀活动预约');
+        activity_id=3;
+      }
+    else if(activityNum==4){
+        $("#insertTopic").html('心理咨询预约');
+        activity_id=4;
+        var str=('<div class="Czb_Ano_editblank"></div></div><div><div class="col-xs-3 col-md-3"><h2 class="Czb_margin_padding text-right"><small>预约时间</small></h2></div><div class="col-xs-6 col-md-6"><textarea class="form-control" rows="1" id="anoTopic"></textarea></div><div class="col-xs-3 col-md-3"></div></div>');
+        $("#addTime").html(str);
+        $("#insertBlank").before('<div class="Czb_Ano_editblank"></div>');
+      }
+    // $.ajax({
+    // url:'',
+    // type:'post',
+    // dataType:'json',
+    // data:{activity_id:activity_id}
+    // success:function(data){
+    // var str=''
+    // $.each(data.activity,function(i,item){
+    // str += item.activity_content
+    // }),
+    // }
+    // })
+    
+    })
+    </script>
+  </head>
+  <body>
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="../index.html">主页</a>
+        </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav">
+            <li><a href="../article/Art_index.html">美文鉴赏</a></li>
+            <li><a href="../Ano/Ano_index.html">匿名贴吧</a></li>
+            <li><a href="#">心理测试</a></li>
+            <li><a href="Online_index.html">在线预约</a></li>
+            <li><a href="../teacher/teacher_info.html">心灵导师</a></li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li id="getUserID"><a>风吹过的夏天</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <div class="row Czb_margin_padding" id="#artMeg">
+      <div class="col-xs-1 col-md-1">
+      </div>
+      <div>
+        <div class="col-xs-2 col-md-2">
+          <img src="../image/online1.jpg" alt="..." class="img-thumbnail Czb_borderBlank Czb_usetcFormat">
+        </div>
+        <div class="col-xs-1 col-md-1">
+          <img src="../image/online2.jpg" alt="..." class="img-thumbnail Czb_borderBlank Czb_usetcFormat">
+        </div>
+        <div class="col-xs-4 col-md-4 Czb_text">
+          <h3 class="text-center"><small>参与活动，放飞明天</small></h3>
+        </div>
+        <div class="col-xs-2 col-md-2">
+          <img src="../image/online5.jpg" alt="..." class="img-thumbnail Czb_borderBlank Czb_usetcFormat">
+        </div>
+        <div class="col-xs-2 col-md-2">
+          <img src="../image/online4.jpg" alt="..." class="img-thumbnail Czb_borderBlank Czb_usetcFormat">
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="col-xs-12 col-md-12">
+        <h2 class="Czb_margin_padding text-center" id="insertTopic"></h2>
+      </div>
+      
+    </div>
+    <div class="Czb_Submit_blank"></div>
+    <div class="container-fluid">
+    <div class="row">
+      <div class="col-xs-3 col-md-3"><h2 class="Czb_margin_padding text-right"><small>姓名</small></h2></div>
+      <div class="col-xs-6 col-md-6">
+        <textarea class="form-control" rows="1" id="anoTopic"></textarea>
+      </div>
+      <div class="col-xs-3 col-md-3">
+      </div>
+    <div class="Czb_Ano_editblank"></div>
+    <div>
+      <div class="col-xs-3 col-md-3"><h2 class="Czb_margin_padding text-right"><small>学号</small></h2></div>
+      <div class="col-xs-6 col-md-6">
+        <textarea class="form-control" rows="1" id="anoTopic"></textarea>
+      </div>
+      <div class="col-xs-3 col-md-3">
+      </div>
+    </div>
+    <div class="Czb_Ano_editblank"></div>
+    <div>
+      <div class="col-xs-3 col-md-3"><h2 class="Czb_margin_padding text-right"><small>联系方式</small></h2></div>
+      <div class="col-xs-6 col-md-6">
+        <textarea class="form-control" rows="1" id="anoTopic"></textarea>
+      </div>
+      <div class="col-xs-3 col-md-3">
+      </div>
+    </div>
+    <div class="Czb_Ano_editblank" id="addTime"></div>
+    <div class="col-md-12 col-xs-12 text-center">
+      <button class="btn btn-default" id="insertBlank">提交</button>
+    </div>
+    </div>
+    </div>
+  </body>
+</html>

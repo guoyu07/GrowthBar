@@ -28,7 +28,6 @@ public class ArticleServices implements BaseService<Article> {
 		return Article.dao.paginate(pageNum, pageSize, "select * ",
 				"from article where status = 1 and art_name like ?", artName);
 	}
-
 	@Override
 	public Article select(int id) {
 		return Article.dao.findById(id);
@@ -47,7 +46,6 @@ public class ArticleServices implements BaseService<Article> {
 			return entity.update();
 		}
 	}
-
 	@Override
 	public Boolean remove(int id) {
 		Article article = select(id);

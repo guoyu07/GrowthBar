@@ -1,18 +1,13 @@
 package controllers;
 
-import java.util.List;
-
 import com.jfinal.core.Controller;
 import com.jfinal.core.JFinal;
 import com.jfinal.plugin.activerecord.Page;
-
 import common.model.Article;
-
 import services.ArticleServices;
 import utils.TimeUtils;
 
-import static common.StatusType.SAVED;
-import static common.StatusType.SUBMITTED;
+import java.util.List;
 
 public class ArticleController extends Controller implements BaseController {
 
@@ -32,30 +27,20 @@ public class ArticleController extends Controller implements BaseController {
 	 * 保存文章 or 发表文章 or 修改文章
 	 */
 	public void save() {
-
-		Article article;
-		Integer artId = getParaToInt("artId", 0);
-		if (isEmptyInteger(artId)) {
-			article = new Article();
-		} else {
-			article = articleServices.select(artId);
-		}
-
 		boolean saveSuccess = false;
+		Article article=new Article();
 		// TODO 从session中读取用户信息
-		//article.setUserAccount(getPara("user_id"));
-		article.setUserAccount("test-user");
-
-		String content = getPara("artContent");
+		String useraccount=getSessionAttr("userid");
+		article.setUserAccount("useraccount");
+		String content = getPara("art_content");
 		article.setArticleContent(content);
-
-		String title = getPara("artTitle");
+		String title = getPara("art_name");
 		article.setArticleTitle(title);
 
-		Integer status = getParaToInt("status");
-		if (SAVED.equals(status) || SUBMITTED.equals(status)) {
-			article.setStatus(status);
-		}
+//		Integer status = getParaToInt("status");
+//		if (SAVED.equals(status) || SUBMITTED.equals(status)) {
+//			article.setStatus(status);
+//		}
 		article.setPostTime(TimeUtils.getCurrentTime());
 
 		saveSuccess = articleServices.save(article);
