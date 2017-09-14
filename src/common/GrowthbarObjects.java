@@ -11,4 +11,10 @@ public interface GrowthbarObjects extends StatusType {
 
 	String NULL_STRING = "";
 
+	Integer UNCOMMITTED = 0;
+
+	Integer SUBMITTED = 1;
+
+	Integer DELETED = -1;
+
 }

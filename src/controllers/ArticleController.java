@@ -153,8 +153,4 @@ public class ArticleController extends Controller implements BaseController {
 		renderJson();
 	}
 
-	public static void main(String[] args) {
-		JFinal.start("WebRoot", 80, "/", 5);
-	}
-
 }
