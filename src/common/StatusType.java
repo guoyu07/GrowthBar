@@ -11,5 +11,6 @@ public interface StatusType {
 
 	Integer SUBMITTED = 1;
 
+	Integer VALID_USER = 1;
 
 }

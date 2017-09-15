@@ -1,9 +1,11 @@
 package controllers;
 
 import com.jfinal.core.Controller;
-import com.jfinal.core.JFinal;
 import com.jfinal.plugin.activerecord.Page;
+
 import common.model.Article;
+import common.model.UserInformation;
+
 import services.ArticleServices;
 import utils.TimeUtils;
 
@@ -28,19 +30,20 @@ public class ArticleController extends Controller implements BaseController {
 	 */
 	public void save() {
 		boolean saveSuccess = false;
-		Article article=new Article();
+		Article article = new Article();
 		// TODO 从session中读取用户信息
-		String useraccount=getSessionAttr("userid");
-		article.setUserAccount("useraccount");
+		UserInformation userInformation = getSessionAttr("user");
+		article.setUserAccount(userInformation.getUserAccount());
 		String content = getPara("art_content");
 		article.setArticleContent(content);
 		String title = getPara("art_name");
 		article.setArticleTitle(title);
 
-//		Integer status = getParaToInt("status");
-//		if (SAVED.equals(status) || SUBMITTED.equals(status)) {
-//			article.setStatus(status);
-//		}
+		Integer status = getParaToInt("status");
+		if (SAVED.equals(status) || SUBMITTED.equals(status)) {
+			article.setStatus(status);
+		}
+
 		article.setPostTime(TimeUtils.getCurrentTime());
 
 		saveSuccess = articleServices.save(article);
