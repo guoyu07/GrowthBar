@@ -16,28 +16,31 @@ public class AppointmentService implements BaseService<Appointment> {
 
 	@Override
 	public List<Appointment> selectList() {
-		return Appointment.dao.find("SELECT * FROM appointment");
+		return Appointment.dao.find("SELECT * FROM appointment WHERE status != -1");
 	}
 
 	/**
 	 * 用户查询所有的预约的历史记录
+	 *
 	 * @param userAccount 用户账号
 	 * @return list
 	 */
 	public List<Appointment> selectListByUser(String userAccount) {
 		return Appointment.dao
-				.find("SELECT * FROM appointment ORDER BY time WHERE user_account = ?",
+				.find("SELECT * FROM appointment WHERE user_account LIKE ? and status != -1 ORDER BY time",
 						userAccount);
 	}
 
 	/**
 	 * 查询活动编号对应的所有预约信息
+	 *
 	 * @param activityId 活动编号
 	 * @return list
 	 */
-	public List<Appointment> slectListByActivity(int activityId) {
+	public List<Appointment> selectListByActivity(int activityId) {
 		return Appointment.dao
-				.find("SELECT * FROM appointment ORDER BY time WHERE activity_id = ?", activityId);
+				.find("SELECT * FROM appointment WHERE activity_id = ? AND status != -1 ORDER BY time ",
+						activityId);
 	}
 
 	@Override

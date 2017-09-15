@@ -63,12 +63,12 @@ public abstract class BaseAppointment<M extends BaseAppointment<M>> extends Mode
 		return get("status");
 	}
 
-	public M setTime(java.lang.Integer time) {
+	public M setTime(java.lang.String time) {
 		set("time", time);
 		return (M)this;
 	}
 
-	public java.lang.Integer getTime() {
+	public java.lang.String getTime() {
 		return get("time");
 	}
 
