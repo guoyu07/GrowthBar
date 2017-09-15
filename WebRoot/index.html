@@ -8,7 +8,17 @@
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/Cheng_Zhangba.css" rel="stylesheet">
     <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="js/jquerysession.js"></script>
     <script type="text/javascript">
+      $(document).ready(function(){
+        var userAccount=$.session.get('userAccount');
+        if (userAccount==null){
+          $("#displayAccount").toggle();
+        }
+        else(){
+          $("#displayAccount").html("<p>"+userAccount+"</p>");
+        }
+      })
       $(document).on('click','.login',function () {
         window.location.href='login.html'
       })
@@ -20,7 +30,7 @@
 <body>
 <div class="container-fluid">
 <div class="row">
-<div class="col-xs-12" style="text-align: right;">
+<div class="col-xs-12" style="text-align: right;" id="displayAccount" hidden>
   <button class="btn btn-default Czb_btn_unback register">注册
   </button>
   <button class="btn btn-default Czb_btn_unback login">登录
