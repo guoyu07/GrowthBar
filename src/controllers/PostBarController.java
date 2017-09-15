@@ -11,10 +11,15 @@ package controllers;
 import com.jfinal.core.Controller;
 
 import common.model.Post;
+import common.model.UserInformation;
 
+import java.util.List;
+
+import javafx.geometry.Pos;
 import services.PostService;
 import utils.DateHelper;
 
+import static common.GrowthbarObjects.SUBMITTED;
 import static common.GrowthbarObjects.UNCOMMITTED;
 
 /**
@@ -22,7 +27,7 @@ import static common.GrowthbarObjects.UNCOMMITTED;
  */
 public class PostBarController extends Controller {
 
-	private PostService postService;
+	private PostService postService = new PostService();
 
 	public void index() {
 		//TODO 贴吧主页
@@ -38,7 +43,8 @@ public class PostBarController extends Controller {
 		Post post = new Post();
 		post.setPostTime(DateHelper.getCurrentTimestamp());
 		//TODO 从session中读取userAccount
-		post.setUserAccount("");
+		UserInformation userInformation = getSessionAttr("user");
+		post.setUserAccount(userInformation.getUserAccount());
 		post.setPostStatus(UNCOMMITTED);
 		post.setPostTitle(title);
 		post.setPostContent(content);
@@ -49,7 +55,68 @@ public class PostBarController extends Controller {
 	}
 
 	public void submit() {
+		Integer postId = getParaToInt("postId");
+		Post post = postService.select(postId);
+		post.setPostStatus(SUBMITTED);
+		boolean saveSuccess = false;
+		saveSuccess = postService.save(post);
+		setAttr("status", saveSuccess);
+		setAttr("post", post);
+		renderJson();
+	}
 
+	public void update() {
+		Integer postId = getParaToInt("postId");
+		String title = getPara("postTitle");
+		String content = getPara("postContent");
+		boolean saveSuccess = false;
+		Post post = new Post();
+		post.setPostTime(DateHelper.getCurrentTimestamp());
+		//TODO 从session中读取userAccount
+		UserInformation userInformation = getSessionAttr("user");
+		post.setPostId(postId);
+		post.setUserAccount(userInformation.getUserAccount());
+		post.setPostStatus(UNCOMMITTED);
+		post.setPostTitle(title);
+		post.setPostContent(content);
+		saveSuccess = postService.save(post);
+
+		setAttr("post", post);
+		setAttr("status", saveSuccess);
+	}
+
+	public void viewAll() {
+		Integer pageNum = getParaToInt("pageNum");
+		Integer pageSize = getParaToInt("pageSize");
+		List<Post> postList = postService.paginate(pageNum, pageSize).getList();
+		setAttr("postList", postList);
+		renderJson();
+	}
+
+	public void viewOwn() {
+		UserInformation userInformation = getSessionAttr("user");
+		List<Post> postList = postService.selectAllPostByUser(userInformation.getUserAccount());
+		setAttr("postList", postList);
+		renderJson();
+	}
+
+	public void viewSingle() {
+		Integer id = getParaToInt("postId");
+		Post post = postService.select(id);
+		setAttr("post", post);
+		renderJson();
+	}
+
+	public void removeOwn() {
+		boolean deleteSuccess = false;
+		Integer id = getParaToInt("postId");
+		Post post = postService.select(id);
+		UserInformation userInformation = getSessionAttr("user");
+		if (userInformation.getUserAccount().equals(post.getUserAccount())) {
+			deleteSuccess = postService.remove(id);
+		}
+
+		setAttr("status", deleteSuccess);
 	}
 
 }
