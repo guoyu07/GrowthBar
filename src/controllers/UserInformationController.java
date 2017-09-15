@@ -4,6 +4,8 @@ import com.jfinal.core.Controller;
 
 import common.model.UserInformation;
 
+import org.eclipse.jetty.server.Authentication;
+
 import services.UserInformationServices;
 
 import javax.imageio.ImageIO;
@@ -32,7 +34,9 @@ public class UserInformationController extends Controller implements BaseControl
 			render("../loginfail.html");
 		else {
 			HttpSession session = getSession();
-			session.setAttribute("user", userInformationList.get(ZERO_INT));
+			UserInformation userInformation = userInformationList.get(ZERO_INT);
+			userInformation.setUserPassword(null);
+			session.setAttribute("user", userInformation);
 			session.setMaxInactiveInterval(60);
 			render("../loginsuccess.html");
 		}
@@ -83,7 +87,7 @@ public class UserInformationController extends Controller implements BaseControl
 			int rand = (int) (Math.random() * 36);
 			rands[i] = chars.charAt(rand);
 		}
-              /*
+			  /*
         * 产生图像
           * 画背景
          */
