@@ -41,7 +41,7 @@ public class PostBarController extends Controller {
 		String content = getPara("postContent");
 
 		Post post = new Post();
-		post.setPostTime(DateHelper.getCurrentTimestamp());
+		post.setPostTime(DateHelper.getDateTime());
 		//TODO 从session中读取userAccount
 		UserInformation userInformation = getSessionAttr("user");
 		post.setUserAccount(userInformation.getUserAccount());
@@ -71,7 +71,7 @@ public class PostBarController extends Controller {
 		String content = getPara("postContent");
 		boolean saveSuccess = false;
 		Post post = new Post();
-		post.setPostTime(DateHelper.getCurrentTimestamp());
+		post.setPostTime(DateHelper.getDateTime());
 		//TODO 从session中读取userAccount
 		UserInformation userInformation = getSessionAttr("user");
 		post.setPostId(postId);

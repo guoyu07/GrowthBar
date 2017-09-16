@@ -1,8 +1,11 @@
 package controllers;
 
 import com.jfinal.core.Controller;
+
 import common.model.UserInformation;
+
 import net.sf.json.JSONObject;
+
 import services.UserInformationServices;
 
 import javax.imageio.ImageIO;
@@ -11,6 +14,7 @@ import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
@@ -22,40 +26,42 @@ public class UserInformationController extends Controller implements BaseControl
 	private UserInformationServices userInformationServices = new UserInformationServices();
 
 	public void Userlogin() {
-		String user_account = getPara("user_id");
-		String user_password = getPara("user_password");
+		JSONObject object = new JSONObject();
+		String user_account = getPara("userAccount");
+		String user_password = getPara("userPassword");
 		List<UserInformation> userInformationList = userInformationServices
 				.find(user_account, user_password);
-		if (isEmptyList(userInformationList))
-			render("../loginfail.html");
-		else {
+		if (isEmptyList(userInformationList)) {
+			object.put("status", false);
+		} else {
 			HttpSession session = getSession();
 			UserInformation userInformation = userInformationList.get(ZERO_INT);
 			userInformation.setUserPassword(null);
 			session.setAttribute("user", userInformation);
-			session.setMaxInactiveInterval(60);
-			render("../loginsuccess.html");
-		}
-	}
-	public void check(){
-		JSONObject object=new JSONObject();
-		boolean status=false;
-		UserInformation user=getSessionAttr("user");
-		String user_account=user.getUserAccount();
-		if(user_account!=null)
-		{
-			status=true;
-			object.put("status",status);
-			object.put("userAccount",user_account);
-		}
-		else
-		{
-			status=false;
-			object.put("status",status);
-			object.put("userAccount",null);
+			session.setMaxInactiveInterval(600);
+			object.put("status", true);
 		}
 		renderJson(object);
 	}
+
+	public void check() {
+		JSONObject object = new JSONObject();
+		boolean status = false;
+		UserInformation user = getSessionAttr("user");
+		if (null == user || null == user.getUserAccount()) {
+			status = false;
+			object.put("status", status);
+			object.put("userAccount", null);
+		} else {
+			status = true;
+			object.put("status", status);
+			object.put("userAccount", user.getUserAccount());
+
+		}
+		renderJson(object);
+
+	}
+
 	public boolean storeuser() {
 		boolean saveSuccess = false;
 		String userAccount = getPara("user_account");
@@ -102,13 +108,13 @@ public class UserInformationController extends Controller implements BaseControl
 			rands[i] = chars.charAt(rand);
 		}
 			  /*
-        * 产生图像
+		* 产生图像
           * 画背景
          */
 		g.setColor(new Color(0xDCDCDC));
 		g.fillRect(0, 0, width, height);
-              /*
-        * 随机产生120个干扰点
+			  /*
+		* 随机产生120个干扰点
          */
 		for (int i = 0; i < 120; i++) {
 			int x = (int) (Math.random() * width);
@@ -142,7 +148,7 @@ public class UserInformationController extends Controller implements BaseControl
 	private void checkCode(HttpServletResponse response, HttpServletRequest request)
 			throws IOException {
 		String info = null;
-        /*获取输入的值*/
+		/*获取输入的值*/
 		String value1 = request.getParameter("name");
          /*获取图片的值*/
 		HttpSession session = request.getSession();

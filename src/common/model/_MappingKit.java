@@ -21,10 +21,9 @@ public class _MappingKit {
 		arp.addMapping("article", "article_id", Article.class);
 		arp.addMapping("comment", "comment_id", Comment.class);
 		arp.addMapping("post", "post_id", Post.class);
-		arp.addMapping("que_answer", "que_id", QueAnswer.class);
-		arp.addMapping("question", "question_id", Question.class);
 		arp.addMapping("teacher", "teacher_id", Teacher.class);
 		arp.addMapping("user_information", "user_id", UserInformation.class);
+		arp.addMapping("exam_result", "exam_id", ExamResult.class);
 	}
 }
 
