@@ -18,7 +18,6 @@ import java.util.List;
 import services.ActivityService;
 import utils.DateHelper;
 
-import static common.GrowthbarObjects.ON_TIME;
 import static common.GrowthbarObjects.OVERDUE;
 
 /**

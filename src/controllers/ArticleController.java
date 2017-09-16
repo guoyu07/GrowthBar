@@ -31,7 +31,6 @@ public class ArticleController extends Controller implements BaseController {
 	public void save() {
 		boolean saveSuccess = false;
 		Article article = new Article();
-		// TODO 从session中读取用户信息
 		UserInformation userInformation = getSessionAttr("user");
 		if (null == userInformation) {
 			setAttr("status", false);
@@ -64,7 +63,8 @@ public class ArticleController extends Controller implements BaseController {
 		String status = getPara("status", "submitted");
 
 		Integer pageNum = getParaToInt("pageNum", 1);
-		String userId = getPara("userId", "");
+		UserInformation userInformation = getSessionAttr("user");
+		String userId = (null == userInformation ? null : userInformation.getUserAccount());
 		if (null != userId && !"".equals(userId)) {
 			if ("submitted".equals(status)) {
 				setAttr("articleList", articleServices.queryByUserId(userId, pageNum, 5));
@@ -93,7 +93,8 @@ public class ArticleController extends Controller implements BaseController {
 			querySuccess = true;
 		}
 
-		String userId = getPara("userId", "");
+		UserInformation userInformation = getSessionAttr("user");
+		String userId = (null == userInformation ? null : userInformation.getUserAccount());
 		if (null != userId && !"".equals(userId)) {
 			setAttr("articleList", articleServices.queryByUserId(userId, pageNum, 5));
 			querySuccess = true;
@@ -149,11 +150,12 @@ public class ArticleController extends Controller implements BaseController {
 	public void delete() {
 
 		//TODO 用户删除权限验证
-
+		UserInformation userInformation = getSessionAttr("user");
+		String userAccount = null == userInformation ? null : userInformation.getUserAccount();
 		Integer artId = getParaToInt("artId", 0);
 		boolean deleteSuccess = false;
 		Article article = articleServices.select(artId);
-		if (null != article) {
+		if (null != article && article.getUserAccount().equals(userAccount)) {
 			deleteSuccess = articleServices.remove(artId);
 			setAttr("article", article);
 		}

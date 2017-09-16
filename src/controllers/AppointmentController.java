@@ -2,6 +2,7 @@ package controllers;
 
 import com.jfinal.core.Controller;
 
+import common.StatusType;
 import common.model.Appointment;
 import common.model.UserInformation;
 
@@ -16,7 +17,7 @@ import static common.GrowthbarObjects.SUBMITTED;
 /**
  * Version:v1.0 (description:  )
  */
-public class AppointmentController extends Controller {
+public class AppointmentController extends Controller implements BaseController {
 
 	private AppointmentService appointmentService = new AppointmentService();
 
@@ -29,7 +30,14 @@ public class AppointmentController extends Controller {
 
 		Integer activityId = getParaToInt("activityId");
 		UserInformation userInformation = getSessionAttr("user");
-		String userAccount = userInformation.getUserAccount();
+		String userAccount = (null == userInformation ? null : userInformation.getUserAccount());
+
+		if(isEmptyString(userAccount)) {
+			setAttr("status",false);
+			renderJson();
+			return;
+		}
+
 		String desc = getPara("desc");
 		String tel = getPara("telephone");
 
@@ -50,7 +58,16 @@ public class AppointmentController extends Controller {
 	}
 
 	public void cancel() {
+
 		Integer id = getParaToInt("appointmentId");
+		UserInformation userInformation = getSessionAttr("user");
+		String userAccount = (null == userInformation ? null : userInformation.getUserAccount());
+
+		if(isEmptyString(userAccount)) {
+			setAttr("status",false);
+			renderJson();
+			return;
+		}
 		boolean deleteSuccess = false;
 		deleteSuccess = appointmentService.remove(id);
 
@@ -62,7 +79,7 @@ public class AppointmentController extends Controller {
 	public void viewOwn() {
 		UserInformation userInformation = getSessionAttr("user");
 		List<Appointment> appointments;
-		if(null != userInformation) {
+		if (null != userInformation) {
 			String userAccount = userInformation.getUserAccount();
 			appointments = appointmentService.selectListByUser(userAccount);
 		} else {
