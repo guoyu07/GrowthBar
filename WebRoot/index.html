@@ -10,14 +10,35 @@
     <script type="text/javascript" src="js/jquery.js"></script>
     <script type="text/javascript" src="js/jquerysession.js"></script>
     <script type="text/javascript">
-      $(document).ready(function(){
-        var userAccount=$.session.get('userAccount');
-        if (userAccount==null){
-          $("#displayAccount").toggle();
-        }
-        else(){
-          $("#displayAccount").html("<p>"+userAccount+"</p>");
-        }
+
+        $(document).ready(function(){
+            var userAccount = "";
+            $.ajax({
+                url:'/User/check',
+                type:'post',
+                dataType:'json',
+                success:function(data) {
+                  if(data.status==true){
+                      userAccount = data.userAccount;
+                      $("#displayAccount").html("<p>"+userAccount+"</p>");
+                      $("#displayAccount").toggle();
+                  }
+                  else{
+
+                      $("#displayAccount").toggle();
+                  }
+            }
+            })
+//            var myName=$.session.get('user');
+//            alert(myName);
+//        var userAccount=$.session.get('user');
+//        alert(userAccount);
+//        if (userAccount==undefined){
+//          $("#displayAccount").toggle();
+//        }
+//        else{
+//          $("#displayAccount").html("<p>"+userAccount+"</p>");
+//        }
       })
       $(document).on('click','.login',function () {
         window.location.href='login.html'

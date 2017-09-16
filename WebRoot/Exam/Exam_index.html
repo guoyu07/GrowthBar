@@ -11,7 +11,6 @@
     <script type="text/javascript" src="../js/jquerysession.js"></script>
     <script type="text/javascript">
       $(document).on('click','.submitAnswer',function(){
-      var userAccount=$.session.get('userAccount');
       var val=new Array();
       var flag=false;
       var quTiHua = 0;
@@ -55,7 +54,7 @@
         url:'',
         type:'POST',
         dataType:'json',
-        data:{userAccount:userAccount,quTiHua:quTiHua,qiangPo:qiangp,jiaoLv:jiaoLv,diDui:diDui,kongBu:kongBu,pianZhi:pianZhi,jingShenBing:jingShenBing,shuiMian:shuiMian},
+        data:{quTiHua:quTiHua,qiangPo:qiangPo,jiaoLv:jiaoLv,diDui:diDui,kongBu:kongBu,pianZhi:pianZhi,jingShenBing:jingShenBing,shuiMian:shuiMian},
         success:function(data){
             if(data.status==true){
                 alert("记录成功");
