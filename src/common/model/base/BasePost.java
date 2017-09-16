@@ -36,12 +36,12 @@ public abstract class BasePost<M extends BasePost<M>> extends Model<M> implement
 		return get("post_content");
 	}
 
-	public M setPostTime(java.lang.Integer postTime) {
+	public M setPostTime(java.lang.String postTime) {
 		set("post_time", postTime);
 		return (M)this;
 	}
 
-	public java.lang.Integer getPostTime() {
+	public java.lang.String getPostTime() {
 		return get("post_time");
 	}
 

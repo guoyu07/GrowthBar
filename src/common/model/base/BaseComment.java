@@ -45,12 +45,12 @@ public abstract class BaseComment<M extends BaseComment<M>> extends Model<M> imp
 		return get("comment_content");
 	}
 
-	public M setCommentTime(java.lang.Integer commentTime) {
+	public M setCommentTime(java.lang.String commentTime) {
 		set("comment_time", commentTime);
 		return (M)this;
 	}
 
-	public java.lang.Integer getCommentTime() {
+	public java.lang.String getCommentTime() {
 		return get("comment_time");
 	}
 
