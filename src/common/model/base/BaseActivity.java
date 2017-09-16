@@ -36,12 +36,12 @@ public abstract class BaseActivity<M extends BaseActivity<M>> extends Model<M> i
 		return get("activity_place");
 	}
 
-	public M setActivityTime(java.lang.Integer activityTime) {
+	public M setActivityTime(java.lang.String activityTime) {
 		set("activity_time", activityTime);
 		return (M)this;
 	}
 
-	public java.lang.Integer getActivityTime() {
+	public java.lang.String getActivityTime() {
 		return get("activity_time");
 	}
 

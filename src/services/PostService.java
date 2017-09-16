@@ -6,6 +6,8 @@ import common.model.Post;
 
 import java.util.List;
 
+import javafx.geometry.Pos;
+
 /**
  * Version:v1.0 (description:  )
  */
@@ -21,14 +23,14 @@ public class PostService implements BaseService<Post> {
 		return Post.dao.find("SELECT * FROM post ORDER BY post_time");
 	}
 
-	public List<Post> selectAllPostByUser(String userAccount) {
-		return Post.dao
-				.find("SELECT * FROM post ORDER BY post_time WHERE user_account = ?", userAccount);
+	public Page<Post> paginate(Integer pageNumber, Integer pageSize) {
+		return Post.dao.paginate(pageNumber, pageSize, "SELECT post_id,post_title,user_account",
+				"FROM post WHERE post_status != -1 and post_status != 0 ORDER BY post_time DESC");
 	}
 
-	public Page<Post> paginate(int pageNum, int pageSize) {
+	public List<Post> selectAllPostByUser(String userAccount) {
 		return Post.dao
-				.paginate(pageNum, pageSize, "SELECT *", "FROM post ORDER BY post_time desc");
+				.find("SELECT * FROM post ORDER BY post_time WHERE user_account LIKE ?", userAccount);
 	}
 
 	@Override

@@ -17,4 +17,8 @@ public interface GrowthbarObjects extends StatusType {
 
 	Integer DELETED = -1;
 
+	Integer ON_TIME = 1;
+
+	Integer OVERDUE = 0;
+
 }
