@@ -1,11 +1,8 @@
 package controllers;
 
 import com.jfinal.core.Controller;
-
 import common.model.UserInformation;
-
-import org.eclipse.jetty.server.Authentication;
-
+import net.sf.json.JSONObject;
 import services.UserInformationServices;
 
 import javax.imageio.ImageIO;
@@ -14,7 +11,6 @@ import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
@@ -41,8 +37,26 @@ public class UserInformationController extends Controller implements BaseControl
 			render("../loginsuccess.html");
 		}
 	}
-
-	public void storeuser() {
+	public void check(){
+		JSONObject object=new JSONObject();
+		boolean status=false;
+		UserInformation user=getSessionAttr("user");
+		String user_account=user.getUserAccount();
+		if(user_account!=null)
+		{
+			status=true;
+			object.put("status",status);
+			object.put("userAccount",user_account);
+		}
+		else
+		{
+			status=false;
+			object.put("status",status);
+			object.put("userAccount",null);
+		}
+		renderJson(object);
+	}
+	public boolean storeuser() {
 		boolean saveSuccess = false;
 		String userAccount = getPara("user_account");
 		String userPassword = getPara("user_password");
@@ -60,8 +74,8 @@ public class UserInformationController extends Controller implements BaseControl
 		userInformation.setUserStatus(VALID_USER);
 		saveSuccess = userInformationServices.save(userInformation);
 		setAttr("status", saveSuccess);
-		setAttr("user", userInformation);
-		renderJson();
+		setAttr("userAccount", userInformation);
+		return saveSuccess;
 	}
 
 	protected void createValidate(HttpServletRequest request, HttpServletResponse response)

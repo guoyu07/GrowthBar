@@ -9,6 +9,7 @@
     <link href="../css/bootstrap.min.css" rel="stylesheet">
     <link href="../css/Cheng_Zhangba.css" rel="stylesheet">
     <script type="text/javascript" src="../js/jquery.js"></script>
+    <script type="text/javascript" src="../js/jquerysession.js"></script>
     <script type="text/javascript">
     $(document).ready(function(){
       var url = window.location.href.split('?');
@@ -30,23 +31,64 @@
     else if(activityNum==4){
         $("#insertTopic").html('心理咨询预约');
         activity_id=4;
-        var str=('<div class="Czb_Ano_editblank"></div></div><div><div class="col-xs-3 col-md-3"><h2 class="Czb_margin_padding text-right"><small>预约时间</small></h2></div><div class="col-xs-6 col-md-6"><textarea class="form-control" rows="1" id="anoTopic"></textarea></div><div class="col-xs-3 col-md-3"></div></div>');
+        var str=('<div class="Czb_Ano_editblank"></div></div><div><div class="col-xs-3 col-md-3"><h2 class="Czb_margin_padding text-right"><small>预约时间</small></h2></div><div class="col-xs-6 col-md-6"><textarea class="form-control" rows="1" id="actTime"></textarea></div><div class="col-xs-3 col-md-3"></div></div>');
         $("#addTime").html(str);
         $("#insertBlank").before('<div class="Czb_Ano_editblank"></div>');
       }
-    // $.ajax({
-    // url:'',
-    // type:'post',
-    // dataType:'json',
-    // data:{activity_id:activity_id}
-    // success:function(data){
-    // var str=''
-    // $.each(data.activity,function(i,item){
-    // str += item.activity_content
-    // }),
-    // }
-    // })
-    
+      })
+    $(document).on('click','#insertBlank',function(){
+      var url = window.location.href.split('?');
+      var str=url[1].split('=');
+      var activityNum=str[1];
+      var userName=$("#userName").val();
+      var userId=$("#userId").val();
+      var userPhone=$("#userPhone").val();
+      var userAccount = $.session.get('userAccount');
+      if ((activityNum==1)||(activityNum==2)||(activityNum==3)){
+        $.ajax({
+          url:'',
+          type:'POST',
+          dataType:'json',
+          data:{userAccount:userAccount,activityNum:activityNum,userName:userName,userId:userId,userPhone:userPhone},
+          success:function(data){
+            if (data.status==true) {
+              alert("预约成功");
+              window.location.href="Online_index.html";
+            }
+            else{
+              alert("请重新提交");
+            }
+          },
+          error: function(XMLHttpRequest, textStatus, errorThrown) {
+            alert(XMLHttpRequest.responseText);
+            alert(XMLHttpRequest.readyState);
+            alert(textStatus);
+        },
+        })
+      }
+      if (activityNum==4){
+          var userTime = $("actTime").val();
+          $.ajax({
+          url:'',
+          type:'POST',
+          dataType:'json',
+          data:{userAccount:userAccount,activityNum:activityNum,userName:userName,userId:userId,userPhone:userPhone,userTime:userTime},
+          success:function(data){
+            if (data.status==true) {
+              alert("预约成功");
+              window.location.href="Online_index.html";
+            }
+            else{
+              alert("请重新提交");
+            }
+          },
+          error: function(XMLHttpRequest, textStatus, errorThrown) {
+            alert(XMLHttpRequest.responseText);
+            alert(XMLHttpRequest.readyState);
+            alert(textStatus);
+        },
+        })
+      }
     })
     </script>
   </head>
@@ -108,7 +150,7 @@
     <div class="row">
       <div class="col-xs-3 col-md-3"><h2 class="Czb_margin_padding text-right"><small>姓名</small></h2></div>
       <div class="col-xs-6 col-md-6">
-        <textarea class="form-control" rows="1" id="anoTopic"></textarea>
+        <textarea class="form-control" rows="1" id="userName"></textarea>
       </div>
       <div class="col-xs-3 col-md-3">
       </div>
@@ -116,7 +158,7 @@
     <div>
       <div class="col-xs-3 col-md-3"><h2 class="Czb_margin_padding text-right"><small>学号</small></h2></div>
       <div class="col-xs-6 col-md-6">
-        <textarea class="form-control" rows="1" id="anoTopic"></textarea>
+        <textarea class="form-control" rows="1" id="userId"></textarea>
       </div>
       <div class="col-xs-3 col-md-3">
       </div>
@@ -125,7 +167,7 @@
     <div>
       <div class="col-xs-3 col-md-3"><h2 class="Czb_margin_padding text-right"><small>联系方式</small></h2></div>
       <div class="col-xs-6 col-md-6">
-        <textarea class="form-control" rows="1" id="anoTopic"></textarea>
+        <textarea class="form-control" rows="1" id="userPhone"></textarea>
       </div>
       <div class="col-xs-3 col-md-3">
       </div>

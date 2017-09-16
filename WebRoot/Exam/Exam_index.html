@@ -8,9 +8,9 @@
     <link href="../css/bootstrap.min.css" rel="stylesheet">
     <link href="../css/Cheng_Zhangba.css" rel="stylesheet">
     <script type="text/javascript" src="../js/jquery.js"></script>
+    <script type="text/javascript" src="../js/jquerysession.js"></script>
     <script type="text/javascript">
       $(document).on('click','.submitAnswer',function(){
-      var userAccount=$.session.get('userAccount');
       var val=new Array();
       var flag=false;
       var quTiHua = 0;
@@ -51,10 +51,10 @@
       jingShenBing = (valInt[6]+valInt[15]+valInt[34]+valInt[61]+valInt[76]+valInt[83]+valInt[84]+valInt[86]+valInt[87]+valInt[89])/10;
       shuiMian = (valInt[18]+valInt[43]+valInt[58]+valInt[59]+valInt[63]+valInt[65]+valInt[88])/7; 
       $.ajax({
-        url:'',
+        url:'/Exam/storeScore',
         type:'POST',
         dataType:'json',
-        data:{userAccount:userAccount,quTiHua:quTiHua,qiangPo:qiangp,jiaoLv:jiaoLv,diDui:diDui,kongBu:kongBu,pianZhi:pianZhi,jingShenBing:jingShenBing,shuiMian:shuiMian},
+        data:{quTiHua:quTiHua,qiangPo:qiangPo,jiaoLv:jiaoLv,diDui:diDui,kongBu:kongBu,pianZhi:pianZhi,jingShenBing:jingShenBing,shuiMian:shuiMian},
         success:function(data){
             if(data.status==true){
                 alert("记录成功");
