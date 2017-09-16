@@ -54,8 +54,8 @@
 //             artId: textContent
 //         },
 //         success: function(data) {
-//             var str = ('<div><h1 class="text-center" >' + data.article.art_name + '</h1><h2 class="text-right">' + data.article.user_id + '&nbsp;&nbsp;<small id="artTime">' + data.article.post_time + '</small></h2><h2 class="text-left " style="  word-break: break-all;word-wrap: break-word;" id="artContent" >' + data.article.art_content + '</h2></div>');
-//             $("#artTitle").html(str);
+            // var str =('<div class="container-fluid"><div class="row"><div class="col-xs-12" style="text-align: center;"><h2>'+data.article.art_name+'</h2><p>'+data.article.user_id+' <small> '+data.article.post_time+'</small></p></div><div class="col-xs-3"></div><div class="col-xs-6"><div class="form-control" style="">'+data.article.art_content+'</div></div><div class="col-xs-3"></div></div></div>'); 
+            // $("#artDisplay").html(str);
 //         },
 //         error: function(XMLHttpRequest, textStatus, errorThrown) {
 //             alert(XMLHttpRequest.responseText);
