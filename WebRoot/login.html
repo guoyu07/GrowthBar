@@ -13,7 +13,7 @@
         var userAccount = $("#userAccount").val();
         var userPassword = $("#userPassword").val();
         $.ajax({
-          url:'',
+          url:'/User/Userlogin',
           type:'POST',
           dataType:'json',
           data:{userAccount:userAccount,userPassword:userPassword},

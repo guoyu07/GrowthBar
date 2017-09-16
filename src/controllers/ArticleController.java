@@ -7,7 +7,7 @@ import common.model.Article;
 import common.model.UserInformation;
 
 import services.ArticleServices;
-import utils.TimeUtils;
+import utils.DateHelper;
 
 import java.util.List;
 
@@ -33,23 +33,28 @@ public class ArticleController extends Controller implements BaseController {
 		Article article = new Article();
 		// TODO 从session中读取用户信息
 		UserInformation userInformation = getSessionAttr("user");
-		article.setUserAccount(userInformation.getUserAccount());
-		String content = getPara("art_content");
-		article.setArticleContent(content);
-		String title = getPara("art_name");
-		article.setArticleTitle(title);
+		if (null == userInformation) {
+			setAttr("status", false);
+		} else {
+			article.setUserAccount(userInformation.getUserAccount());
+			String content = getPara("art_content");
+			article.setArticleContent(content);
+			String title = getPara("art_name");
+			article.setArticleTitle(title);
 
-		Integer status = getParaToInt("status");
-		if (SAVED.equals(status) || SUBMITTED.equals(status)) {
-			article.setStatus(status);
+			//		Integer status = getParaToInt("status");
+			Integer status = SUBMITTED;
+			if (SAVED.equals(status) || SUBMITTED.equals(status)) {
+				article.setStatus(status);
+			}
+
+			article.setPostTime(DateHelper.getDateTime());
+
+			saveSuccess = articleServices.save(article);
+
+			setAttr("article", article);
+			setAttr("status", saveSuccess);
 		}
-
-		article.setPostTime(TimeUtils.getCurrentTime());
-
-		saveSuccess = articleServices.save(article);
-
-		setAttr("status", saveSuccess);
-		setAttr("article", article);
 		renderJson();
 	}
 
