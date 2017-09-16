@@ -2,21 +2,65 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>loginsuccess</title>
-</head>
-<body>
-<script>
-    var t=1;//设定跳转的时间
+    <title>登录成功</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/Cheng_Zhangba.css" rel="stylesheet">
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script>
+    var t=3;//设定跳转的时间
     setInterval("refer()",1000); //启动1秒定时
     function refer(){
         if(t==0){
-            location="/index.html"; //#设定跳转的链接地址
+            location="index.html"; //#设定跳转的链接地址
         }
-        document.getElementById('success').innerHTML="登陆成功"+t+"秒后跳转到主页面"; // 显示倒计时
-        t--; // 计数器递减
-//本文转自：
+        $("#success").html("登陆成功"+t+"秒后跳转到主页面"); // 显示倒计时
+        t--;
     }
 </script>
-<span id="success"></span>
+</head>
+<body>
+ <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="index.html">主页</a>
+        </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav">
+            <li><a href="article/Art_index.html">美文鉴赏</a></li>
+            <li><a href="Ano/Ano_index.html">匿名贴吧</a></li>
+            <li><a href="Exam/Exam_index.html">心理测试</a></li>
+            <li><a href="Online/Online_index.html">在线预约</a></li>
+            <li><a href="teacher/teacher_info.html">心灵导师</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <div class="row Czb_margin_padding" id="#artMeg">
+      <div class="col-sm-1 col-xs-1">
+      </div>
+      <div>
+        <div class="col-sm-2 col-xs-2">
+          <img src="image/online1.jpg" alt="..." class="img-thumbnail Czb_borderBlank Czb_usetcFormat">
+        </div>
+        <div class="col-sm-1 col-xs-1">
+          <img src="image/online2.jpg" alt="..." class="img-thumbnail Czb_borderBlank Czb_usetcFormat">
+        </div>
+        <div class="col-sm-4 col-xs-4 Czb_text">
+          <h3 class="text-center"><small id="success"></small></h3>
+        </div>
+        <div class="col-sm-2 col-xs-2">
+          <img src="image/online5.jpg" alt="..." class="img-thumbnail Czb_borderBlank Czb_usetcFormat">
+        </div>
+        <div class="col-sm-2 col-xs-2">
+          <img src="image/online4.jpg" alt="..." class="img-thumbnail Czb_borderBlank Czb_usetcFormat">
+        </div>
+      </div>
+    </div>
 </body>
 </html>

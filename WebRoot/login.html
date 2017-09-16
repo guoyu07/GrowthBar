@@ -7,6 +7,27 @@
     <title>成长吧登录页面</title>
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/Cheng_Zhangba.css" rel="stylesheet">
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript">
+      $(document).on('click','#loginButton',function(){
+        var userAccount = ("#userAccount").val();
+        var userPassword = ("#userPassword").val();
+        $.ajax({
+          url:'',
+          type:'POST',
+          dataType:'json',
+          data:{userAccount:userAccount,userPassword:userPassword},
+          success:function(data){
+            if(data.status==true){
+              window.location.href="loginsuccess.html";
+            }
+            else{
+              window.location.href="loginfail.html";
+            }
+          }
+        })
+      })
+    </script>
   </head>
 <body>
     <nav class="navbar navbar-default">
@@ -55,19 +76,19 @@
 <div>
 <div class="container">
 <div class="thumbnail Czb_borderBlank ">
-      <div class="caption Czb_login_width">
+      <div class="caption Czb_login_width" style="border:none;">
       <form class="form-horizontal" action="/User/Userlogin">
   <div class="form-group">
-    <label for="inputEmail3" class="col-sm-3 control-label">用户名</label>
+    <label class="col-sm-3 control-label">用户名</label>
     <div class="col-sm-9">
-      <input name="user_id" class="form-control" id="inputEmail3" placeholder="Account">
+      <input type="text" class="form-control" id="userAccount" placeholder="Account">
       <a href="#">登录规则</a>
     </div>
   </div>
   <div class="form-group">
-    <label for="inputPassword3" class="col-sm-3 control-label">密码</label>
+    <label class="col-sm-3 control-label">密码</label>
     <div class="col-sm-9">
-      <input name="user_password" class="form-control" id="inputPassword3" placeholder="Password">
+      <input type="password" class="form-control" id="userPassword" placeholder="Password">
       <a href="#">忘记密码</a>
     </div>
   </div>
@@ -80,18 +101,16 @@
       </div>
     </div>
   </div>
+</form>
   <div class="form-group">
     <div class="col-sm-offset-3 col-sm-9">
-      <button type="submit" class="btn btn-default">登录</button>
+      <button type="submit" class="btn btn-default" id="loginButton">登录</button>
       <button class="btn btn-default">忘记密码</button>
     </div>
   </div>
-</form>
       </div>
     </div>
 </div>
 </div>
-
-
 </body>
 </html>

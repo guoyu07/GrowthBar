@@ -8,38 +8,24 @@
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/Cheng_Zhangba.css" rel="stylesheet">
     <script type="text/javascript" src="js/jquery.js"></script>
-    <script type="text/javascript" src="js/jquerysession.js"></script>
     <script type="text/javascript">
-
-        $(document).ready(function(){
-            var userAccount = "";
-            $.ajax({
-                url:'/User/check',
-                type:'post',
-                dataType:'json',
-                success:function(data) {
-                  if(data.status==true){
-                      userAccount = data.userAccount;
-                      $("#displayAccount").html("<p>"+userAccount+"</p>");
-                      $("#displayAccount").toggle();
-                  }
-                  else{
-
-                      $("#displayAccount").toggle();
-                  }
-            }
-            })
-//            var myName=$.session.get('user');
-//            alert(myName);
-//        var userAccount=$.session.get('user');
-//        alert(userAccount);
-//        if (userAccount==undefined){
-//          $("#displayAccount").toggle();
-//        }
-//        else{
-//          $("#displayAccount").html("<p>"+userAccount+"</p>");
-//        }
+    $(document).ready(function(){
+      $.ajax({
+        url:'/User/check',
+        type:'POST',
+        dataType:'json',
+        success:function(data){
+          if (data.status==true) {
+            var userAccount = data.userAccount;
+            $("#loginAccount").html('<p>'+userAccount+'</p>');
+            $("#loginAccount").toggle();
+          }
+          else{
+            $("#loginAccount").toggle();
+          }
+        },
       })
+    })
       $(document).on('click','.login',function () {
         window.location.href='login.html'
       })
@@ -51,7 +37,7 @@
 <body>
 <div class="container-fluid">
 <div class="row">
-<div class="col-xs-12" style="text-align: right;" id="displayAccount" hidden>
+<div class="col-xs-12" style="text-align: right;" hidden id="loginAccount">
   <button class="btn btn-default Czb_btn_unback register">注册
   </button>
   <button class="btn btn-default Czb_btn_unback login">登录
