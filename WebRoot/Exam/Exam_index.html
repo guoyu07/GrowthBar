@@ -51,7 +51,7 @@
       jingShenBing = (valInt[6]+valInt[15]+valInt[34]+valInt[61]+valInt[76]+valInt[83]+valInt[84]+valInt[86]+valInt[87]+valInt[89])/10;
       shuiMian = (valInt[18]+valInt[43]+valInt[58]+valInt[59]+valInt[63]+valInt[65]+valInt[88])/7; 
       $.ajax({
-        url:'',
+        url:'/Exam/storeScore',
         type:'POST',
         dataType:'json',
         data:{quTiHua:quTiHua,qiangPo:qiangPo,jiaoLv:jiaoLv,diDui:diDui,kongBu:kongBu,pianZhi:pianZhi,jingShenBing:jingShenBing,shuiMian:shuiMian},
