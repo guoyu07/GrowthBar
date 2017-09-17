@@ -13,7 +13,7 @@
     <script type="text/javascript">
     $(document).ready(function(){
     $.ajax({
-    url:'',
+    url:'/User/check',
     type:'POST',
     dataType:'json',
     success:function(data){
@@ -26,7 +26,7 @@
     $("#getUserID").toggle();
     }
     },
-    })
+    });
     var url = window.location.href.split('?');
     var str=url[1].split('=');
     var activityNum=str[1];
@@ -47,7 +47,7 @@
     $("#insertTopic").html('团队活动预约');
     activity_id=4;
     }
-    })
+    });
     $(document).on('click','#insertBlank',function(){
     var url = window.location.href.split('?');
     var str=url[1].split('=');
@@ -75,8 +75,8 @@
     alert(XMLHttpRequest.readyState);
     alert(textStatus);
     },
-    })
-    })
+    });
+    });
     </script>
   </head>
   <body>
@@ -100,8 +100,8 @@
             <li><a href="../teacher/teacher_info.html">心灵导师</a></li>
           </ul>
           <ul class="nav navbar-nav navbar-right" id="getUserID" hidden>
-            <li><a>注册</a></li>
-            <li><a>登录</a></li>
+            <li><a href="../submit.html">注册</a></li>
+            <li><a href="../login.html">登录</a></li>
           </ul>
         </div>
       </div>
