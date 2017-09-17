@@ -58,7 +58,7 @@ $(document).ready(function() {
             $.each(data.postList, function(i, item) {
                 str += ('<li class="list-group-item"><a class="pageGetName" href="#" id="getName' + i + '">' + item.post_title + '<p id="getId' + i + '" hidden>' + item.post_id + '</p></a></li>');
             });
-            $("#anoTitle").html(str);
+            $("#addAnoTopic").html(str);
         },
         error: function(XMLHttpRequest, textStatus, errorThrown) {
             alert(XMLHttpRequest.responseText);

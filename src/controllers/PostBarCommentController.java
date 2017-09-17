@@ -13,6 +13,7 @@ import com.jfinal.core.Controller;
 import common.model.Comment;
 import common.model.UserInformation;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import services.CommentService;
@@ -32,7 +33,12 @@ public class PostBarCommentController extends Controller implements BaseControll
 	public void viewCommentByPost() {
 		Integer postId = getParaToInt("postId");
 		List<Comment> commentList = commentService.selectAllCommentsByPost(postId);
-		setAttr("comments",commentList);
+		List<Comment> comments = new ArrayList<>();
+		for (Comment comment : commentList) {
+			comment.setUserAccount(null);
+			comments.add(comment);
+		}
+		setAttr("comments", commentList);
 		renderJson();
 	}
 
@@ -40,11 +46,11 @@ public class PostBarCommentController extends Controller implements BaseControll
 
 		boolean saveSuccess = false;
 		UserInformation userInformation = getSessionAttr("user");
-		if(null == userInformation) {
-			setAttr("status",false);
+		if (null == userInformation) {
+			setAttr("status", false);
 		} else {
 			Integer postId = getParaToInt("postId");
-			Integer parentId = getParaToInt("parentId",ZERO_INT);
+			Integer parentId = getParaToInt("parentId", ZERO_INT);
 			String commentContent = getPara("content");
 			Comment comment = new Comment();
 			comment.setPostId(postId);
@@ -54,8 +60,8 @@ public class PostBarCommentController extends Controller implements BaseControll
 			comment.setUserAccount(userInformation.getUserAccount());
 			comment.setCommentContent(commentContent);
 			saveSuccess = commentService.save(comment);
-			setAttr("comment",comment);
-			setAttr("status",saveSuccess);
+			setAttr("comment", comment);
+			setAttr("status", saveSuccess);
 		}
 
 		renderJson();

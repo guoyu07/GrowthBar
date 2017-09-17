@@ -1,4 +1,4 @@
-$(document).ready(function($) {
+$(document).ready(function() {
     $.ajax({
         url: '/User/check',
         type: 'POST',
@@ -12,25 +12,25 @@ $(document).ready(function($) {
                 $("#getUserID").toggle();
             }
         },
-    });
+    })
     $.ajax({
-        url: '/postbar/viewAll',
-        type: "POST",
-        dataType: "json",
-        success: function(data) {
-            var str = "";
-            $.each(data.postList, function(i, item) {
-                str += ('<li class="list-group-item"><a class="pageGetName" href="#" id="getName' + i + '">' + item.post_title + '<p id="getId' + i + '" hidden>' + item.post_id + '</p></a></li>');
-            });
-            $("#anoTitle").html(str)
-        },
-        error: function(XMLHttpRequest, textStatus, errorThrown) {
-            alert(XMLHttpRequest.responseText);
-            alert(XMLHttpRequest.readyState);
-            alert(textStatus);
-        },
-    });
-});
+               url: '/postbar/viewAll',
+               type: "POST",
+               dataType: "json",
+               success: function(data) {
+                   var str = "";
+                   $.each(data.postList, function(i, item) {
+                       str += ('<li class="list-group-item"><a class="pageGetName" href="#" id="getName' + i + '">' + item.post_title + '<p id="getId' + i + '" hidden>' + item.post_id + '</p></a></li>');
+                   });
+                   $("#anoTitle").html(str)
+               },
+               error: function(XMLHttpRequest, textStatus, errorThrown) {
+                   alert(XMLHttpRequest.responseText);
+                   alert(XMLHttpRequest.readyState);
+                   alert(textStatus);
+               },
+           });
+})
 $(function($) {
     $(".pageAll").click(function() {
         var page = $(this).html();
@@ -66,7 +66,7 @@ $(document).on("click", ".pageGetName", function() {
         type: 'POST',
         dataType: 'json',
         data: {
-            post_id: ano_id,
+            postId: ano_id,
         },
         success: function(data) {
             $("#remove1").remove()
@@ -102,7 +102,7 @@ $(document).on("click", ".pageGetName", function() {
                     url: '/postbar-comment/comment',
                     type: 'POST',
                     dataType: 'json',
-                    data: {post_id:ano_id,content:commentContent},
+                    data: {postId:ano_id,content:commentContent},
                     success:function(data){
                         if (data.status==true) {
                             alert("评论成功");
