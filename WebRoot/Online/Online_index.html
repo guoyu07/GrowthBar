@@ -26,11 +26,11 @@
                        },
                    })
             $.ajax({
-                       url: '',
+                       url: '/activity/viewAll',
                        type: 'POST',
                        dataType: 'json',
                        success: function (data) {
-                           $.each(data, function (i, item) {
+                           $.each(data.activities, function (i, item) {
                                if (i == 0) {
                                    $("#activityTheme1").text(item.activity_theme);
                                    $("#activityCompere1").text(item.activity_compere);
@@ -124,8 +124,8 @@
             <img class="img-thumbnail Czb_image" src="../image/communication.jpg" alt="...">
             <div class="caption" style="text-align: center;">
                 <h3 class="Czb_text" id="activityTheme1"></h3>
-                <h4 class="Czb_text" id="activityContent1">ss<small id="activityCompere1">ss</small></h4>
-                <p class="Czb_text" id="activityTime1">ss</p>
+                <h4 class="Czb_text" id="activityContent1"><small id="activityCompere1"></small></h4>
+                <p class="Czb_text" id="activityTime1"></p>
                 <li class="text-right"><a href="Online_form.html?actnum=1" id="postMeg1">点我预约</a>
                 </li>
             </div>

@@ -40,10 +40,14 @@ public class AppointmentController extends Controller implements BaseController 
 
 		String desc = getPara("desc");
 		String tel = getPara("telephone");
+		Long stuId = getParaToLong("userId");
+		String userName = getPara("userName");
 
 		appointment.setActivityId(activityId);
 		//从session中读取用户信息
 		appointment.setUserAccount(userAccount);
+		appointment.setStudentId(stuId);
+		appointment.setUserName(userName);
 		appointment.setDescription(desc);
 		appointment.setUserTel(tel);
 		appointment.setStatus(SUBMITTED);

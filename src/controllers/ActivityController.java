@@ -36,11 +36,11 @@ public class ActivityController extends Controller {
 		List<Activity> activityList = new ArrayList<>();
 
 		for (Activity activity : activities) {
-			if (DateHelper.getCurrentTimestamp() > DateHelper
-					.getDefaultFormatTimeStamp(activity.getActivityTime())) {
-				activity.setStatus(OVERDUE);
-				activityService.save(activity);
-			}
+//			if (DateHelper.getCurrentTimestamp() > DateHelper
+//					.getDefaultFormatTimeStamp(activity.getActivityTime())) {
+//				activity.setStatus(OVERDUE);
+//				activityService.save(activity);
+//			}
 			activityList.add(activity);
 		}
 
