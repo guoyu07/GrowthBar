@@ -40,7 +40,4 @@ public class TeacherController extends Controller{
 		renderJson();
 	}
 	
-	public static void main(String[] args) {
-		JFinal.start("WebRoot", 80, "/", 5);
-	}
 }
