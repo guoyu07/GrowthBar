@@ -12,7 +12,6 @@
         $(document).on("click", "#putArt", function () {
             var art_name = $("#art_name").val();
             var art_content = $("#art_content").val();
-            alert(art_name+art_content);
             $.ajax({
                        url: '/article/save',
                        type: 'POST',
@@ -20,10 +19,10 @@
                        data: {art_name: art_name, art_content: art_content},
                        success: function (data) {
                            if (data.status == 1) {
-                               window.location.href = 'Art_index.html'
+                               window.location.href = 'Art_index.html';
                            }
                            else {
-                               alert("error")
+                               alert("error");
                            }
                        },
                        error: function (XMLHttpRequest, textStatus, errorThrown) {
@@ -100,7 +99,7 @@
             </div>
         </div>
     </div>
-    <div class="row">
+    <div class="row" id="testAdd">
         <div class="row Czb_margin_padding">
             <div class="col-sm-2 col-xs-2"></div>
             <div class="Czb_artEdit col-sm-8 col-xs-8" style="border:none;">

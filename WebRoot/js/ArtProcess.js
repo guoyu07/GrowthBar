@@ -60,7 +60,7 @@ $(document).on("click", ".pageGetName", function () {
                    artId: textContent
                },
                success: function (data) {
-                   str = ('<div class="container-fluid"><div class="row"><div class="col-xs-12" style="text-align: center;"><h2>'+ data.article.article_title + '</h2><p>' + data.article.user_account+ ' <small> ' + data.article.post_time+ '</small></p></div><div class="col-xs-3"></div><div class="col-xs-6"><div class="form-control" style="border:none;">'+ data.article.article_content+ '</div></div><div class="col-xs-3"></div></div></div>');
+                   str = ('<div class="container-fluid"><div class="row"><div class="col-xs-12" style="text-align: center;"><h2>'+ data.article.article_title + '</h2><p>' + data.article.user_account+ ' <small> ' + data.article.post_time+ '</small></p></div><div class="col-xs-3"></div><div class="col-xs-6"><div class="form-control" style="border:none;">'+ data.article.article_content.replace(/\n/g,'<br>')+ '</div></div><div class="col-xs-3"></div></div></div>');
                     $("#artDisplay").html(str);
                },
                error: function (XMLHttpRequest, textStatus, errorThrown) {

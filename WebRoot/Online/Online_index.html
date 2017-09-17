@@ -8,11 +8,35 @@
     <link href="../css/bootstrap.min.css" rel="stylesheet">
     <link href="../css/Cheng_Zhangba.css" rel="stylesheet">
     <script type="text/javascript" src="../js/jquery.js"></script>
-    <script type="text/javascript">
-    $(document).on("click","#postMeg1",function(){
-       window.loaction.href="Online_form.html?actnum=1"
-    })
-    </script>
+<!--     <script type="text/javascript">
+      $(document).ready(function() {
+        $.ajax({
+          url:'',
+          type:'POST',
+          dataType:'',
+          success:function(data){
+            $.each(data,function(i,item){
+                if (i==0) {
+                  $("#activityContent1").text(item.activity_content);
+                  $("#activityTime1").text(item.activity_time);
+                }
+                else if (i==1) {
+                  $("#activityContent2").text(item.activity_content);
+                  $("#activityTime2").text(item.activity_time);
+                }
+                else if (i==2) {
+                  $("#activityContent3").text(item.activity_content);
+                  $("#activityTime4").text(item.activity_time);
+                }
+                else if (i==3) {
+                  $("#activityContent4").text(item.activity_content);
+                  $("#activityTime4").text(item.activity_time);
+                }
+            });
+          },
+        })
+      });
+    </script> -->
 </head>
 <body>
 <nav class="navbar navbar-default">
@@ -69,9 +93,9 @@
   <div class="thumbnail ">
       <img class="img-thumbnail Czb_image" src="../image/communication.jpg" alt="...">
       <div class="caption">
-      <h3 class="Czb_text" id="actResever">成长吧交流活动</h3>
-        <p class="Czb_text" id="actIntroduction">愿你被世界温柔以待</p>
-        <p class="Czb_text" id="actTime">2017/05/25</p>
+      <h3 class="Czb_text" id="activity1">成长吧交流活动</h3>
+        <p class="Czb_text" id="activityContent1"></p>
+        <p class="Czb_text" id="activityTime1"></p>
         <li class="text-right"><a href="Online_form.html?actnum=1" id="postMeg1">点我预约</a></li>
       </div>
       </div>
@@ -81,9 +105,9 @@
   <div class="thumbnail ">
       <img class="img-thumbnail Czb_image" src="../image/xiaohong.jpg" alt="...">
       <div class="caption">
-      <h3 class="Czb_text" id="fiveResever">525心理健康节</h3>
-        <p class="Czb_text" id="fiveContent">大学生心理健康节</p>
-        <p class="Czb_text" id="fiveTime">2017/05/25</p>
+      <h3 class="Czb_text" id="activity2">525心理健康节</h3>
+        <p class="Czb_text" id="activityContent2"></p>
+        <p class="Czb_text" id="activityTime2"></p>
           <li class="text-right"><a href="Online_form.html?actnum=2" id="postMeg2">点我预约</a></li>
       </div>
       </div>
@@ -96,9 +120,9 @@
   <div class="thumbnail ">
       <img class="img-thumbnail Czb_image" src="../image/wolf.jpg" alt="...">
       <div class="caption">
-      <h3 class="Czb_text" id="wolfResever">狼人杀桌游</h3>
-        <p class="Czb_text" id="wolfContent">多狼上警，刀刀强神...</p>
-        <p class="Czb_text" id="wolfTime">2017/05/25</p>
+      <h3 class="Czb_text" id="activity3">狼人杀桌游</h3>
+        <p class="Czb_text" id="activityContent3"></p>
+        <p class="Czb_text" id="activityTime3"></p>
         <li class="text-right"><a href="Online_form.html?actnum=3" id="postMeg3">点我预约</a></li>
       </div>
       </div>
@@ -108,9 +132,9 @@
   <div class="thumbnail ">
       <img class="img-thumbnail Czb_image" src="../image/inner.jpg" alt="...">
       <div class="caption">
-      <h3 class="Czb_text" id="innerResever">心理咨询</h3>
-        <p class="Czb_text" id="innerContent">心理咨询预约。。。</p>
-        <p class="Czb_text" id="innerTime">任意时间anytime</p>
+      <h3 class="Czb_text" id="activity4">团队活动</h3>
+        <p class="Czb_text" id="activityContent4"></p>
+        <p class="Czb_text" id="activityTime4"></p>
         <li class="text-right"><a href="Online_form.html?actnum=4" id="postMeg4">点我预约</a></li>
       </div>
       </div>
