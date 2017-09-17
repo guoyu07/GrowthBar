@@ -10,6 +10,23 @@
     <script type="text/javascript" src="../js/jquery.js"></script>
     <script type="text/javascript" src="../js/jquerysession.js"></script>
     <script type="text/javascript">
+    $(document).ready(function() {
+        $.ajax({
+        url:'/User/check',
+        type:'POST',
+        dataType:'json',
+        success:function(data){
+        if (data.status==true) {
+        var userAccount = data.userAccount;
+        $("#getUserID").html('<li><a>'+userAccount+'</a></li>');
+        $("#getUserID").toggle();
+        }
+        else{
+        $("#getUserID").toggle();
+        }
+        },
+        })
+        })
       $(document).on('click','.submitAnswer',function(){
       var val=new Array();
       var flag=false;
@@ -97,9 +114,10 @@
               </div>
               <button type="submit" class="btn btn-default">搜索</button>
             </form>
-            <ul class="nav navbar-nav navbar-right">
-              <li><a href="Ano_edit.html" id="postMeg">发帖</a></li>
-            </ul>
+            <ul class="nav navbar-nav navbar-right" id="getUserID" hidden>
+                        <li><a href="../submit.html?num=3">注册</a></li>
+                        <li><a href="../login.html?num=3">登录</a></li>
+                    </ul>
           </li>
         </ul>
       </div>

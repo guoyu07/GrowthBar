@@ -20,7 +20,7 @@ $(document).ready(function() {
         success: function(data) {
             var str = "";
             $.each(data.postList, function(i, item) {
-                str += ('<li class="list-group-item"><a class="pageGetName" href="#" id="getName' + i + '">' + item.post_title + '<p id="getId' + i + '" hidden>' + item.post_id + '</p></a></li>');
+                str += ('<li class="list-group-item"><a class="pageGetName" style="color: #000000;" href="#" id="getName' + i + '">' + item.post_title + '<p id="getId' + i + '" hidden>' + item.post_id + '</p></a></li>');
             });
             $("#anoTitle").html(str)
         },
@@ -44,7 +44,7 @@ $(function($) {
             success: function(data) {
                 var str = "";
                 $.each(data.postList, function(i, item) {
-                    str += ('<li class="list-group-item"><a class="pageGetName" href="#" id="getName' + i + '">' + item.post_title + '<p id="getId' + i + '" hidden>' + item.post_id + '</p></a></li>');
+                    str += ('<li class="list-group-item"><a class="pageGetName" href="#" style="color: #000000;" id="getName' + i + '">' + item.post_title + '<p id="getId' + i + '" hidden>' + item.post_id + '</p></a></li>');
                 });
                 $("#anoTitle").html(str);
             },

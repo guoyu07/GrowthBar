@@ -11,9 +11,30 @@
     setInterval("refer()",1000); //启动1秒定时
     function refer(){
         if(t==0){
-            location="index.html"; //#设定跳转的链接地址
+        var url = window.location.href.split('?');
+        var str = url[1].split('=');
+        var num = str[1];
+              if(num==1){
+                location="article/Art_index.html";
+              }
+              if(num==2){
+                location="Ano/Ano_index.html";
+              }
+              if(num==3){
+                location="Exam/Exam_index.html";
+              }
+              if(num==4){
+                location="teacher/teacher_info.html";
+              }
+              if(num==5){
+                location="Online/Online_index.html";
+              }
+              if(num==6){
+                location="index.html"; //#设定跳转的链接地址
+              }
+            
         }
-        $("#success").html("登陆成功"+t+"秒后跳转到主页面"); // 显示倒计时
+        $("#success").html("登陆成功"+t+"秒后跳转"); // 显示倒计时
         t--;
     }
 </script>

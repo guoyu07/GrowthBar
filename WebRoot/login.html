@@ -10,6 +10,9 @@
     <script type="text/javascript" src="js/jquery.js"></script>
     <script type="text/javascript">
       $(document).on('click','#loginButton',function(){
+        var url = window.location.href.split('?');
+        var str = url[1].split('=');
+        var num = str[1];
         var userAccount = $("#userAccount").val();
         var userPassword = $("#userPassword").val();
         $.ajax({
@@ -19,7 +22,21 @@
           data:{userAccount:userAccount,userPassword:userPassword},
           success:function(data){
             if(data.status==true){
-              window.location.href="loginsuccess.html";
+              if(num==1){
+                window.location.href="loginsuccess.html?num=1";
+              }
+              if(num==2){
+                window.location.href="loginsuccess.html?num=2";
+              }
+              if(num==3){
+                window.location.href="loginsuccess.html?num=3";
+              }
+              if(num==4){
+                window.location.href="loginsuccess.html?num=4";
+              }
+              if(num==5){
+                window.location.href="loginsuccess.html?num=5";
+              }
             }
             else{
               window.location.href="loginfail.html";
