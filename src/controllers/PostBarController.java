@@ -44,14 +44,19 @@ public class PostBarController extends Controller {
 		post.setPostTime(DateHelper.getDateTime());
 		//TODO 从session中读取userAccount
 		UserInformation userInformation = getSessionAttr("user");
-		post.setUserAccount(userInformation.getUserAccount());
-		post.setPostStatus(UNCOMMITTED);
-		post.setPostTitle(title);
-		post.setPostContent(content);
-		saveSuccess = postService.save(post);
+		if (null == userInformation) {
+			setAttr("status", false);
+		} else {
+			post.setUserAccount(userInformation.getUserAccount());
+			post.setPostStatus(UNCOMMITTED);
+			post.setPostTitle(title);
+			post.setPostContent(content);
+			saveSuccess = postService.save(post);
+			setAttr("post", post);
+			setAttr("status", saveSuccess);
+		}
 
-		setAttr("post", post);
-		setAttr("status", saveSuccess);
+		renderJson();
 	}
 
 	public void submit() {
@@ -75,14 +80,19 @@ public class PostBarController extends Controller {
 		//TODO 从session中读取userAccount
 		UserInformation userInformation = getSessionAttr("user");
 		post.setPostId(postId);
-		post.setUserAccount(userInformation.getUserAccount());
-		post.setPostStatus(UNCOMMITTED);
-		post.setPostTitle(title);
-		post.setPostContent(content);
-		saveSuccess = postService.save(post);
+		if (null != userInformation) {
 
-		setAttr("post", post);
+			post.setUserAccount(userInformation.getUserAccount());
+			post.setPostStatus(UNCOMMITTED);
+			post.setPostTitle(title);
+			post.setPostContent(content);
+			saveSuccess = postService.save(post);
+
+			setAttr("post", post);
+
+		}
 		setAttr("status", saveSuccess);
+		renderJson();
 	}
 
 	public void viewAll() {
@@ -112,7 +122,7 @@ public class PostBarController extends Controller {
 		Integer id = getParaToInt("postId");
 		Post post = postService.select(id);
 		UserInformation userInformation = getSessionAttr("user");
-		if (userInformation.getUserAccount().equals(post.getUserAccount())) {
+		if (null != userInformation && userInformation.getUserAccount().equals(post.getUserAccount())) {
 			deleteSuccess = postService.remove(id);
 		}
 
