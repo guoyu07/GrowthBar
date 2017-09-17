@@ -42,7 +42,7 @@ $(document).ready(function() {
         success: function(data) {
             if (data.status == true) {
                 var userAccount = data.userAccount;
-                $("#getUserID").html('<li><a>' + userAccount + '</a></li>');
+                $("#getUserID").html('<li><a>' + userAccount + '</a></li>'+'<li><a href="Ano_edit.html" id="postMeg">发帖</a></li>');
                 $("#getUserID").toggle();
             } else {
                 $("#getUserID").toggle();
