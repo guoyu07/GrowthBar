@@ -10,18 +10,6 @@
     <script type="text/javascript" src="../js/jquery.js"></script>
     <script type="text/javascript" src="../js/jquerysession.js"></script>
     <script type="text/javascript" src="../js/AnoEdit.js"></script>
-    <script type="text/javascript">
-    $(document).ready(function(){
-      var str=''
-      str +=('<li class="list-group-item"><a href="#">'+'在电子科大就读是怎么样一种体验'+'</a></li>')
-      $("#addAnoTopic").html(str)
-    })
-      $(document).on("click","#submitTopic",function(){
-        var anoTopic=$("#anoTopic").val()
-        var userId=$("#userId").html()
-        window.location.href='Ano_index.html'
-      })
-    </script>
 </head>
 <body>
   <nav class="navbar navbar-default">
@@ -78,24 +66,39 @@
   </div>
 </div>
 </div>
-<div class="Czb_Submit_blank"></div>
-<h2 id="userId" hidden>userId</h2>
-<div>
-  <div class="col-sm-3 col-xs-3">
-    <h2 class="Czb_margin_padding text-right"><small>发起话题</small></h2>
-  </div>
-  <div class="col-sm-6 col-xs-6">
-  <textarea class="form-control" rows="1" id="anoTopic"></textarea>
-  </div>
-  <div class="col-sm-3 col-xs-3">
-    <button class="btn btn-default" id="submitTopic">提交</button>
-  </div>
-</div>
-<div class="Czb_Ano_editblank"></div>
+<div style="height: 40px; width: 100%;"></div>
+<div class="container-fluid">
+<div class="row">
 <div class="col-sm-3 col-xs-3"><h2 class="text-right Czb_margin_padding"><small>热门讨论帖</small></h2></div>
 <div class="col-sm-6 col-xs-6">
   <ul class="list-group" id="addAnoTopic">
   </ul>
+</div>
+</div>
+<div style="height: 10px; width: 100%;"></div>
+<div class="row">
+  <div class="col-sm-3 col-xs-3">
+    <h2 class="Czb_margin_padding text-right"><small>发起话题</small></h2>
+  </div>
+  <div class="col-sm-6 col-xs-6">
+  <input type="text" class="form-control" rows="1" id="anoTopic">
+  </div>
+</div>
+<div style="height: 10px; width: 100%;"></div>
+<div class="row">
+  <div class="col-sm-3 col-xs-3">
+    <h2 class="Czb_margin_padding text-right"><small>具体描述</small></h2>
+  </div>
+  <div class="col-sm-6 col-xs-6">
+  <textarea class="form-control" rows="4" id="ano_content"></textarea>
+  </div>
+  <div class="col-sm-3 col-xs-3">
+  </div>
+</div>
+<div style="height: 10px; width: 100%;"></div>
+<div class="row">
+  <div class="col-xs-12" style="text-align: center;"><button class="btn btn-default" id="submitTopic">提交</button></div>
+</div>
 </div>
 </body>
 </html>

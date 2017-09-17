@@ -10,56 +10,6 @@
     <script type="text/javascript" src="../js/jquery.js"></script>
     <script type="text/javascript" src="../js/jquerysession.js"></script>
     <script type="text/javascript" src="../js/AnoProcess.js"></script>
-    <script type="text/javascript">
-    $(document).on("click", ".pageGetName", function() {
-    var textContent = $(this).clone();
-    textContent.find(':nth-child(n)').remove()
-    var topicTitle = textContent.html()
-    var postbar_id = $(this).children('p').html()
-    // $.ajax({
-        // url: '/GrowthBar_1/article/viewArticle',
-        // type: 'POST',
-        // dataType: 'json',
-        // data: {
-        //     postbar_id: postbar_id
-        // },
-        // success: function(data) {
-            $("#remove1").remove()
-            $("#remove2").remove()
-            $("#remove3").remove()
-            var title = ('<div class="col-xs-12 col-sm-12 text-center"><h2>' + topicTitle + '</h2></div>')
-            var str2 = ('</ul></div></div></div><div class="col-sm-2 col-xs-2"></div></div>')
-            var str = ('<div class="row Czb_margin_padding" ><div class="col-sm-2 col-xs-2"></div><div class="col-sm-8 col-xs-8" ><div class="thumbnail"><div class="caption"><ul class="list-group" id="insertComment">')
-            var content = ''
-            // $.each(data.anoindex, function(i, item) {
-                content += ('<li class="list-group-item">' + '在电子科大就读就是单身一辈子的体验' + '<h2 class="text-right"><small>匿名用户</small></h2>' + '</li>' + '</li>'+'<li class="list-group-item">' + '没有女朋友' + '<h2 class="text-right"><small>匿名用户</small></h2>' + '</li>' + '</li>'+'<li class="list-group-item">' + '男女比例7:1，一对情侣3对。' + '<h2 class="text-right"><small>匿名用户</small></h2>' + '</li>' + '</li>'+'<li class="list-group-item">' + '交一个人的学费，上两个人的课，写四个人的作业，和六个人当好基友。' + '<h2 class="text-right"><small>匿名用户</small></h2>' + '</li>' + '</li>')
-            // });
-            var str4 = ('<div id="remove4"><div class="col-sm-2 col-xs-2"></div><div class="col-sm-8 col-xs-8">添加评论<textarea class="form-control commentContent" rows="10"></textarea></div><div class="col-sm-2 col-xs-2"></div></div>')
-            var button=('<div class="col-sm-offset-6 col-sm-6 Czb_Ano_blank" id="remove5"><button  class="btn btn-default " id="clickButton">提交</button></div>')
-            $('#navBlank').html(title)
-            $("#testBlank").html(str + content + str2 + str4 +button);
-    //     },
-    //     error: function(XMLHttpRequest, textStatus, errorThrown) {
-    //         alert(XMLHttpRequest.responseText);
-    //         alert(XMLHttpRequest.readyState);
-    //         alert(textStatus);
-    //     },
-    // })
-})
-
-     $(document).on("click", "#clickButton", function() {
-          var textContent=$("textarea").val()
-          // $.ajax({
-             // success:function(){
-                comment_content=textContent
-                $("#remove4").remove()
-                $("#remove5").remove()
-                var content=('<li class="list-group-item">' + textContent+ '<h2 class="text-right"><small>匿名用户</small></h2>' + '</li>')
-                $("#insertComment").before(content)
-          //    }
-          // })
-     })
-    </script>
 </head>
 <body>
   <nav class="navbar navbar-default">
@@ -135,7 +85,6 @@
     <div class="thumbnail">
       <div class="caption">
         <ul class="list-group" id="anoTitle">
-        <li class="list-group-item"><a class="pageGetName" href="#" id="getName">在电子科大就读是一种怎么样的体验<p id="getId" hidden>0</p></a></li>
         </ul>
       </div>
     </div>
