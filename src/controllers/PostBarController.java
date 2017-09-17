@@ -30,7 +30,6 @@ public class PostBarController extends Controller {
 	private PostService postService = new PostService();
 
 	public void index() {
-		//TODO 贴吧主页
 		render("index.html");
 	}
 
@@ -42,13 +41,13 @@ public class PostBarController extends Controller {
 
 		Post post = new Post();
 		post.setPostTime(DateHelper.getDateTime());
-		//TODO 从session中读取userAccount
 		UserInformation userInformation = getSessionAttr("user");
 		if (null == userInformation) {
 			setAttr("status", false);
 		} else {
 			post.setUserAccount(userInformation.getUserAccount());
-			post.setPostStatus(UNCOMMITTED);
+//			post.setPostStatus(UNCOMMITTED);
+			post.setPostStatus(SUBMITTED);
 			post.setPostTitle(title);
 			post.setPostContent(content);
 			saveSuccess = postService.save(post);
@@ -77,7 +76,6 @@ public class PostBarController extends Controller {
 		boolean saveSuccess = false;
 		Post post = new Post();
 		post.setPostTime(DateHelper.getDateTime());
-		//TODO 从session中读取userAccount
 		UserInformation userInformation = getSessionAttr("user");
 		post.setPostId(postId);
 		if (null != userInformation) {
@@ -96,9 +94,8 @@ public class PostBarController extends Controller {
 	}
 
 	public void viewAll() {
-		Integer pageNum = getParaToInt("pageNum");
-		Integer pageSize = getParaToInt("pageSize");
-		List<Post> postList = postService.paginate(pageNum, pageSize).getList();
+		Integer pageNum = getParaToInt("pageNum",1);
+		List<Post> postList = postService.paginate(pageNum, 5).getList();
 		setAttr("postList", postList);
 		renderJson();
 	}
@@ -113,6 +110,7 @@ public class PostBarController extends Controller {
 	public void viewSingle() {
 		Integer id = getParaToInt("postId");
 		Post post = postService.select(id);
+		post.setUserAccount(null);
 		setAttr("post", post);
 		renderJson();
 	}

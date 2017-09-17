@@ -24,7 +24,7 @@ public class PostService implements BaseService<Post> {
 	}
 
 	public Page<Post> paginate(Integer pageNumber, Integer pageSize) {
-		return Post.dao.paginate(pageNumber, pageSize, "SELECT post_id,post_title,user_account",
+		return Post.dao.paginate(pageNumber, pageSize, "SELECT post_id,post_title",
 				"FROM post WHERE post_status != -1 and post_status != 0 ORDER BY post_time DESC");
 	}
 

@@ -34,7 +34,7 @@ public class CommentService implements BaseService<Comment> {
 	 */
 	public List<Comment> selectAllCommentsByPost(int postId) {
 		return Comment.dao
-				.find("SELECT * FROM comment ORDER BY comment_time WHERE post_id = ?", postId);
+				.find("SELECT * FROM comment WHERE post_id = ? AND status = 1 ORDER BY comment_time", postId);
 	}
 
 	@Override
