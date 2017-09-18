@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>个人资料</title>
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/Cheng_Zhangba.css" rel="stylesheet">
+    <script type="text/javascript" src="../js/jquery.js"></script>
+    <script type="text/javascript" src="../js/userAdmin.js"></script>
+</head>
+<body>
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="../index.html">主页</a>
+        </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav">
+            <li><a href="../article/Art_index.html">美文鉴赏</a></li>
+            <li><a href="Ano_index.html">匿名贴吧</a></li>
+            <li><a href="../Exam/Exam_index.html">心理测试</a></li>
+            <li><a href="../Online/Online_index.html">在线预约</a></li>
+            <li><a href="../teacher/teacher_info.html">心灵导师</a></li>
+          </ul>
+          <form class="navbar-form navbar-left">
+            <div class="form-group">
+              <input type="text" class="form-control" placeholder="帖子">
+            </div>
+            <button type="submit" class="btn btn-default">搜索</button>
+          </form>
+          <ul class="nav navbar-nav navbar-right" id="getUserID" hidden>
+            <li><a href="../submit.html?num=2">注册</a></li>
+            <li><a href="../login.html?num=2">登录</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<div class="row Czb_margin_padding">
+    <div class="col-xs-1 col-md-1">
+    </div>
+    <div>
+        <div class="col-xs-2 col-md-2">
+            <img src="../image/online1.jpg" alt="..."
+                 class="img-thumbnail Czb_borderBlank Czb_usetcFormat">
+        </div>
+        <div class="col-xs-1 col-md-1">
+            <img src="../image/online2.jpg" alt="..."
+                 class="img-thumbnail Czb_borderBlank Czb_usetcFormat">
+        </div>
+        <div class="col-xs-4 col-md-4 Czb_text">
+            <h3 class="text-center">
+                <small>个人信息查看</small>
+            </h3>
+        </div>
+        <div class="col-xs-2 col-md-2">
+            <img src="../image/online5.jpg" alt="..."
+                 class="img-thumbnail Czb_borderBlank Czb_usetcFormat">
+        </div>
+        <div class="col-xs-2 col-md-2">
+            <img src="../image/online4.jpg" alt="..."
+                 class="img-thumbnail Czb_borderBlank Czb_usetcFormat">
+        </div>
+    </div>
+</div>
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-xs-2"></div>
+		<div class="col-xs-8">
+			<table class="table table-bordered">
+				<tr>
+					<td style="text-align: center;"><a id="addArticle" style="text-decoration: none;">文章投稿信息</a></td>
+					<td style="text-align: center;"><a id="addPost" style="text-decoration: none;">贴吧发帖信息</a></td>
+					<td style="text-align: center;"><a id="addExam" style="text-decoration: none;">心理测试结果</a></td>
+					<td style="text-align: center;"><a id="addOnline" style="text-decoration: none;">活动预约结果</a></td>
+				</tr>
+			</table>
+			<table class="table table-bordered" id="addInfo">
+				<tr style="text-align: center;">
+				</tr>
+			</table>
+		</div>
+	</div>
+</div>
+</body>
+</html>
