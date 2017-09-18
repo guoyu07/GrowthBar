@@ -16,9 +16,9 @@
         type:'POST',
         dataType:'JSON',
         data:dataInf,
-        success:function(){
-            if(data.status==1){
-                window.location.href='submitsuccess.html'
+        success:function(data){
+            if(data.status==true){
+                window.location.href='index.html'
             }
             else{
                 alert("error")

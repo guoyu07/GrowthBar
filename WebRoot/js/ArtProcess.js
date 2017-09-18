@@ -7,7 +7,7 @@ $(document).ready(function($) {
             var str = "";
             $.each(data.articles, function(i, item) {
                 str +=
-                    ('<li class="list-group-item"><a href="#" class="pageGetName" id="getName' + i + '">' +
+                    ('<li class="list-group-item"><a href="#" style="color: #000000;" class="pageGetName" id="getName' + i + '">' +
                         item.article_title + '<p id="getId' + i + '" hidden>' + item.article_id +
                         '</p></a></li>');
             });
@@ -48,7 +48,7 @@ $(function($) {
                 var str = "";
                 $.each(data.articles, function(i, item) {
                     str +=
-                        ('<li class="list-group-item "><a class="pageGetName" href="#" id="getName">' +
+                        ('<li class="list-group-item "><a class="pageGetName" style="color: #000000;" href="#" id="getName">' +
                             item.art_name + '<p id="getId' + i + '" hidden>' + item.art_id +
                             '</p></a></li>');
                 });

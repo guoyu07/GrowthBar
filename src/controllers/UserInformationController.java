@@ -62,7 +62,7 @@ public class UserInformationController extends Controller implements BaseControl
 
 	}
 
-	public boolean storeuser() {
+	public void storeuser() {
 		boolean saveSuccess = false;
 		String userAccount = getPara("user_account");
 		String userPassword = getPara("user_password");
@@ -81,7 +81,7 @@ public class UserInformationController extends Controller implements BaseControl
 		saveSuccess = userInformationServices.save(userInformation);
 		setAttr("status", saveSuccess);
 		setAttr("userAccount", userInformation);
-		return saveSuccess;
+		renderJson();
 	}
 
 	protected void createValidate(HttpServletRequest request, HttpServletResponse response)

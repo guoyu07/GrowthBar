@@ -67,9 +67,9 @@ public class ArticleController extends Controller implements BaseController {
 		String userId = (null == userInformation ? null : userInformation.getUserAccount());
 		if (null != userId && !"".equals(userId)) {
 			if ("submitted".equals(status)) {
-				setAttr("articleList", articleServices.queryByUserId(userId, pageNum, 5));
+				setAttr("articleList", articleServices.queryByUserId(userId, pageNum, 7));
 			} else if ("saved".equals(status)) {
-				setAttr("articleList", articleServices.queryOwnSavedArticles(userId, pageNum, 5));
+				setAttr("articleList", articleServices.queryOwnSavedArticles(userId, pageNum, 7));
 			} else {
 				return;
 			}
@@ -89,14 +89,14 @@ public class ArticleController extends Controller implements BaseController {
 
 		String artName = getPara("artName", "");
 		if (null != artName) {
-			setAttr("articleList", articleServices.queryByArtName(artName, pageNum, 5));
+			setAttr("articleList", articleServices.queryByArtName(artName, pageNum, 7));
 			querySuccess = true;
 		}
 
 		UserInformation userInformation = getSessionAttr("user");
 		String userId = (null == userInformation ? null : userInformation.getUserAccount());
 		if (null != userId && !"".equals(userId)) {
-			setAttr("articleList", articleServices.queryByUserId(userId, pageNum, 5));
+			setAttr("articleList", articleServices.queryByUserId(userId, pageNum, 7));
 			querySuccess = true;
 		}
 		setAttr("status", querySuccess);
@@ -114,7 +114,7 @@ public class ArticleController extends Controller implements BaseController {
 
 		boolean queryStatus = false;
 
-		articlesPage = articleServices.paginate(pageNum, 5);
+		articlesPage = articleServices.paginate(pageNum, 7);
 		if (null != articlesPage.getList()) {
 			List<Article> articleList = articlesPage.getList();
 			setAttr("articles", articleList);

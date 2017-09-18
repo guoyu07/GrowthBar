@@ -19,6 +19,7 @@ public class FrontRoutes extends Routes {
 		add("/postbar-comment", PostBarCommentController.class);
 		add("/User", UserInformationController.class);
 		add("/appointment", AppointmentController.class);
+		add("/Exam",ExamresultController.class);
 	}
 
 }

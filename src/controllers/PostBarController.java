@@ -95,7 +95,7 @@ public class PostBarController extends Controller {
 
 	public void viewAll() {
 		Integer pageNum = getParaToInt("pageNum",1);
-		List<Post> postList = postService.paginate(pageNum, 5).getList();
+		List<Post> postList = postService.paginate(pageNum, 8).getList();
 		setAttr("postList", postList);
 		renderJson();
 	}
