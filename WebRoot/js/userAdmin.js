@@ -13,7 +13,7 @@
                           var str2 = '</tr>';
                           var content = '';
                           $.ajax({
-                                  url: '',
+                                  url: '/article/viewOwn',
                                   type: 'POST',
                                   dataType: 'json',
                                   success: function(data) {
@@ -30,12 +30,12 @@
                           var str2 = '</tr>';
                           var content = '';
                           $.ajax({
-                                  url: '',
+                                  url: '/postbar/viewRelated',
                                   type: 'POST',
                                   dataType: 'json',
                                   success: function(data) {
                                       $.each(data.postList, function(i, item) {
-                                          content += ('<td><a class="clickPost">' + item.postbar_title + '<p hidden>' + item.postabar_id + '</p>' + '</a></td>');
+                                          content += ('<td><a class="clickPost">' + item.post_title + '<p hidden>' + item.postabar_id + '</p>' + '</a></td>');
                                       });
                                       $("#addInfo").html(str1 + content + str2);
                                   }
@@ -94,7 +94,7 @@
                           var jingShenBing = 0;
                           var shuiMian = 0;
                           $.ajax({
-                                  url: '',
+                                  url: '/Exam/queryOwnResults',
                                   type: 'POST',
                                   dataType: 'json',
                                   success: function(data) {
@@ -118,7 +118,7 @@
                           var str2 = '</tr>';
                           var content = '';
                           $.ajax({
-                                  url: '',
+                                  url: '/appointment/viewOwn',
                                   type: 'POST',
                                   dataType: 'json',
                                   success: function(data) {

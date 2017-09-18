@@ -13,6 +13,7 @@ import com.jfinal.core.Controller;
 import common.model.Post;
 import common.model.UserInformation;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javafx.geometry.Pos;
@@ -102,7 +103,20 @@ public class PostBarController extends Controller {
 
 	public void viewOwn() {
 		UserInformation userInformation = getSessionAttr("user");
-		List<Post> postList = postService.selectAllPostByUser(userInformation.getUserAccount());
+		List<Post> postList = new ArrayList<>();
+		if(null != userInformation) {
+			postList = postService.selectAllPostByUser(userInformation.getUserAccount());
+		}
+		setAttr("postList", postList);
+		renderJson();
+	}
+
+	public void viewRelated() {
+		UserInformation userInformation = getSessionAttr("user");
+		List<Post> postList = new ArrayList<>();
+		if(null != userInformation) {
+			postList = postService.selectAllRelated(userInformation.getUserAccount());
+		}
 		setAttr("postList", postList);
 		renderJson();
 	}

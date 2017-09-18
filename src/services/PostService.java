@@ -30,8 +30,14 @@ public class PostService implements BaseService<Post> {
 	}
 
 	public List<Post> selectAllPostByUser(String userAccount) {
-		return Post.dao.find("SELECT * FROM post ORDER BY post_time WHERE user_account LIKE ?",
+		return Post.dao.find("SELECT * FROM post WHERE user_account LIKE ? ORDER BY post_time ",
 				userAccount);
+	}
+
+	public List<Post> selectAllRelated(String userAccount) {
+		return Post.dao
+				.find("SELECT DISTINCT post.post_id,post.post_title FROM post,comment WHERE comment.post_id = post.post_id AND comment.user_account LIKE ?",
+						userAccount);
 	}
 
 	@Override

@@ -17,7 +17,7 @@
         success:function(data){
           if (data.status==true) {
             var userAccount = data.userAccount;
-            $("#loginAccount").html('<p>'+userAccount+'</p>');
+            $("#loginAccount").html('<p>'+userAccount+'</p>'+'<a href="userAdmin/user_index.html">user</a>');
             $("#loginAccount").toggle();
           }
           else{

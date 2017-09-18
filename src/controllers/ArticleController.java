@@ -79,6 +79,16 @@ public class ArticleController extends Controller implements BaseController {
 		renderJson();
 	}
 
+	public void viewOwn() {
+		UserInformation userInformation = getSessionAttr("user");
+		String userId = (null == userInformation ? null : userInformation.getUserAccount());
+		if (null != userId && !"".equals(userId)) {
+			setAttr("articles", articleServices.queryByUserId(userId, 1, 10000).getList());
+		}
+		setAttr("status",true);
+		renderJson();
+	}
+
 	/**
 	 * 查询相关文章 条件查询
 	 */

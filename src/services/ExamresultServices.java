@@ -13,7 +13,13 @@ public class ExamresultServices implements BaseService<ExamResult> {
 
 	@Override
 	public List<ExamResult> selectList() {
-		return ExamResult.dao.find("select * from exam_result order by date");
+		return ExamResult.dao.find("select * from exam_result order by date DESC");
+	}
+
+	public List<ExamResult> selectOwn(String userAccount) {
+		return ExamResult.dao
+				.find("select * from exam_result WHERE user_account = ? order by date DESC",
+						userAccount);
 	}
 
 	@Override

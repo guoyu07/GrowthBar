@@ -5,7 +5,11 @@ import com.jfinal.core.Controller;
 import common.model.ExamResult;
 import common.model.UserInformation;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import services.ExamresultServices;
+import utils.DateHelper;
 
 public class ExamresultController extends Controller implements BaseController {
 
@@ -25,7 +29,7 @@ public class ExamresultController extends Controller implements BaseController {
 		String shuiMian = getPara("shuiMian");
 		ExamResult examResult = new ExamResult();
 		examResult.setUserAccount(userAccount);
-		examResult.setUserAccount(userAccount);
+		examResult.setDate(DateHelper.getDateTime());
 		examResult.setQutihua(quTiHua);
 		examResult.setQiangpo(qiangPo);
 		examResult.setJiaolv(jiaoLv);
@@ -36,5 +40,15 @@ public class ExamresultController extends Controller implements BaseController {
 		examResult.setShuimian(shuiMian);
 		saveSuccess = examresultServices.save(examResult);
 		return saveSuccess;
+	}
+
+	public void queryOwnResults() {
+		UserInformation userInformation = getSessionAttr("user");
+		List<ExamResult> examResults = new ArrayList<>();
+		if (null != userInformation) {
+			examResults = examresultServices.selectOwn(userInformation.getUserAccount());
+		}
+		setAttr("examResults",examResults);
+		renderJson();
 	}
 }
