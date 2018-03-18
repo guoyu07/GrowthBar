@@ -44,6 +44,14 @@ public class UserInformationController extends Controller implements BaseControl
 		renderJson(object);
 	}
 
+	public void logout() {
+		HttpSession session = getSession();
+		session.setAttribute("user", null);
+		JSONObject object = new JSONObject();
+		object.put("status",false);
+		render("index.html");
+	}
+
 	public void check() {
 		JSONObject object = new JSONObject();
 		boolean status = false;
@@ -150,7 +158,7 @@ public class UserInformationController extends Controller implements BaseControl
 		String info = null;
 		/*获取输入的值*/
 		String value1 = request.getParameter("name");
-         /*获取图片的值*/
+		 /*获取图片的值*/
 		HttpSession session = request.getSession();
 		String value2 = (String) session.getAttribute("checkcode");
         /*对比两个值（字母不区分大小写）*/

@@ -1,88 +1,108 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>编辑页面</title>
-        <link href="../css/bootstrap.min.css" rel="stylesheet">
-        <link href="../css/Cheng_Zhangba.css" rel="stylesheet">
-        <script type="text/javascript" src="../js/jquery.js"></script>
-        <script type="text/javascript">
-        $(document).ready(function() {
-        $.ajax({
-        url:'/User/check',
-        type:'POST',
-        dataType:'json',
-        success:function(data){
-        if (data.status==true) {
-        var userAccount = data.userAccount;
-        $("#getUserID").html('<li><a>'+userAccount+'</a></li>');
-        $("#getUserID").toggle();
-        }
-        else{
-        $("#getUserID").toggle();
-        }
-        },
-        })
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>编辑页面</title>
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/Cheng_Zhangba.css" rel="stylesheet">
+    <script type="text/javascript" src="../js/jquery.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $.ajax({
+                       url: '/User/check',
+                       type: 'POST',
+                       dataType: 'json',
+                       success: function (data) {
+                           if (data.status == true) {
+                               var userAccount = data.userAccount;
+                               $("#getUserID").html('<li><a>' + userAccount + '</a></li>');
+                               $("#getUserID").toggle();
+                           }
+                           else {
+                               $("#getUserID").toggle();
+                           }
+                       },
+                   })
         })
         $(document).on("click", "#putArt", function () {
-        var art_name = $("#art_name").val();
-        var art_content = $("#art_content").val();
-        $.ajax({
-        url: '/article/save',
-        type: 'POST',
-        dataType: 'json',
-        data: {art_name: art_name, art_content: art_content},
-        success: function (data) {
-        if (data.status == 1) {
-        window.location.href = 'Art_index.html';
-        }
-        else {
-        alert("error");
-        }
-        },
-        error: function (XMLHttpRequest, textStatus, errorThrown) {
-        alert(XMLHttpRequest.responseText);
-        alert(XMLHttpRequest.readyState);
-        alert(textStatus);
-        }
-        })
-        })
-        </script>
-    </head>
-    <body>
-        <nav class="navbar navbar-default">
-            <div class="container-fluid">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+
+                           var isValidArticleName = false;
+                           var isValidArticleContent = false;
+                           var art_name = $("#art_name").val();
+                           if (art_name.length < 1) {
+                               $("#art_name-msg").html("文章标题为空！");
+                           } else {
+                               isValidArticleName = true;
+                           }
+
+                           var art_content = $("#art_content").val();
+                           if (art_content.length < 1) {
+                               $("#art_content-msg").html("文章内容为空")
+                           } else {
+                               isValidArticleContent = true;
+                           }
+
+                           if (isValidArticleName && isValidArticleContent) {
+                               $.ajax({
+                                          url: '/article/save',
+                                          type: 'POST',
+                                          dataType: 'json',
+                                          data: {art_name: art_name, art_content: art_content},
+                                          success: function (data) {
+                                              if (data.status == 1) {
+                                                  alert("发表成功");
+                                                  window.location.href = 'Art_index.html';
+                                              }
+                                              else {
+                                                  alert("error");
+                                              }
+                                          },
+                                          error: function (XMLHttpRequest, textStatus, errorThrown) {
+                                              alert(XMLHttpRequest.responseText);
+                                              alert(XMLHttpRequest.readyState);
+                                              alert(textStatus);
+                                          }
+                                      })
+                           }
+                       }
+        )
+
+    </script>
+</head>
+<body>
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
                     data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href="../index.html">主页</a>
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="../index.html">主页</a>
+        </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li><a href="Art_index.html">美文鉴赏</a></li>
+                <li><a href="../Ano/Ano_index.html">匿名贴吧</a></li>
+                <li><a href="#">心理测试</a></li>
+                <li><a href="../Online/Online_index.html">在线预约</a></li>
+                <li><a href="../teacher/teacher_info.html">心灵导师</a></li>
+            </ul>
+            <form class="navbar-form navbar-left">
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="文章">
                 </div>
-                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                    <ul class="nav navbar-nav">
-                        <li><a href="Art_index.html">美文鉴赏</a></li>
-                        <li><a href="../Ano/Ano_index.html">匿名贴吧</a></li>
-                        <li><a href="#">心理测试</a></li>
-                        <li><a href="../Online/Online_index.html">在线预约</a></li>
-                        <li><a href="../teacher/teacher_info.html">心灵导师</a></li>
-                    </ul>
-                    <form class="navbar-form navbar-left">
-                        <div class="form-group">
-                            <input type="text" class="form-control" placeholder="文章">
-                        </div>
-                        <button type="submit" class="btn btn-default">搜索</button>
-                    </form>
-                    <ul class="nav navbar-nav navbar-right" id="getUserID" hidden>
-                        <li><a href="../submit.html">注册</a></li>
-                        <li><a href="../login.html">登录</a></li>
-                    </ul>
-                </li>
+                <button type="submit" class="btn btn-default">搜索</button>
+            </form>
+            <ul class="nav navbar-nav navbar-right" id="getUserID" hidden>
+                <li><a href="../submit.html">注册</a></li>
+                <li><a href="../login.html">登录</a></li>
+            </ul>
+            </li>
             </ul>
         </div>
     </div>
@@ -94,24 +114,24 @@
         <div>
             <div class="col-sm-2 col-xs-2">
                 <img src="../image/ano2.jpg" alt="..."
-                class="img-thumbnail Czb_borderBlank Czb_usetcFormat">
+                     class="img-thumbnail Czb_borderBlank Czb_usetcFormat">
             </div>
             <div class="col-sm-1 col-xs-1">
                 <img src="../image/ano4.jpg" alt="..."
-                class="img-thumbnail Czb_borderBlank Czb_usetcFormat">
+                     class="img-thumbnail Czb_borderBlank Czb_usetcFormat">
             </div>
             <div class="col-sm-4 col-xs-4 Czb_text">
                 <h3 class="text-center">
-                <small>放松心灵，品味生活</small>
+                    <small>放松心灵，品味生活</small>
                 </h3>
             </div>
             <div class="col-sm-2 col-xs-2">
                 <img src="../image/ano3.jpg" alt="..."
-                class="img-thumbnail Czb_borderBlank Czb_usetcFormat">
+                     class="img-thumbnail Czb_borderBlank Czb_usetcFormat">
             </div>
             <div class="col-sm-2 col-xs-2">
                 <img src="../image/ano5.jpg" alt="..."
-                class="img-thumbnail Czb_borderBlank Czb_usetcFormat">
+                     class="img-thumbnail Czb_borderBlank Czb_usetcFormat">
             </div>
         </div>
     </div>
@@ -124,6 +144,7 @@
                         <label class="col-sm-2 control-label">标题</label>
                         <div class="col-sm-10">
                             <input type="text" class="form-control " id="art_name" name="art_name">
+                            <p id="art_name-msg" class="bg-warning"></p>
                         </div>
                     </div>
                     <div class="form-group">
@@ -131,6 +152,7 @@
                         <div class="col-sm-10">
                             <input name="user_id" type="text" value="demotest" id="user_id" hidden>
                             <textarea class="form-control " rows="15" id="art_content"></textarea>
+                            <p id="art_content-msg" class="bg-warning"></p>
                         </div>
                     </div>
                 </form>

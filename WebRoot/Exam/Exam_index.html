@@ -1,406 +1,858 @@
 <!DOCTYPE html>
 <html>
-  <head>
+<head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meExamta name="viewport" content="width=device-width, initial-scale=1">
-    <title>心理测试</title>
-    <link href="../css/bootstrap.min.css" rel="stylesheet">
-    <link href="../css/Cheng_Zhangba.css" rel="stylesheet">
-    <script type="text/javascript" src="../js/jquery.js"></script>
-    <script type="text/javascript" src="../js/jquerysession.js"></script>
-    <script type="text/javascript">
-    $(document).ready(function() {
-        $.ajax({
-        url:'/User/check',
-        type:'POST',
-        dataType:'json',
-        success:function(data){
-        if (data.status==true) {
-        var userAccount = data.userAccount;
-        $("#getUserID").html('<li><a>'+userAccount+'</a></li>');
-        $("#getUserID").toggle();
-        }
-        else{
-        $("#getUserID").toggle();
-        }
-        },
-        })
-        })
-      $(document).on('click','.submitAnswer',function(){
-      var val=new Array();
-      var flag=false;
-      var quTiHua = 0;
-      var qiangPo = 0;
-      var renJi = 0;
-      var yiYu = 0;
-      var jiaoLv = 0;
-      var diDui = 0;
-      var kongBu = 0;
-      var pianZhi = 0;
-      var jingShenBing = 0;
-      var shuiMian = 0;
-      for (var i = 0; i < 90; i++) {
-      str='ans'+(i+1);
-      val[i]=$('input[name='+str+']:checked').val();
-      if(val[i]==undefined){
-      flag=true;
-      }
-      }
-      valInt = new Array();
-      for(var i = 0; i < 90; i++){
-        valInt[i]=parseFloat(val[i]);
-      }
-      if (flag) {
-      alert('请检查选项');
-      } 
-      else {
-      alert('恭喜你完成测试，请等待测试结果。');
-      }
-      quTiHua = (valInt[0]+valInt[3]+valInt[26]+valInt[39]+valInt[41]+valInt[47]+valInt[48]+valInt[51]+valInt[52]+valInt[55]+valInt[57])/12;
-      qiangPo = (valInt[2]+valInt[8]+valInt[9]+valInt[27]+valInt[37]+valInt[44]+valInt[45]+valInt[50]+valInt[54]+valInt[64])/10;
-      renJi = (valInt[5]+valInt[20]+valInt[33]+valInt[35]+valInt[36]+valInt[40]+valInt[60]+valInt[68]+valInt[72])/9;
-      yiYu = (valInt[4]+valInt[13]+valInt[19]+valInt[21]+valInt[25]+valInt[28]+valInt[29]+valInt[30]+valInt[31]+valInt[53]+valInt[70]+valInt[78])/13;
-      jiaoLv = (valInt[1]+valInt[16]+valInt[22]+valInt[32]+valInt[38]+valInt[56]+valInt[71]+valInt[77]+valInt[79]+valInt[85])/10;
-      diDui = (valInt[10]+valInt[23]+valInt[62]+valInt[66]+valInt[73]+valInt[80])/6;
-      kongBu = (valInt[12]+valInt[24]+valInt[46]+valInt[49]+valInt[69]+valInt[74]+valInt[81])/7;
-      pianZhi = (valInt[7]+valInt[17]+valInt[42]+valInt[67]+valInt[75]+valInt[82])/6;
-      jingShenBing = (valInt[6]+valInt[15]+valInt[34]+valInt[61]+valInt[76]+valInt[83]+valInt[84]+valInt[86]+valInt[87]+valInt[89])/10;
-      shuiMian = (valInt[18]+valInt[43]+valInt[58]+valInt[59]+valInt[63]+valInt[65]+valInt[88])/7; 
-      $.ajax({
-        url:'/Exam/storeScore',
-        type:'POST',
-        dataType:'json',
-        data:{quTiHua:quTiHua,qiangPo:qiangPo,jiaoLv:jiaoLv,diDui:diDui,kongBu:kongBu,pianZhi:pianZhi,jingShenBing:jingShenBing,shuiMian:shuiMian},
-        success:function(data){
-            if(data.status==true){
-                alert("记录成功");
-                window.location.href="index.html";      
-                $("#addResult").html('<table class="table">'+'<tr>'+'<td>特征'+'</td>'+'<td>得分'+'</td>'+'</tr>'+'<tr>'+'<td>躯体化'+'</td>'+'<td>'+quTiHua+'</td>'+'</tr>'+'<tr>'+'<td>强迫'+'</td>'+'<td>'+qiangPo+'</td>'+'</tr>'+'<tr>'+'<td>焦虑'+'</td>'+'<td>'+jiaoLv+'</td>'+'</tr>'+'<tr>'+'<td>敌对性'+'</td>'+'<td>'+diDui+'</td>'+'</tr>'+'<tr>'+'<td>恐怖'+'</td>'+'<td>'+kongBu+'</td>'+'</tr>'+'<tr>'+'<td>偏执'+'</td>'+'<td>'+pianZhi+'</td>'+'</tr>'+'<tr>'+'<td>精神病性'+'</td>'+'<td>'+jingShenBing+'</td>'+'</tr>'+'<tr>'+'<td>睡眠及饮食'+'</td>'+'<td>'+shuiMian+'</td>'+'</tr>'+'</table>');
-            }
-            else{
-                alert("请重新提交");
-            }
-        },
-      })
+        <title>心理测试</title>
+        <link href="../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../css/Cheng_Zhangba.css" rel="stylesheet">
+        <script type="text/javascript" src="../js/jquery.js"></script>
+        <script type="text/javascript" src="../js/jquerysession.js"></script>
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $.ajax({
+                           url: '/User/check',
+                           type: 'POST',
+                           dataType: 'json',
+                           success: function (data) {
+                               if (data.status == true) {
+                                   var userAccount = data.userAccount;
+                                   $("#getUserID").html('<li><a>' + userAccount + '</a></li>');
+                                   $("#getUserID").toggle();
+                               }
+                               else {
+                                   $("#getUserID").toggle();
+                               }
+                           },
+                       })
+            })
+            $(document).on('click', '.submitAnswer', function () {
+                var val = new Array();
+                var flag = false;
+                var quTiHua = 0;
+                var qiangPo = 0;
+                var renJi = 0;
+                var yiYu = 0;
+                var jiaoLv = 0;
+                var diDui = 0;
+                var kongBu = 0;
+                var pianZhi = 0;
+                var jingShenBing = 0;
+                var shuiMian = 0;
+                for (var i = 0; i < 90; i++) {
+                    str = 'ans' + (i + 1);
+                    val[i] = $('input[name=' + str + ']:checked').val();
+                    if (val[i] == undefined) {
+                        flag = true;
+                        console.log(i);
+                        console.log(val[i]);
+                    }
+                }
+                valInt = new Array();
+                for (var i = 0; i < 90; i++) {
+                    valInt[i] = parseFloat(val[i]);
+                }
+                if (flag) {
+                    alert('请检查选项');
+                }
+                else {
+                    alert('恭喜你完成测试，请等待测试结果。');
+                }
+                quTiHua =
+                    (valInt[0] + valInt[3] + valInt[26] + valInt[39] + valInt[41] + valInt[47]
+                     + valInt[48] + valInt[51] + valInt[52] + valInt[55] + valInt[57]) / 12;
+                qiangPo =
+                    (valInt[2] + valInt[8] + valInt[9] + valInt[27] + valInt[37] + valInt[44]
+                     + valInt[45] + valInt[50] + valInt[54] + valInt[64]) / 10;
+                renJi =
+                    (valInt[5] + valInt[20] + valInt[33] + valInt[35] + valInt[36] + valInt[40]
+                     + valInt[60] + valInt[68] + valInt[72]) / 9;
+                yiYu =
+                    (valInt[4] + valInt[13] + valInt[19] + valInt[21] + valInt[25] + valInt[28]
+                     + valInt[29] + valInt[30] + valInt[31] + valInt[53] + valInt[70] + valInt[78])
+                    / 13;
+                jiaoLv =
+                    (valInt[1] + valInt[16] + valInt[22] + valInt[32] + valInt[38] + valInt[56]
+                     + valInt[71] + valInt[77] + valInt[79] + valInt[85]) / 10;
+                diDui =
+                    (valInt[10] + valInt[23] + valInt[62] + valInt[66] + valInt[73] + valInt[80])
+                    / 6;
+                kongBu =
+                    (valInt[12] + valInt[24] + valInt[46] + valInt[49] + valInt[69] + valInt[74]
+                     + valInt[81]) / 7;
+                pianZhi =
+                    (valInt[7] + valInt[17] + valInt[42] + valInt[67] + valInt[75] + valInt[82])
+                    / 6;
+                jingShenBing =
+                    (valInt[6] + valInt[15] + valInt[34] + valInt[61] + valInt[76] + valInt[83]
+                     + valInt[84] + valInt[86] + valInt[87] + valInt[89]) / 10;
+                shuiMian =
+                    (valInt[18] + valInt[43] + valInt[58] + valInt[59] + valInt[63] + valInt[65]
+                     + valInt[88]) / 7;
+                $.ajax({
+                           url: '/Exam/storeScore',
+                           type: 'POST',
+                           dataType: 'json',
+                           data: {
+                               quTiHua: quTiHua,
+                               qiangPo: qiangPo,
+                               jiaoLv: jiaoLv,
+                               diDui: diDui,
+                               kongBu: kongBu,
+                               pianZhi: pianZhi,
+                               jingShenBing: jingShenBing,
+                               shuiMian: shuiMian
+                           },
+                           success: function (data) {
+                               if (data.status == true) {
+                                   alert("记录成功");
+                                   window.location.href = "index.html";
+                                   $("#addResult")
+                                       .html('<table class="table">' + '<tr>' + '<td>特征' + '</td>'
+                                             + '<td>得分' + '</td>' + '</tr>' + '<tr>' + '<td>躯体化'
+                                             + '</td>' + '<td>' + quTiHua + '</td>' + '</tr>'
+                                             + '<tr>' + '<td>强迫' + '</td>' + '<td>' + qiangPo
+                                             + '</td>' + '</tr>' + '<tr>' + '<td>焦虑' + '</td>'
+                                             + '<td>' + jiaoLv + '</td>' + '</tr>' + '<tr>'
+                                             + '<td>敌对性' + '</td>' + '<td>' + diDui + '</td>'
+                                             + '</tr>' + '<tr>' + '<td>恐怖' + '</td>' + '<td>'
+                                             + kongBu + '</td>' + '</tr>' + '<tr>' + '<td>偏执'
+                                             + '</td>' + '<td>' + pianZhi + '</td>' + '</tr>'
+                                             + '<tr>' + '<td>精神病性' + '</td>' + '<td>' + jingShenBing
+                                             + '</td>' + '</tr>' + '<tr>' + '<td>睡眠及饮食' + '</td>'
+                                             + '<td>' + shuiMian + '</td>' + '</tr>' + '</table>');
+                               }
+                               else {
+                                   alert("请重新提交");
+                               }
+                           },
+                       })
 
-      })
+            })
 
-      </script>
-    </head>
-    <body>
-      <nav class="navbar navbar-default">
-        <div class="container-fluid">
-          <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
+        </script>
+        </head>
+<body>
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                    data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
             </button>
             <a class="navbar-brand" href="index.html">主页</a>
-          </div>
-          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-              <li><a href="../article/Art_index.html">美文鉴赏</a></li>
-              <li><a href="../Ano/Ano_index.html">匿名贴吧</a></li>
-              <li><a href="Exam_index.html">心理测试</a></li>
-              <li><a href="../Online/Online_index.html">在线预约</a></li>
-              <li><a href="../teacher/teacher_info.html">心灵导师</a></li>
+                <li><a href="../article/Art_index.html">美文鉴赏</a></li>
+                <li><a href="../Ano/Ano_index.html">匿名贴吧</a></li>
+                <li><a href="Exam_index.html">心理测试</a></li>
+                <li><a href="../Online/Online_index.html">在线预约</a></li>
+                <li><a href="../teacher/teacher_info.html">心灵导师</a></li>
             </ul>
             <form class="navbar-form navbar-left">
-              <div class="form-group">
-                <input type="text" class="form-control" placeholder="帖子">
-              </div>
-              <button type="submit" class="btn btn-default">搜索</button>
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="帖子">
+                </div>
+                <button type="submit" class="btn btn-default">搜索</button>
             </form>
             <ul class="nav navbar-nav navbar-right" id="getUserID" hidden>
-                        <li><a href="../submit.html?num=3">注册</a></li>
-                        <li><a href="../login.html?num=3">登录</a></li>
-                    </ul>
-          </li>
-        </ul>
-      </div>
+                <li><a href="../submit.html?num=3">注册</a></li>
+                <li><a href="../login.html?num=3">登录</a></li>
+            </ul>
+            </li>
+            </ul>
+        </div>
     </div>
-  </nav>
-  <div class="row Czb_margin_padding">
+</nav>
+<div class="row Czb_margin_padding">
     <div class="col-sm-1 col-xs-1">
     </div>
     <div>
-      <div class="col-sm-2 col-xs-2">
-        <img src="../image/exam1.jpg" alt="..." class="img-thumbnail Czb_borderBlank Czb_usetcFormat">
-      </div>
-      <div class="col-sm-1 col-xs-1">
-        <img src="../image/exam2.jpg" alt="..." class="img-thumbnail Czb_borderBlank Czb_usetcFormat">
-      </div>
-      <div class="col-sm-4 col-xs-4 Czb_text">
-        <h3 class="text-center"><small>深入内心，探索真我</small></h3>
+        <div class="col-sm-2 col-xs-2">
+            <img src="../image/exam1.jpg" alt="..."
+                 class="img-thumbnail Czb_borderBlank Czb_usetcFormat">
+        </div>
+        <div class="col-sm-1 col-xs-1">
+            <img src="../image/exam2.jpg" alt="..."
+                 class="img-thumbnail Czb_borderBlank Czb_usetcFormat">
+        </div>
+        <div class="col-sm-4 col-xs-4 Czb_text">
+            <h3 class="text-center">
+                <small>深入内心，探索真我</small>
+            </h3>
 
-      </div>
-      <div class="col-sm-2 col-xs-2">
-        <img src="../image/exam3.jpg" alt="..." class="img-thumbnail Czb_borderBlank Czb_usetcFormat">
-      </div>
-      <div class="col-sm-2 col-xs-2">
-        <img src="../image/exam4.jpg" alt="..." class="img-thumbnail Czb_borderBlank Czb_usetcFormat">
-      </div>
+        </div>
+        <div class="col-sm-2 col-xs-2">
+            <img src="../image/exam3.jpg" alt="..."
+                 class="img-thumbnail Czb_borderBlank Czb_usetcFormat">
+        </div>
+        <div class="col-sm-2 col-xs-2">
+            <img src="../image/exam4.jpg" alt="..."
+                 class="img-thumbnail Czb_borderBlank Czb_usetcFormat">
+        </div>
     </div>
-  </div>
-  <div class="col-xs-2 col-sm-2" ></div>
-  <div class="col-xs-8 col-sm-8" id="addResult">
+</div>
+<div class="col-xs-2 col-sm-2"></div>
+<div class="col-xs-8 col-sm-8" id="addResult">
     <div class="thumbnail" style="border: none;">
-      <div class="caption">
-        <ul class="list-group" id="ansAdd">
-        <li class="list-group-item col-xs-12" style="text-align:center;">
-         1.头痛<br><label><input type="radio" name="ans1" value=1> A:无影响<input type="radio" name="ans1" value=2> B:轻度 <input type="radio" name="ans1" value=3> C:中度 <input type="radio" name="ans1" value=4> D：重度 <input type="radio" name="ans1" value=5> E：你完了 </label> 
-        </li>
-		<li class="list-group-item col-xs-12" style="text-align:center;">
-         2.神经过敏，心中不踏实<br><label><input type="radio" name="ans2" value=1> A:无影响<input type="radio" name="ans2" value=2> B:轻度 <input type="radio" name="ans2" value=3> C:中度 <input type="radio" name="ans2" value=4> D：重度 <input type="radio" name="ans2" value=5> E：你完了 </label> 
-        </li>
-		<li class="list-group-item col-xs-12" style="text-align:center;">
-         3.头脑中有不必要的想法或字句盘旋<br><label><input type="radio" name="ans3" value=1> A:无影响<input type="radio" name="ans3" value=2> B:轻度 <input type="radio" name="ans3" value=3> C:中度 <input type="radio" name="ans3" value=4> D：重度 <input type="radio" name="ans3" value=5> E：你完了 </label> 
-        </li>
-		<li class="list-group-item col-xs-12" style="text-align:center;">
-         4.头昏或昏倒<br><label><input type="radio" name="ans4" value=1> A:无影响<input type="radio" name="ans4" value=2> B:轻度 <input type="radio" name="ans4" value=3> C:中度 <input type="radio" name="ans4" value=4> D：重度 <input type="radio" name="ans4" value=5> E：你完了 </label> 
-        </li>
-		<li class="list-group-item col-xs-12" style="text-align:center;">
-         5.对异性的兴趣减退<br><label><input type="radio" name="ans5" value=1> A:无影响<input type="radio" name="ans5" value=2> B:轻度 <input type="radio" name="ans5" value=3> C:中度 <input type="radio" name="ans5" value=4> D：重度 <input type="radio" name="ans5" value=5> E：你完了 
-    </label></li>
-		<li class="list-group-item col-xs-12" style="text-align:center;">
-         6.对旁人责备求全<br><label><input type="radio" name="ans6" value=1> A:无影响<input type="radio" name="ans6" value=2> B:轻度 <input type="radio" name="ans6" value=3> C:中度 <input type="radio" name="ans6" value=4> D：重度 <input type="radio" name="ans6" value=5> E：你完了 </label> 
-        </li>
-		<li class="list-group-item col-xs-12" style="text-align:center;">
-         7.感到别人能控制你的思想<br><label><input type="radio" name="ans7" value=1> A:无影响<input type="radio" name="ans7" value=2> B:轻度 <input type="radio" name="ans7" value=3> C:中度 <input type="radio" name="ans7" value=4> D：重度 <input type="radio" name="ans7" value=5> E：你完了 </label> 
-        </li>
-		<li class="list-group-item col-xs-12" style="text-align:center;">
-         8.责怪别人制造麻烦<br><label><input type="radio" name="ans8" value=1> A:无影响<input type="radio" name="ans8" value=2> B:轻度 <input type="radio" name="ans8" value=3> C:中度 <input type="radio" name="ans8" value=4> D：重度 <input type="radio" name="ans8" value=5> E：你完了 </label> 
-        </li>
-		<li class="list-group-item col-xs-12" style="text-align:center;">
-         9.忘记性大<br><label><input type="radio" name="ans9" value=1> A:无影响<input type="radio" name="ans9" value=2> B:轻度 <input type="radio" name="ans9" value=3> C:中度 <input type="radio" name="ans9" value=4> D：重度 <input type="radio" name="ans9" value=5> E：你完了 </label> 
-        </li>
-		<li class="list-group-item col-xs-12" style="text-align:center;">
-         10.担心自己的衣饰整齐及仪态的端正<br><label><input type="radio" name="ans10" value=1> A:无影响<input type="radio" name="ans10" value=2> B:轻度 <input type="radio" name="ans10" value=3> C:中度 <input type="radio" name="ans10" value=4> D：重度 <input type="radio" name="ans10" value=5> E：你完了 </label> 
-        </li>
-		<li class="list-group-item col-xs-12" style="text-align:center;">
-         11.容易烦恼和激动<br><label><input type="radio" name="ans11" value=1> A:无影响<input type="radio" name="ans11" value=2> B:轻度 <input type="radio" name="ans11" value=3> C:中度 <input type="radio" name="ans11" value=4> D：重度 <input type="radio" name="ans11" value=5> E：你完了 </label> 
-        </li>
-		<li class="list-group-item col-xs-12" style="text-align:center;">
-         12.胸痛<br><label><input type="radio" name="ans12" value=1> A:无影响<input type="radio" name="ans12" value=2> B:轻度 <input type="radio" name="ans12" value=3> C:中度 <input type="radio" name="ans12" value=4> D：重度 <input type="radio" name="ans12" value=5> E：你完了 </label> 
-        </li>
-		<li class="list-group-item col-xs-12" style="text-align:center;">
-         13.害怕空旷的场所或街道<br><label><input type="radio" name="ans13" value=1> A:无影响<input type="radio" name="ans13" value=2> B:轻度 <input type="radio" name="ans13" value=3> C:中度 <input type="radio" name="ans13" value=4> D：重度 <input type="radio" name="ans13" value=5> E：你完了 </label> 
-        </li>
-		<li class="list-group-item col-xs-12" style="text-align:center;">
-         14.感到自己精力下降，活动减慢<br><label><input type="radio" name="ans14" value=1> A:无影响<input type="radio" name="ans14" value=2> B:轻度 <input type="radio" name="ans14" value=3> C:中度 <input type="radio" name="ans14" value=4> D：重度 <input type="radio" name="ans14" value=5> E：你完了 </label> 
-        </li>
-		<li class="list-group-item col-xs-12" style="text-align:center;">
-         15.想结束自己的性命<br><label><input type="radio" name="ans15" value=1> A:无影响<input type="radio" name="ans15" value=2> B:轻度 <input type="radio" name="ans15" value=3> C:中度 <input type="radio" name="ans15" value=4> D：重度 <input type="radio" name="ans15" value=5> E：你完了 </label> 
-        </li>
-		 <li class="list-group-item col-xs-12" style="text-align:center;">
-         16.听到旁人听不到的声音<br><label><input type="radio" name="ans16" value=1> A:无影响<input type="radio" name="ans16" value=2> B:轻度 <input type="radio" name="ans16" value=3> C:中度 <input type="radio" name="ans16" value=4> D：重度 <input type="radio" name="ans16" value=5> E：你完了 </label> 
-        </li>
-		<li class="list-group-item col-xs-12" style="text-align:center;">
-         17.发抖<br><label><input type="radio" name="ans17" value=1> A:无影响<input type="radio" name="ans17" value=2> B:轻度 <input type="radio" name="ans17" value=3> C:中度 <input type="radio" name="ans17" value=4> D：重度 <input type="radio" name="ans17" value=5> E：你完了 </label> 
-        </li>
-		<li class="list-group-item col-xs-12" style="text-align:center;">
-         18.感到大多数人都不可信任<br><label><input type="radio" name="ans18" value=1> A:无影响<input type="radio" name="ans18" value=2> B:轻度 <input type="radio" name="ans18" value=3> C:中度 <input type="radio" name="ans18" value=4> D：重度 <input type="radio" name="ans18" value=5> E：你完了 </label> 
-        </li>
-    <li class="list-group-item col-xs-12" style="text-align:center;">
-         19.胃口不好<br><label><input type="radio" name="ans19" value=1> A:无影响<input type="radio" name="ans19" value=2> B:轻度 <input type="radio" name="ans19" value=3> C:中度 <input type="radio" name="ans19" value=4> D：重度 <input type="radio" name="ans19" value=5> E：你完了 </label> 
-        </li>
-		<li class="list-group-item col-xs-12" style="text-align:center;">
-         20.容易哭泣<br><label><input type="radio" name="ans20" value=1> A:无影响<input type="radio" name="ans20" value=2> B:轻度 <input type="radio" name="ans20" value=3> C:中度 <input type="radio" name="ans20" value=4> D：重度 <input type="radio" name="ans20" value=5> E：你完了 </label> 
-        </li>
-		<li class="list-group-item col-xs-12" style="text-align:center;">
-         21.同异性相处时感到害羞不自在<br><label><input type="radio" name="ans21" value=1> A:无影响<input type="radio" name="ans21" value=2> B:轻度 <input type="radio" name="ans21" value=3> C:中度 <input type="radio" name="ans21" value=4> D：重度 <input type="radio" name="ans21" value=5> E：你完了 </label> 
-        </li>
-		<li class="list-group-item col-xs-12" style="text-align:center;">
-         22.感到受骗，中了圈套或有人想抓您<br><label><input type="radio" name="ans22" value=1> A:无影响<input type="radio" name="ans22" value=2> B:轻度 <input type="radio" name="ans22" value=3> C:中度 <input type="radio" name="ans22" value=4> D：重度 <input type="radio" name="ans22" value=5> E：你完了 </label> 
-        </li>
-		<li class="list-group-item col-xs-12" style="text-align:center;">
-         23.无缘无故地突然感到害怕<br><label><input type="radio" name="ans23" value=1> A:无影响<input type="radio" name="ans23" value=2> B:轻度 <input type="radio" name="ans23" value=3> C:中度 <input type="radio" name="ans23" value=4> D：重度 <input type="radio" name="ans23" value=5> E：你完了 </label> 
-        </li>
-		<li class="list-group-item col-xs-12" style="text-align:center;">
-         24.自己不能控制地大发脾气<br><label><input type="radio" name="ans24" value=1> A:无影响<input type="radio" name="ans24" value=2> B:轻度 <input type="radio" name="ans24" value=3> C:中度 <input type="radio" name="ans24" value=4> D：重度 <input type="radio" name="ans24" value=5> E：你完了 </label> 
-        </li>
-		<li class="list-group-item col-xs-12" style="text-align:center;">
-         25.怕单独出门<br><label><input type="radio" name="ans25" value=1> A:无影响<input type="radio" name="ans25" value=2> B:轻度 <input type="radio" name="ans25" value=3> C:中度 <input type="radio" name="ans25" value=4> D：重度 <input type="radio" name="ans25" value=5> E：你完了 </label> 
-        </li>
-		<li class="list-group-item col-xs-12" style="text-align:center;">
-         26.经常责怪自己<br><label><input type="radio" name="ans26" value=1> A:无影响<input type="radio" name="ans26" value=2> B:轻度 <input type="radio" name="ans26" value=3> C:中度 <input type="radio" name="ans26" value=4> D：重度 <input type="radio" name="ans26" value=5> E：你完了 </label> 
-        </li>
-		<li class="list-group-item col-xs-12" style="text-align:center;">
-         27.腰痛<br><label><input type="radio" name="ans27" value=1> A:无影响<input type="radio" name="ans27" value=2> B:轻度 <input type="radio" name="ans27" value=3> C:中度 <input type="radio" name="ans27" value=4> D：重度 <input type="radio" name="ans27" value=5> E：你完了 </label> 
-        </li>
-		<li class="list-group-item col-xs-12" style="text-align:center;">
-         28.感到难以完成任务<br><label><input type="radio" name="ans28" value=1> A:无影响<input type="radio" name="ans28" value=2> B:轻度 <input type="radio" name="ans28" value=3> C:中度 <input type="radio" name="ans28" value=4> D：重度 <input type="radio" name="ans28" value=5> E：你完了 </label> 
-        </li>
-		<li class="list-group-item col-xs-12" style="text-align:center;">
-         29.感到孤独<br><label><input type="radio" name="ans29" value=1> A:无影响<input type="radio" name="ans29" value=2> B:轻度 <input type="radio" name="ans29" value=3> C:中度 <input type="radio" name="ans29" value=4> D：重度 <input type="radio" name="ans29" value=5> E：你完了 </label> 
-        </li>
-		<li class="list-group-item col-xs-12" style="text-align:center;">
-         30.感到苦闷<br><label><input type="radio" name="ans30" value=1> A:无影响<input type="radio" name="ans30" value=2> B:轻度 <input type="radio" name="ans30" value=3> C:中度 <input type="radio" name="ans30" value=4> D：重度 <input type="radio" name="ans30" value=5> E：你完了 </label> 
-        </li>
-		<li class="list-group-item col-xs-12" style="text-align:center;">
-         31.过分担忧<br><label><input type="radio" name="ans31" value=1> A:无影响<input type="radio" name="ans31" value=2> B:轻度 <input type="radio" name="ans31" value=3> C:中度 <input type="radio" name="ans31" value=4> D：重度 <input type="radio" name="ans31" value=5> E：你完了 </label> 
-        </li>
-		<li class="list-group-item col-xs-12" style="text-align:center;">
-         32.对事物不感兴趣<br><label><input type="radio" name="ans32" value=1> A:无影响<input type="radio" name="ans32" value=2> B:轻度 <input type="radio" name="ans32" value=3> C:中度 <input type="radio" name="ans32" value=4> D：重度 <input type="radio" name="ans32" value=5> E：你完了 </label> 
-        </li>
-		<li class="list-group-item col-xs-12" style="text-align:center;">
-         33.感到害怕<br><label><input type="radio" name="ans33" value=1> A:无影响<input type="radio" name="ans33" value=2> B:轻度 <input type="radio" name="ans33" value=3> C:中度 <input type="radio" name="ans33" value=4> D：重度 <input type="radio" name="ans33" value=5> E：你完了 </label> 
-        </li>
-		<li class="list-group-item col-xs-12" style="text-align:center;">
-         34.我的感情容易受到伤害<br><label><input type="radio" name="ans34" value=1> A:无影响<input type="radio" name="ans34" value=2> B:轻度 <input type="radio" name="ans34" value=3> C:中度 <input type="radio" name="ans34" value=4> D：重度 <input type="radio" name="ans34" value=5> E：你完了 </label> 
-        </li>
-		<li class="list-group-item col-xs-12" style="text-align:center;">
-         35.旁人能知道您的私下想法<br><label><input type="radio" name="ans35" value=1> A:无影响<input type="radio" name="ans35" value=2> B:轻度 <input type="radio" name="ans35" value=3> C:中度 <input type="radio" name="ans35" value=4> D：重度 <input type="radio" name="ans35" value=5> E：你完了 </label> 
-        </li>
-		<li class="list-group-item col-xs-12" style="text-align:center;">
-         36.感到别人不理解您不同情您<br><label><input type="radio" name="ans36" value=1> A:无影响<input type="radio" name="ans36" value=2> B:轻度 <input type="radio" name="ans36" value=3> C:中度 <input type="radio" name="ans36" value=4> D：重度 <input type="radio" name="ans36" value=5> E：你完了 </label> 
-        </li>
-		<li class="list-group-item col-xs-12" style="text-align:center;">
-         37.感到别人对您不友好，不喜欢你<br><label><input type="radio" name="ans37" value=1> A:无影响<input type="radio" name="ans37" value=2> B:轻度 <input type="radio" name="ans37" value=3> C:中度 <input type="radio" name="ans37" value=4> D：重度 <input type="radio" name="ans37" value=5> E：你完了 </label> 
-        </li>
-		<li class="list-group-item col-xs-12" style="text-align:center;">
-         38.做事必须做的很慢以保证做得正确<br><label><input type="radio" name="ans38" value=1> A:无影响<input type="radio" name="ans38" value=2> B:轻度 <input type="radio" name="ans38" value=3> C:中度 <input type="radio" name="ans38" value=4> D：重度 <input type="radio" name="ans38" value=5> E：你完了 </label> 
-        </li>
-		<li class="list-group-item col-xs-12" style="text-align:center;">
-         39.心跳的很厉害<br><label><input type="radio" name="ans39" value=1> A:无影响<input type="radio" name="ans39" value=2> B:轻度 <input type="radio" name="ans39" value=3> C:中度 <input type="radio" name="ans39" value=4> D：重度 <input type="radio" name="ans39" value=5> E：你完了 </label> 
-        </li>
-		<li class="list-group-item col-xs-12" style="text-align:center;">
-         40.恶心或胃不舒服<br><label><input type="radio" name="ans40" value=1> A:无影响<input type="radio" name="ans40" value=2> B:轻度 <input type="radio" name="ans40" value=3> C:中度 <input type="radio" name="ans40" value=4> D：重度 <input type="radio" name="ans40" value=5> E：你完了 </label> 
-        </li>
-		<li class="list-group-item col-xs-12" style="text-align:center;">
-         41.感到比不上别人<br><label><input type="radio" name="ans41" value=1> A:无影响<input type="radio" name="ans41" value=2> B:轻度 <input type="radio" name="ans41" value=3> C:中度 <input type="radio" name="ans41" value=4> D：重度 <input type="radio" name="ans41" value=5> E：你完了 </label> 
-        </li>
-		<li class="list-group-item col-xs-12" style="text-align:center;">
-         42.肌肉酸痛<br><label><input type="radio" name="ans42" value=1> A:无影响<input type="radio" name="ans42" value=2> B:轻度 <input type="radio" name="ans42" value=3> C:中度 <input type="radio" name="ans42" value=4> D：重度 <input type="radio" name="ans42" value=5> E：你完了 </label> 
-        </li>
-		<li class="list-group-item col-xs-12" style="text-align:center;">
-         43.感到有人在监视您<br><label><input type="radio" name="ans43" value=1> A:无影响<input type="radio" name="ans43" value=2> B:轻度 <input type="radio" name="ans43" value=3> C:中度 <input type="radio" name="ans43" value=4> D：重度 <input type="radio" name="ans43" value=5> E：你完了 </label> 
-        </li>
-		<li class="list-group-item col-xs-12" style="text-align:center;">
-         44.难以入睡<br><label><input type="radio" name="ans44" value=1> A:无影响<input type="radio" name="ans44" value=2> B:轻度 <input type="radio" name="ans44" value=3> C:中度 <input type="radio" name="ans44" value=4> D：重度 <input type="radio" name="ans44" value=5> E：你完了 </label> 
-        </li>
-		<li class="list-group-item col-xs-12" style="text-align:center;">
-         45.做事必须反复检查<br><label><input type="radio" name="ans45" value=1> A:无影响<input type="radio" name="ans45" value=2> B:轻度 <input type="radio" name="ans45" value=3> C:中度 <input type="radio" name="ans45" value=4> D：重度 <input type="radio" name="ans45" value=5> E：你完了 </label> 
-        </li>
-		<li class="list-group-item col-xs-12" style="text-align:center;">
-         46.难以做出决定<br><label><input type="radio" name="ans46" value=1> A:无影响<input type="radio" name="ans46" value=2> B:轻度 <input type="radio" name="ans46" value=3> C:中度 <input type="radio" name="ans46" value=4> D：重度 <input type="radio" name="ans46" value=5> E：你完了 </label> 
-        </li>
-		<li class="list-group-item col-xs-12" style="text-align:center;">
-         47.怕乘电车、公共汽车、地铁或火车<br><label><input type="radio" name="ans47" value=1> A:无影响<input type="radio" name="ans47" value=2> B:轻度 <input type="radio" name="ans47" value=3> C:中度 <input type="radio" name="ans47" value=4> D：重度 <input type="radio" name="ans47" value=5> E：你完了 </label> 
-        </li>
-		<li class="list-group-item col-xs-12" style="text-align:center;">
-         48.呼吸有困难<br><label><input type="radio" name="ans48" value=1> A:无影响<input type="radio" name="ans48" value=2> B:轻度 <input type="radio" name="ans48" value=3> C:中度 <input type="radio" name="ans48" value=4> D：重度 <input type="radio" name="ans48" value=5> E：你完了 </label> 
-        </li>
-		<li class="list-group-item col-xs-12" style="text-align:center;">
-         49.一阵阵发冷或发热<br><label><input type="radio" name="ans49" value=1> A:无影响<input type="radio" name="ans49" value=2> B:轻度 <input type="radio" name="ans49" value=3> C:中度 <input type="radio" name="ans49" value=4> D：重度 <input type="radio" name="ans49" value=5> E：你完了 </label> 
-        </li>
-		<li class="list-group-item col-xs-12" style="text-align:center;">
-         50.因为感到还怕而避开某些东西，场合或活动<br><label><input type="radio" name="ans50" value=1> A:无影响<input type="radio" name="ans50" value=2> B:轻度 <input type="radio" name="ans50" value=3> C:中度 <input type="radio" name="ans50" value=4> D：重度 <input type="radio" name="ans50" value=5> E：你完了 </label> 
-        </li>
-		<li class="list-group-item col-xs-12" style="text-align:center;">
-         51.脑子变空了<br><label><input type="radio" name="ans51" value=1> A:无影响<input type="radio" name="ans51" value=2> B:轻度 <input type="radio" name="ans51" value=3> C:中度 <input type="radio" name="ans51" value=4> D：重度 <input type="radio" name="ans51" value=5> E：你完了 </label> 
-        </li>
-		<li class="list-group-item col-xs-12" style="text-align:center;">
-         52.身体发麻或刺痛<br><label><input type="radio" name="ans52" value=1> A:无影响<input type="radio" name="ans52" value=2> B:轻度 <input type="radio" name="ans52" value=3> C:中度 <input type="radio" name="ans52" value=4> D：重度 <input type="radio" name="ans52" value=5> E：你完了 </label> 
-        </li>
-		<li class="list-group-item col-xs-12" style="text-align:center;">
-         53.喉咙有梗塞感<br><label><input type="radio" name="ans53" value=1> A:无影响<input type="radio" name="ans53" value=2> B:轻度 <input type="radio" name="ans53" value=3> C:中度 <input type="radio" name="ans53" value=4> D：重度 <input type="radio" name="ans53" value=5> E：你完了 </label> 
-        </li>
-		<li class="list-group-item col-xs-12" style="text-align:center;">
-         54.感到对前途没有希望<br><label><input type="radio" name="ans54" value=1> A:无影响<input type="radio" name="ans54" value=2> B:轻度 <input type="radio" name="ans54" value=3> C:中度 <input type="radio" name="ans54" value=4> D：重度 <input type="radio" name="ans54" value=5> E：你完了 </label> 
-        </li>
-		<li class="list-group-item col-xs-12" style="text-align:center;">
-         55.不能集中注意力<br><label><input type="radio" name="ans55" value=1> A:无影响<input type="radio" name="ans55" value=2> B:轻度 <input type="radio" name="ans55" value=3> C:中度 <input type="radio" name="ans55" value=4> D：重度 <input type="radio" name="ans55" value=5> E：你完了 </label> 
-        </li>
-		<li class="list-group-item col-xs-12" style="text-align:center;">
-         56.感到身体某一部分软弱无力<br><label><input type="radio" name="ans56" value=1> A:无影响<input type="radio" name="ans56" value=2> B:轻度 <input type="radio" name="ans56" value=3> C:中度 <input type="radio" name="ans56" value=4> D：重度 <input type="radio" name="ans56" value=5> E：你完了 </label> 
-        </li>
-		<li class="list-group-item col-xs-12" style="text-align:center;">
-         57.感到紧张或容易紧张<br><label><input type="radio" name="ans57" value=1> A:无影响<input type="radio" name="ans57" value=2> B:轻度 <input type="radio" name="ans57" value=3> C:中度 <input type="radio" name="ans57" value=4> D：重度 <input type="radio" name="ans57" value=5> E：你完了 </label> 
-        </li>
-		<li class="list-group-item col-xs-12" style="text-align:center;">
-         58.感到手或脚发重<br><label><input type="radio" name="ans58" value=1> A:无影响<input type="radio" name="ans58" value=2> B:轻度 <input type="radio" name="ans58" value=3> C:中度 <input type="radio" name="ans58" value=4> D：重度 <input type="radio" name="ans58" value=5> E：你完了 </label> 
-        </li>
-		<li class="list-group-item col-xs-12" style="text-align:center;">
-         59.想到有关死亡的事<br><label><input type="radio" name="ans59" value=1> A:无影响<input type="radio" name="ans59" value=2> B:轻度 <input type="radio" name="ans59" value=3> C:中度 <input type="radio" name="ans59" value=4> D：重度 <input type="radio" name="ans59" value=5> E：你完了 </label> 
-        </li>
-		<li class="list-group-item col-xs-12" style="text-align:center;">
-         60.吃得太多<br><label><input type="radio" name="ans60" value=1> A:无影响<input type="radio" name="ans60" value=2> B:轻度 <input type="radio" name="ans60" value=3> C:中度 <input type="radio" name="ans60" value=4> D：重度 <input type="radio" name="ans60" value=5> E：你完了 </label> 
-        </li>
-		<li class="list-group-item col-xs-12" style="text-align:center;">
-         61.脑子变空了<br><label><input type="radio" name="ans61" value=1> A:无影响<input type="radio" name="ans61" value=2> B:轻度 <input type="radio" name="ans61" value=3> C:中度 <input type="radio" name="ans61" value=4> D：重度 <input type="radio" name="ans61" value=5> E：你完了 </label> 
-        </li><li class="list-group-item col-xs-12" style="text-align:center;">
-         62.身体发麻或刺痛<br><label><input type="radio" name="ans62" value=1> A:无影响<input type="radio" name="ans62" value=2> B:轻度 <input type="radio" name="ans62" value=3> C:中度 <input type="radio" name="ans62" value=4> D：重度 <input type="radio" name="ans62" value=5> E：你完了 </label> 
-        </li><li class="list-group-item col-xs-12" style="text-align:center;">
-         63.有想打人或伤害他人的冲动<br><label><input type="radio" name="ans63" value=1> A:无影响<input type="radio" name="ans63" value=2> B:轻度 <input type="radio" name="ans63" value=3> C:中度 <input type="radio" name="ans63" value=4> D：重度 <input type="radio" name="ans63" value=5> E：你完了 </label> 
-        </li><li class="list-group-item col-xs-12" style="text-align:center;">
-         64.醒的太早<br><label><input type="radio" name="ans64" value=1> A:无影响<input type="radio" name="ans64" value=2> B:轻度 <input type="radio" name="ans64" value=3> C:中度 <input type="radio" name="ans64" value=4> D：重度 <input type="radio" name="ans64" value=5> E：你完了 </label> 
-        </li><li class="list-group-item col-xs-12" style="text-align:center;">
-         65.必须反复洗手、点数<br><label><input type="radio" name="ans65" value=1> A:无影响<input type="radio" name="ans65" value=2> B:轻度 <input type="radio" name="ans65" value=3> C:中度 <input type="radio" name="ans65" value=4> D：重度 <input type="radio" name="ans65" value=5> E：你完了 </label> 
-        </li><li class="list-group-item col-xs-12" style="text-align:center;">
-         66.睡得不稳不深<br><label><input type="radio" name="ans66" value=1> A:无影响<input type="radio" name="ans66" value=2> B:轻度 <input type="radio" name="ans66" value=3> C:中度 <input type="radio" name="ans66" value=4> D：重度 <input type="radio" name="ans66" value=5> E：你完了 </label> 
-        </li><li class="list-group-item col-xs-12" style="text-align:center;">
-         67.有想摔坏或破坏东西的冲动<br><label><input type="radio" name="ans67" value=1> A:无影响<input type="radio" name="ans67" value=2> B:轻度 <input type="radio" name="ans67" value=3> C:中度 <input type="radio" name="ans67" value=4> D：重度 <input type="radio" name="ans67" value=5> E：你完了 </label> 
-        </li><li class="list-group-item col-xs-12" style="text-align:center;">
-         68.有一些别人没有的想法或念头<br><label><input type="radio" name="ans68" value=1> A:无影响<input type="radio" name="ans68" value=2> B:轻度 <input type="radio" name="ans68" value=3> C:中度 <input type="radio" name="ans68" value=4> D：重度 <input type="radio" name="ans68" value=5> E：你完了 </label> 
-        </li><li class="list-group-item col-xs-12" style="text-align:center;">
-         69.感到对别人神经过敏<br><label><input type="radio" name="ans69" value=1> A:无影响<input type="radio" name="ans69" value=2> B:轻度 <input type="radio" name="ans69" value=3> C:中度 <input type="radio" name="ans69" value=4> D：重度 <input type="radio" name="ans69" value=5> E：你完了 </label> 
-        </li><li class="list-group-item col-xs-12" style="text-align:center;">
-         70.在商店或电影院等人多的地方感到不自在<br><label><input type="radio" name="ans70" value=1> A:无影响<input type="radio" name="ans70" value=2> B:轻度 <input type="radio" name="ans70" value=3> C:中度 <input type="radio" name="ans70" value=4> D：重度 <input type="radio" name="ans70" value=5> E：你完了 </label> 
-        </li>
-		<li class="list-group-item col-xs-12" style="text-align:center;">
-         71.感到任何事情都很困难<br><label><input type="radio" name="ans71" value=1> A:无影响<input type="radio" name="ans71" value=2> B:轻度 <input type="radio" name="ans71" value=3> C:中度 <input type="radio" name="ans71" value=4> D：重度 <input type="radio" name="ans71" value=5> E：你完了 </label> 
-        </li><li class="list-group-item col-xs-12" style="text-align:center;">
-         72.一阵阵恐惧或惊恐<br><label><input type="radio" name="ans72" value=1> A:无影响<input type="radio" name="ans72" value=2> B:轻度 <input type="radio" name="ans72" value=3> C:中度 <input type="radio" name="ans72" value=4> D：重度 <input type="radio" name="ans72" value=5> E：你完了 </label> 
-        </li><li class="list-group-item col-xs-12" style="text-align:center;">
-         73.感到在公共场合吃东西很不舒服<br><label><input type="radio" name="ans73" value=1> A:无影响<input type="radio" name="ans73" value=2> B:轻度 <input type="radio" name="ans73" value=3> C:中度 <input type="radio" name="ans73" value=4> D：重度 <input type="radio" name="ans73" value=5> E：你完了 </label> 
-        </li><li class="list-group-item col-xs-12" style="text-align:center;">
-         74.经常与人争论<br><label><input type="radio" name="ans74" value=1> A:无影响<input type="radio" name="ans74" value=2> B:轻度 <input type="radio" name="ans74" value=3> C:中度 <input type="radio" name="ans74" value=4> D：重度 <input type="radio" name="ans74" value=5> E：你完了 </label> 
-        </li><li class="list-group-item col-xs-12" style="text-align:center;">
-         75.单独一人时神经很紧张<br><label><input type="radio" name="ans75" value=1> A:无影响<input type="radio" name="ans75" value=2> B:轻度 <input type="radio" name="ans75" value=3> C:中度 <input type="radio" name="ans75" value=4> D：重度 <input type="radio" name="ans75" value=5> E：你完了 </label> 
-        </li><li class="list-group-item col-xs-12" style="text-align:center;">
-         76.别人对您的成绩没有做出恰当的评价<br><label><input type="radio" name="ans76" value=1> A:无影响<input type="radio" name="ans76" value=2> B:轻度 <input type="radio" name="ans76" value=3> C:中度 <input type="radio" name="ans76" value=4> D：重度 <input type="radio" name="ans76" value=5> E：你完了 </label> 
-        </li><li class="list-group-item col-xs-12" style="text-align:center;">
-         77.即使和别人坐在一起也感到孤独<br><label><input type="radio" name="ans77" value=1> A:无影响<input type="radio" name="ans77" value=2> B:轻度 <input type="radio" name="ans77" value=3> C:中度 <input type="radio" name="ans77" value=4> D：重度 <input type="radio" name="ans77" value=5> E：你完了 </label> 
-        </li><li class="list-group-item col-xs-12" style="text-align:center;">
-         78.感到坐立不安心神不宁<br><label><input type="radio" name="ans78" value=1> A:无影响<input type="radio" name="ans78" value=2> B:轻度 <input type="radio" name="ans78" value=3> C:中度 <input type="radio" name="ans78" value=4> D：重度 <input type="radio" name="ans78" value=5> E：你完了 </label> 
-        </li><li class="list-group-item col-xs-12" style="text-align:center;">
-         79.感到自己没有什么价值<br><label><input type="radio" name="ans79" value=1> A:无影响<input type="radio" name="ans79" value=2> B:轻度 <input type="radio" name="ans79" value=3> C:中度 <input type="radio" name="ans79" value=4> D：重度 <input type="radio" name="ans79" value=5> E：你完了 </label> 
-        </li><li class="list-group-item col-xs-12" style="text-align:center;">
-         80.感到熟悉的东西变成陌生或不像是真的<br><label><input type="radio" name="ans80" value=1> A:无影响<input type="radio" name="ans80" value=2> B:轻度 <input type="radio" name="ans80" value=3> C:中度 <input type="radio" name="ans80" value=4> D：重度 <input type="radio" name="ans80" value=5> E：你完了 </label> 
-        </li>
-		<li class="list-group-item col-xs-12" style="text-align:center;">
-         81.大叫或摔东西<br><label><input type="radio" name="ans81" value=1> A:无影响<input type="radio" name="ans81" value=2> B:轻度 <input type="radio" name="ans81" value=3> C:中度 <input type="radio" name="ans81" value=4> D：重度 <input type="radio" name="ans81" value=5> E：你完了 </label> 
-        </li><li class="list-group-item col-xs-12" style="text-align:center;">
-         82.害怕会在公共场合昏倒<br><label><input type="radio" name="ans82" value=1> A:无影响<input type="radio" name="ans82" value=2> B:轻度 <input type="radio" name="ans82" value=3> C:中度 <input type="radio" name="ans82" value=4> D：重度 <input type="radio" name="ans82" value=5> E：你完了 </label> 
-        </li><li class="list-group-item col-xs-12" style="text-align:center;">
-         83.感到别人想占您的便宜<br><label><input type="radio" name="ans83" value=1> A:无影响<input type="radio" name="ans83" value=2> B:轻度 <input type="radio" name="ans83" value=3> C:中度 <input type="radio" name="ans83" value=4> D：重度 <input type="radio" name="ans83" value=5> E：你完了 </label> 
-        </li><li class="list-group-item col-xs-12" style="text-align:center;">
-         84.为一些有关"性"的想法而很苦恼<br><label><input type="radio" name="ans84" value=1> A:无影响<input type="radio" name="ans84" value=2> B:轻度 <input type="radio" name="ans84" value=3> C:中度 <input type="radio" name="ans84" value=4> D：重度 <input type="radio" name="ans84" value=5> E：你完了 </label> 
-        </li><li class="list-group-item col-xs-12" style="text-align:center;">
-         85.认为应该因为自己的过错而受到惩罚<br><label><input type="radio" name="ans85" value=1> A:无影响<input type="radio" name="ans85" value=2> B:轻度 <input type="radio" name="ans85" value=3> C:中度 <input type="radio" name="ans85" value=4> D：重度 <input type="radio" name="ans85" value=5> E：你完了 </label> 
-        </li><li class="list-group-item col-xs-12" style="text-align:center;">
-         86.感到要赶快把事情做完<br><label><input type="radio" name="ans86" value=1> A:无影响<input type="radio" name="ans86" value=2> B:轻度 <input type="radio" name="ans86" value=3> C:中度 <input type="radio" name="ans86" value=4> D：重度 <input type="radio" name="ans86" value=5> E：你完了 </label> 
-        </li><li class="list-group-item col-xs-12" style="text-align:center;">
-         87.感到自己的身体有严重的问题<br><label><input type="radio" name="ans87" value=1> A:无影响<input type="radio" name="ans87" value=2> B:轻度 <input type="radio" name="ans87" value=3> C:中度 <input type="radio" name="ans87" value=4> D：重度 <input type="radio" name="ans87" value=5> E：你完了 </label> 
-        </li><li class="list-group-item col-xs-12" style="text-align:center;">
-         88.从未感到和其他人很亲近<br><label><input type="radio" name="ans88" value=1> A:无影响<input type="radio" name="ans88" value=2> B:轻度 <input type="radio" name="ans88" value=3> C:中度 <input type="radio" name="ans88" value=4> D：重度 <input type="radio" name="ans88" value=5> E：你完了 </label> 
-        </li><li class="list-group-item col-xs-12" style="text-align:center;">
-         89.感到自己有罪<br><label><input type="radio" name="ans89" value=1> A:无影响<input type="radio" name="ans89" value=2> B:轻度 <input type="radio" name="ans89" value=3> C:中度 <input type="radio" name="ans89" value=4> D：重度 <input type="radio" name="ans89" value=5> E：你完了 </label> 
-        </li><li class="list-group-item col-xs-12" style="text-align:center;">
-         90.感到自己的脑子有毛病<br><label><input type="radio" name="ans90" value=1> A:无影响<input type="radio" name="ans90" value=2> B:轻度 <input type="radio" name="ans90" value=3> C:中度 <input type="radio" name="ans90" value=4> D：重度 <input type="radio" name="ans90" value=5> E：你完了 </label> 
-        </li>
-        </ul>
-      </div>
-      <div class="col-xs-12" style="text-align: center;">
-          <button class="btn btn-default submitAnswer">提交</button>
-      </div>
+        <div class="caption">
+            <ul class="list-group" id="ansAdd">
+                <li class="list-group-item col-xs-12" style="text-align:center;">
+                    1.头痛<br><label><input type="radio" name="ans1" value=1> A:无影响<input type="radio"
+                                                                                        name="ans1"
+                                                                                        value=2>
+                    B:轻度 <input type="radio" name="ans1" value=3> C:中度 <input type="radio"
+                                                                              name="ans1" value=4>
+                    D：重度 <input type="radio" name="ans1" value=5> E：你完了 </label>
+                </li>
+                <li class="list-group-item col-xs-12" style="text-align:center;">
+                    2.神经过敏，心中不踏实<br><label><input type="radio" name="ans2" value=1> A:无影响<input
+                        type="radio" name="ans2" value=2> B:轻度 <input type="radio" name="ans2"
+                                                                      value=3> C:中度 <input
+                        type="radio" name="ans2" value=4> D：重度 <input type="radio" name="ans2"
+                                                                      value=5> E：你完了 </label>
+                </li>
+                <li class="list-group-item col-xs-12" style="text-align:center;">
+                    3.头脑中有不必要的想法或字句盘旋<br><label><input type="radio" name="ans3" value=1> A:无影响<input
+                        type="radio" name="ans3" value=2> B:轻度 <input type="radio" name="ans3"
+                                                                      value=3> C:中度 <input
+                        type="radio" name="ans3" value=4> D：重度 <input type="radio" name="ans3"
+                                                                      value=5> E：你完了 </label>
+                </li>
+                <li class="list-group-item col-xs-12" style="text-align:center;">
+                    4.头昏或昏倒<br><label><input type="radio" name="ans4" value=1> A:无影响<input
+                        type="radio" name="ans4" value=2> B:轻度 <input type="radio" name="ans4"
+                                                                      value=3> C:中度 <input
+                        type="radio" name="ans4" value=4> D：重度 <input type="radio" name="ans4"
+                                                                      value=5> E：你完了 </label>
+                </li>
+                <li class="list-group-item col-xs-12" style="text-align:center;">
+                    5.对异性的兴趣减退<br><label><input type="radio" name="ans5" value=1> A:无影响<input
+                        type="radio" name="ans5" value=2> B:轻度 <input type="radio" name="ans5"
+                                                                      value=3> C:中度 <input
+                        type="radio" name="ans5" value=4> D：重度 <input type="radio" name="ans5"
+                                                                      value=5> E：你完了
+                </label></li>
+                <li class="list-group-item col-xs-12" style="text-align:center;">
+                    6.对旁人责备求全<br><label><input type="radio" name="ans6" value=1> A:无影响<input
+                        type="radio" name="ans6" value=2> B:轻度 <input type="radio" name="ans6"
+                                                                      value=3> C:中度 <input
+                        type="radio" name="ans6" value=4> D：重度 <input type="radio" name="ans6"
+                                                                      value=5> E：你完了 </label>
+                </li>
+                <li class="list-group-item col-xs-12" style="text-align:center;">
+                    7.感到别人能控制你的思想<br><label><input type="radio" name="ans7" value=1> A:无影响<input
+                        type="radio" name="ans7" value=2> B:轻度 <input type="radio" name="ans7"
+                                                                      value=3> C:中度 <input
+                        type="radio" name="ans7" value=4> D：重度 <input type="radio" name="ans7"
+                                                                      value=5> E：你完了 </label>
+                </li>
+                <li class="list-group-item col-xs-12" style="text-align:center;">
+                    8.责怪别人制造麻烦<br><label><input type="radio" name="ans8" value=1> A:无影响<input
+                        type="radio" name="ans8" value=2> B:轻度 <input type="radio" name="ans8"
+                                                                      value=3> C:中度 <input
+                        type="radio" name="ans8" value=4> D：重度 <input type="radio" name="ans8"
+                                                                      value=5> E：你完了 </label>
+                </li>
+                <li class="list-group-item col-xs-12" style="text-align:center;">
+                    9.忘记性大<br><label><input type="radio" name="ans9" value=1> A:无影响<input
+                        type="radio" name="ans9" value=2> B:轻度 <input type="radio" name="ans9"
+                                                                      value=3> C:中度 <input
+                        type="radio" name="ans9" value=4> D：重度 <input type="radio" name="ans9"
+                                                                      value=5> E：你完了 </label>
+                </li>
+                <li class="list-group-item col-xs-12" style="text-align:center;">
+                    10.担心自己的衣饰整齐及仪态的端正<br><label><input type="radio" name="ans10" value=1>
+                    A:无影响<input type="radio" name="ans10" value=2> B:轻度 <input type="radio"
+                                                                               name="ans10" value=3>
+                    C:中度 <input type="radio" name="ans10" value=4> D：重度 <input type="radio"
+                                                                               name="ans10" value=5>
+                    E：你完了 </label>
+                </li>
+                <li class="list-group-item col-xs-12" style="text-align:center;">
+                    11.容易烦恼和激动<br><label><input type="radio" name="ans11" value=1> A:无影响<input
+                        type="radio" name="ans11" value=2> B:轻度 <input type="radio" name="ans11"
+                                                                       value=3> C:中度 <input
+                        type="radio" name="ans11" value=4> D：重度 <input type="radio" name="ans11"
+                                                                       value=5> E：你完了 </label>
+                </li>
+                <li class="list-group-item col-xs-12" style="text-align:center;">
+                    12.胸痛<br><label><input type="radio" name="ans12" value=1> A:无影响<input
+                        type="radio" name="ans12" value=2> B:轻度 <input type="radio" name="ans12"
+                                                                       value=3> C:中度 <input
+                        type="radio" name="ans12" value=4> D：重度 <input type="radio" name="ans12"
+                                                                       value=5> E：你完了 </label>
+                </li>
+                <li class="list-group-item col-xs-12" style="text-align:center;">
+                    13.害怕空旷的场所或街道<br><label><input type="radio" name="ans13" value=1> A:无影响<input
+                        type="radio" name="ans13" value=2> B:轻度 <input type="radio" name="ans13"
+                                                                       value=3> C:中度 <input
+                        type="radio" name="ans13" value=4> D：重度 <input type="radio" name="ans13"
+                                                                       value=5> E：你完了 </label>
+                </li>
+                <li class="list-group-item col-xs-12" style="text-align:center;">
+                    14.感到自己精力下降，活动减慢<br><label><input type="radio" name="ans14" value=1> A:无影响<input
+                        type="radio" name="ans14" value=2> B:轻度 <input type="radio" name="ans14"
+                                                                       value=3> C:中度 <input
+                        type="radio" name="ans14" value=4> D：重度 <input type="radio" name="ans14"
+                                                                       value=5> E：你完了 </label>
+                </li>
+                <li class="list-group-item col-xs-12" style="text-align:center;">
+                    15.想结束自己的性命<br><label><input type="radio" name="ans15" value=1> A:无影响<input
+                        type="radio" name="ans15" value=2> B:轻度 <input type="radio" name="ans15"
+                                                                       value=3> C:中度 <input
+                        type="radio" name="ans15" value=4> D：重度 <input type="radio" name="ans15"
+                                                                       value=5> E：你完了 </label>
+                </li>
+                <li class="list-group-item col-xs-12" style="text-align:center;">
+                    16.听到旁人听不到的声音<br><label><input type="radio" name="ans16" value=1> A:无影响<input
+                        type="radio" name="ans16" value=2> B:轻度 <input type="radio" name="ans16"
+                                                                       value=3> C:中度 <input
+                        type="radio" name="ans16" value=4> D：重度 <input type="radio" name="ans16"
+                                                                       value=5> E：你完了 </label>
+                </li>
+                <li class="list-group-item col-xs-12" style="text-align:center;">
+                    17.发抖<br><label><input type="radio" name="ans17" value=1> A:无影响<input
+                        type="radio" name="ans17" value=2> B:轻度 <input type="radio" name="ans17"
+                                                                       value=3> C:中度 <input
+                        type="radio" name="ans17" value=4> D：重度 <input type="radio" name="ans17"
+                                                                       value=5> E：你完了 </label>
+                </li>
+                <li class="list-group-item col-xs-12" style="text-align:center;">
+                    18.感到大多数人都不可信任<br><label><input type="radio" name="ans18" value=1> A:无影响<input
+                        type="radio" name="ans18" value=2> B:轻度 <input type="radio" name="ans18"
+                                                                       value=3> C:中度 <input
+                        type="radio" name="ans18" value=4> D：重度 <input type="radio" name="ans18"
+                                                                       value=5> E：你完了 </label>
+                </li>
+                <li class="list-group-item col-xs-12" style="text-align:center;">
+                    19.胃口不好<br><label><input type="radio" name="ans19" value=1> A:无影响<input
+                        type="radio" name="ans19" value=2> B:轻度 <input type="radio" name="ans19"
+                                                                       value=3> C:中度 <input
+                        type="radio" name="ans19" value=4> D：重度 <input type="radio" name="ans19"
+                                                                       value=5> E：你完了 </label>
+                </li>
+                <li class="list-group-item col-xs-12" style="text-align:center;">
+                    20.容易哭泣<br><label><input type="radio" name="ans20" value=1> A:无影响<input
+                        type="radio" name="ans20" value=2> B:轻度 <input type="radio" name="ans20"
+                                                                       value=3> C:中度 <input
+                        type="radio" name="ans20" value=4> D：重度 <input type="radio" name="ans20"
+                                                                       value=5> E：你完了 </label>
+                </li>
+                <li class="list-group-item col-xs-12" style="text-align:center;">
+                    21.同异性相处时感到害羞不自在<br><label><input type="radio" name="ans21" value=1> A:无影响<input
+                        type="radio" name="ans21" value=2> B:轻度 <input type="radio" name="ans21"
+                                                                       value=3> C:中度 <input
+                        type="radio" name="ans21" value=4> D：重度 <input type="radio" name="ans21"
+                                                                       value=5> E：你完了 </label>
+                </li>
+                <li class="list-group-item col-xs-12" style="text-align:center;">
+                    22.感到受骗，中了圈套或有人想抓您<br><label><input type="radio" name="ans22" value=1>
+                    A:无影响<input type="radio" name="ans22" value=2> B:轻度 <input type="radio"
+                                                                               name="ans22" value=3>
+                    C:中度 <input type="radio" name="ans22" value=4> D：重度 <input type="radio"
+                                                                               name="ans22" value=5>
+                    E：你完了 </label>
+                </li>
+                <li class="list-group-item col-xs-12" style="text-align:center;">
+                    23.无缘无故地突然感到害怕<br><label><input type="radio" name="ans23" value=1> A:无影响<input
+                        type="radio" name="ans23" value=2> B:轻度 <input type="radio" name="ans23"
+                                                                       value=3> C:中度 <input
+                        type="radio" name="ans23" value=4> D：重度 <input type="radio" name="ans23"
+                                                                       value=5> E：你完了 </label>
+                </li>
+                <li class="list-group-item col-xs-12" style="text-align:center;">
+                    24.自己不能控制地大发脾气<br><label><input type="radio" name="ans24" value=1> A:无影响<input
+                        type="radio" name="ans24" value=2> B:轻度 <input type="radio" name="ans24"
+                                                                       value=3> C:中度 <input
+                        type="radio" name="ans24" value=4> D：重度 <input type="radio" name="ans24"
+                                                                       value=5> E：你完了 </label>
+                </li>
+                <li class="list-group-item col-xs-12" style="text-align:center;">
+                    25.怕单独出门<br><label><input type="radio" name="ans25" value=1> A:无影响<input
+                        type="radio" name="ans25" value=2> B:轻度 <input type="radio" name="ans25"
+                                                                       value=3> C:中度 <input
+                        type="radio" name="ans25" value=4> D：重度 <input type="radio" name="ans25"
+                                                                       value=5> E：你完了 </label>
+                </li>
+                <li class="list-group-item col-xs-12" style="text-align:center;">
+                    26.经常责怪自己<br><label><input type="radio" name="ans26" value=1> A:无影响<input
+                        type="radio" name="ans26" value=2> B:轻度 <input type="radio" name="ans26"
+                                                                       value=3> C:中度 <input
+                        type="radio" name="ans26" value=4> D：重度 <input type="radio" name="ans26"
+                                                                       value=5> E：你完了 </label>
+                </li>
+                <li class="list-group-item col-xs-12" style="text-align:center;">
+                    27.腰痛<br><label><input type="radio" name="ans27" value=1> A:无影响<input
+                        type="radio" name="ans27" value=2> B:轻度 <input type="radio" name="ans27"
+                                                                       value=3> C:中度 <input
+                        type="radio" name="ans27" value=4> D：重度 <input type="radio" name="ans27"
+                                                                       value=5> E：你完了 </label>
+                </li>
+                <li class="list-group-item col-xs-12" style="text-align:center;">
+                    28.感到难以完成任务<br><label><input type="radio" name="ans28" value=1> A:无影响<input
+                        type="radio" name="ans28" value=2> B:轻度 <input type="radio" name="ans28"
+                                                                       value=3> C:中度 <input
+                        type="radio" name="ans28" value=4> D：重度 <input type="radio" name="ans28"
+                                                                       value=5> E：你完了 </label>
+                </li>
+                <li class="list-group-item col-xs-12" style="text-align:center;">
+                    29.感到孤独<br><label><input type="radio" name="ans29" value=1> A:无影响<input
+                        type="radio" name="ans29" value=2> B:轻度 <input type="radio" name="ans29"
+                                                                       value=3> C:中度 <input
+                        type="radio" name="ans29" value=4> D：重度 <input type="radio" name="ans29"
+                                                                       value=5> E：你完了 </label>
+                </li>
+                <li class="list-group-item col-xs-12" style="text-align:center;">
+                    30.感到苦闷<br><label><input type="radio" name="ans30" value=1> A:无影响<input
+                        type="radio" name="ans30" value=2> B:轻度 <input type="radio" name="ans30"
+                                                                       value=3> C:中度 <input
+                        type="radio" name="ans30" value=4> D：重度 <input type="radio" name="ans30"
+                                                                       value=5> E：你完了 </label>
+                </li>
+                <li class="list-group-item col-xs-12" style="text-align:center;">
+                    31.过分担忧<br><label><input type="radio" name="ans31" value=1> A:无影响<input
+                        type="radio" name="ans31" value=2> B:轻度 <input type="radio" name="ans31"
+                                                                       value=3> C:中度 <input
+                        type="radio" name="ans31" value=4> D：重度 <input type="radio" name="ans31"
+                                                                       value=5> E：你完了 </label>
+                </li>
+                <li class="list-group-item col-xs-12" style="text-align:center;">
+                    32.对事物不感兴趣<br><label><input type="radio" name="ans32" value=1> A:无影响<input
+                        type="radio" name="ans32" value=2> B:轻度 <input type="radio" name="ans32"
+                                                                       value=3> C:中度 <input
+                        type="radio" name="ans32" value=4> D：重度 <input type="radio" name="ans32"
+                                                                       value=5> E：你完了 </label>
+                </li>
+                <li class="list-group-item col-xs-12" style="text-align:center;">
+                    33.感到害怕<br><label><input type="radio" name="ans33" value=1> A:无影响<input
+                        type="radio" name="ans33" value=2> B:轻度 <input type="radio" name="ans33"
+                                                                       value=3> C:中度 <input
+                        type="radio" name="ans33" value=4> D：重度 <input type="radio" name="ans33"
+                                                                       value=5> E：你完了 </label>
+                </li>
+                <li class="list-group-item col-xs-12" style="text-align:center;">
+                    34.我的感情容易受到伤害<br><label><input type="radio" name="ans34" value=1> A:无影响<input
+                        type="radio" name="ans34" value=2> B:轻度 <input type="radio" name="ans34"
+                                                                       value=3> C:中度 <input
+                        type="radio" name="ans34" value=4> D：重度 <input type="radio" name="ans34"
+                                                                       value=5> E：你完了 </label>
+                </li>
+                <li class="list-group-item col-xs-12" style="text-align:center;">
+                    35.旁人能知道您的私下想法<br><label><input type="radio" name="ans35" value=1> A:无影响<input
+                        type="radio" name="ans35" value=2> B:轻度 <input type="radio" name="ans35"
+                                                                       value=3> C:中度 <input
+                        type="radio" name="ans35" value=4> D：重度 <input type="radio" name="ans35"
+                                                                       value=5> E：你完了 </label>
+                </li>
+                <li class="list-group-item col-xs-12" style="text-align:center;">
+                    36.感到别人不理解您不同情您<br><label><input type="radio" name="ans36" value=1> A:无影响<input
+                        type="radio" name="ans36" value=2> B:轻度 <input type="radio" name="ans36"
+                                                                       value=3> C:中度 <input
+                        type="radio" name="ans36" value=4> D：重度 <input type="radio" name="ans36"
+                                                                       value=5> E：你完了 </label>
+                </li>
+                <li class="list-group-item col-xs-12" style="text-align:center;">
+                    37.感到别人对您不友好，不喜欢你<br><label><input type="radio" name="ans37" value=1>
+                    A:无影响<input type="radio" name="ans37" value=2> B:轻度 <input type="radio"
+                                                                               name="ans37" value=3>
+                    C:中度 <input type="radio" name="ans37" value=4> D：重度 <input type="radio"
+                                                                               name="ans37" value=5>
+                    E：你完了 </label>
+                </li>
+                <li class="list-group-item col-xs-12" style="text-align:center;">
+                    38.做事必须做的很慢以保证做得正确<br><label><input type="radio" name="ans38" value=1>
+                    A:无影响<input type="radio" name="ans38" value=2> B:轻度 <input type="radio"
+                                                                               name="ans38" value=3>
+                    C:中度 <input type="radio" name="ans38" value=4> D：重度 <input type="radio"
+                                                                               name="ans38" value=5>
+                    E：你完了 </label>
+                </li>
+                <li class="list-group-item col-xs-12" style="text-align:center;">
+                    39.心跳的很厉害<br><label><input type="radio" name="ans39" value=1> A:无影响<input
+                        type="radio" name="ans39" value=2> B:轻度 <input type="radio" name="ans39"
+                                                                       value=3> C:中度 <input
+                        type="radio" name="ans39" value=4> D：重度 <input type="radio" name="ans39"
+                                                                       value=5> E：你完了 </label>
+                </li>
+                <li class="list-group-item col-xs-12" style="text-align:center;">
+                    40.恶心或胃不舒服<br><label><input type="radio" name="ans40" value=1> A:无影响<input
+                        type="radio" name="ans40" value=2> B:轻度 <input type="radio" name="ans40"
+                                                                       value=3> C:中度 <input
+                        type="radio" name="ans40" value=4> D：重度 <input type="radio" name="ans40"
+                                                                       value=5> E：你完了 </label>
+                </li>
+                <li class="list-group-item col-xs-12" style="text-align:center;">
+                    41.感到比不上别人<br><label><input type="radio" name="ans41" value=1> A:无影响<input
+                        type="radio" name="ans41" value=2> B:轻度 <input type="radio" name="ans41"
+                                                                       value=3> C:中度 <input
+                        type="radio" name="ans41" value=4> D：重度 <input type="radio" name="ans41"
+                                                                       value=5> E：你完了 </label>
+                </li>
+                <li class="list-group-item col-xs-12" style="text-align:center;">
+                    42.肌肉酸痛<br><label><input type="radio" name="ans42" value=1> A:无影响<input
+                        type="radio" name="ans42" value=2> B:轻度 <input type="radio" name="ans42"
+                                                                       value=3> C:中度 <input
+                        type="radio" name="ans42" value=4> D：重度 <input type="radio" name="ans42"
+                                                                       value=5> E：你完了 </label>
+                </li>
+                <li class="list-group-item col-xs-12" style="text-align:center;">
+                    43.感到有人在监视您<br><label><input type="radio" name="ans43" value=1> A:无影响<input
+                        type="radio" name="ans43" value=2> B:轻度 <input type="radio" name="ans43"
+                                                                       value=3> C:中度 <input
+                        type="radio" name="ans43" value=4> D：重度 <input type="radio" name="ans43"
+                                                                       value=5> E：你完了 </label>
+                </li>
+                <li class="list-group-item col-xs-12" style="text-align:center;">
+                    44.难以入睡<br><label><input type="radio" name="ans44" value=1> A:无影响<input
+                        type="radio" name="ans44" value=2> B:轻度 <input type="radio" name="ans44"
+                                                                       value=3> C:中度 <input
+                        type="radio" name="ans44" value=4> D：重度 <input type="radio" name="ans44"
+                                                                       value=5> E：你完了 </label>
+                </li>
+                <li class="list-group-item col-xs-12" style="text-align:center;">
+                    45.做事必须反复检查<br><label><input type="radio" name="ans45" value=1> A:无影响<input
+                        type="radio" name="ans45" value=2> B:轻度 <input type="radio" name="ans45"
+                                                                       value=3> C:中度 <input
+                        type="radio" name="ans45" value=4> D：重度 <input type="radio" name="ans45"
+                                                                       value=5> E：你完了 </label>
+                </li>
+                <li class="list-group-item col-xs-12" style="text-align:center;">
+                    46.难以做出决定<br><label><input type="radio" name="ans46" value=1> A:无影响<input
+                        type="radio" name="ans46" value=2> B:轻度 <input type="radio" name="ans46"
+                                                                       value=3> C:中度 <input
+                        type="radio" name="ans46" value=4> D：重度 <input type="radio" name="ans46"
+                                                                       value=5> E：你完了 </label>
+                </li>
+                <li class="list-group-item col-xs-12" style="text-align:center;">
+                    47.怕乘电车、公共汽车、地铁或火车<br><label><input type="radio" name="ans47" value=1>
+                    A:无影响<input type="radio" name="ans47" value=2> B:轻度 <input type="radio"
+                                                                               name="ans47" value=3>
+                    C:中度 <input type="radio" name="ans47" value=4> D：重度 <input type="radio"
+                                                                               name="ans47" value=5>
+                    E：你完了 </label>
+                </li>
+                <li class="list-group-item col-xs-12" style="text-align:center;">
+                    48.呼吸有困难<br><label><input type="radio" name="ans48" value=1> A:无影响<input
+                        type="radio" name="ans48" value=2> B:轻度 <input type="radio" name="ans48"
+                                                                       value=3> C:中度 <input
+                        type="radio" name="ans48" value=4> D：重度 <input type="radio" name="ans48"
+                                                                       value=5> E：你完了 </label>
+                </li>
+                <li class="list-group-item col-xs-12" style="text-align:center;">
+                    49.一阵阵发冷或发热<br><label><input type="radio" name="ans49" value=1> A:无影响<input
+                        type="radio" name="ans49" value=2> B:轻度 <input type="radio" name="ans49"
+                                                                       value=3> C:中度 <input
+                        type="radio" name="ans49" value=4> D：重度 <input type="radio" name="ans49"
+                                                                       value=5> E：你完了 </label>
+                </li>
+                <li class="list-group-item col-xs-12" style="text-align:center;">
+                    50.因为感到还怕而避开某些东西，场合或活动<br><label><input type="radio" name="ans50" value=1> A:无影响<input
+                        type="radio" name="ans50" value=2> B:轻度 <input type="radio" name="ans50"
+                                                                       value=3> C:中度 <input
+                        type="radio" name="ans50" value=4> D：重度 <input type="radio" name="ans50"
+                                                                       value=5> E：你完了 </label>
+                </li>
+                <li class="list-group-item col-xs-12" style="text-align:center;">
+                    51.脑子变空了<br><label><input type="radio" name="ans51" value=1> A:无影响<input
+                        type="radio" name="ans51" value=2> B:轻度 <input type="radio" name="ans51"
+                                                                       value=3> C:中度 <input
+                        type="radio" name="ans51" value=4> D：重度 <input type="radio" name="ans51"
+                                                                       value=5> E：你完了 </label>
+                </li>
+                <li class="list-group-item col-xs-12" style="text-align:center;">
+                    52.身体发麻或刺痛<br><label><input type="radio" name="ans52" value=1> A:无影响<input
+                        type="radio" name="ans52" value=2> B:轻度 <input type="radio" name="ans52"
+                                                                       value=3> C:中度 <input
+                        type="radio" name="ans52" value=4> D：重度 <input type="radio" name="ans52"
+                                                                       value=5> E：你完了 </label>
+                </li>
+                <li class="list-group-item col-xs-12" style="text-align:center;">
+                    53.喉咙有梗塞感<br><label><input type="radio" name="ans53" value=1> A:无影响<input
+                        type="radio" name="ans53" value=2> B:轻度 <input type="radio" name="ans53"
+                                                                       value=3> C:中度 <input
+                        type="radio" name="ans53" value=4> D：重度 <input type="radio" name="ans53"
+                                                                       value=5> E：你完了 </label>
+                </li>
+                <li class="list-group-item col-xs-12" style="text-align:center;">
+                    54.感到对前途没有希望<br><label><input type="radio" name="ans54" value=1> A:无影响<input
+                        type="radio" name="ans54" value=2> B:轻度 <input type="radio" name="ans54"
+                                                                       value=3> C:中度 <input
+                        type="radio" name="ans54" value=4> D：重度 <input type="radio" name="ans54"
+                                                                       value=5> E：你完了 </label>
+                </li>
+                <li class="list-group-item col-xs-12" style="text-align:center;">
+                    55.不能集中注意力<br><label><input type="radio" name="ans55" value=1> A:无影响<input
+                        type="radio" name="ans55" value=2> B:轻度 <input type="radio" name="ans55"
+                                                                       value=3> C:中度 <input
+                        type="radio" name="ans55" value=4> D：重度 <input type="radio" name="ans55"
+                                                                       value=5> E：你完了 </label>
+                </li>
+                <li class="list-group-item col-xs-12" style="text-align:center;">
+                    56.感到身体某一部分软弱无力<br><label><input type="radio" name="ans56" value=1> A:无影响<input
+                        type="radio" name="ans56" value=2> B:轻度 <input type="radio" name="ans56"
+                                                                       value=3> C:中度 <input
+                        type="radio" name="ans56" value=4> D：重度 <input type="radio" name="ans56"
+                                                                       value=5> E：你完了 </label>
+                </li>
+                <li class="list-group-item col-xs-12" style="text-align:center;">
+                    57.感到紧张或容易紧张<br><label><input type="radio" name="ans57" value=1> A:无影响<input
+                        type="radio" name="ans57" value=2> B:轻度 <input type="radio" name="ans57"
+                                                                       value=3> C:中度 <input
+                        type="radio" name="ans57" value=4> D：重度 <input type="radio" name="ans57"
+                                                                       value=5> E：你完了 </label>
+                </li>
+                <li class="list-group-item col-xs-12" style="text-align:center;">
+                    58.感到手或脚发重<br><label><input type="radio" name="ans58" value=1> A:无影响<input
+                        type="radio" name="ans58" value=2> B:轻度 <input type="radio" name="ans58"
+                                                                       value=3> C:中度 <input
+                        type="radio" name="ans58" value=4> D：重度 <input type="radio" name="ans58"
+                                                                       value=5> E：你完了 </label>
+                </li>
+                <li class="list-group-item col-xs-12" style="text-align:center;">
+                    59.想到有关死亡的事<br><label><input type="radio" name="ans59" value=1> A:无影响<input
+                        type="radio" name="ans59" value=2> B:轻度 <input type="radio" name="ans59"
+                                                                       value=3> C:中度 <input
+                        type="radio" name="ans59" value=4> D：重度 <input type="radio" name="ans59"
+                                                                       value=5> E：你完了 </label>
+                </li>
+                <li class="list-group-item col-xs-12" style="text-align:center;">
+                    60.吃得太多<br><label><input type="radio" name="ans60" value=1> A:无影响<input
+                        type="radio" name="ans60" value=2> B:轻度 <input type="radio" name="ans60"
+                                                                       value=3> C:中度 <input
+                        type="radio" name="ans60" value=4> D：重度 <input type="radio" name="ans60"
+                                                                       value=5> E：你完了 </label>
+                </li>
+                <li class="list-group-item col-xs-12" style="text-align:center;">
+                    61.脑子变空了<br><label><input type="radio" name="ans61" value=1> A:无影响<input
+                        type="radio" name="ans61" value=2> B:轻度 <input type="radio" name="ans61"
+                                                                       value=3> C:中度 <input
+                        type="radio" name="ans61" value=4> D：重度 <input type="radio" name="ans61"
+                                                                       value=5> E：你完了 </label>
+                </li>
+                <li class="list-group-item col-xs-12" style="text-align:center;">
+                    62.身体发麻或刺痛<br><label><input type="radio" name="ans62" value=1> A:无影响<input
+                        type="radio" name="ans62" value=2> B:轻度 <input type="radio" name="ans62"
+                                                                       value=3> C:中度 <input
+                        type="radio" name="ans62" value=4> D：重度 <input type="radio" name="ans62"
+                                                                       value=5> E：你完了 </label>
+                </li>
+                <li class="list-group-item col-xs-12" style="text-align:center;">
+                    63.有想打人或伤害他人的冲动<br><label><input type="radio" name="ans63" value=1> A:无影响<input
+                        type="radio" name="ans63" value=2> B:轻度 <input type="radio" name="ans63"
+                                                                       value=3> C:中度 <input
+                        type="radio" name="ans63" value=4> D：重度 <input type="radio" name="ans63"
+                                                                       value=5> E：你完了 </label>
+                </li>
+                <li class="list-group-item col-xs-12" style="text-align:center;">
+                    64.醒的太早<br><label><input type="radio" name="ans64" value=1> A:无影响<input
+                        type="radio" name="ans64" value=2> B:轻度 <input type="radio" name="ans64"
+                                                                       value=3> C:中度 <input
+                        type="radio" name="ans64" value=4> D：重度 <input type="radio" name="ans64"
+                                                                       value=5> E：你完了 </label>
+                </li>
+                <li class="list-group-item col-xs-12" style="text-align:center;">
+                    65.必须反复洗手、点数<br><label><input type="radio" name="ans65" value=1> A:无影响<input
+                        type="radio" name="ans65" value=2> B:轻度 <input type="radio" name="ans65"
+                                                                       value=3> C:中度 <input
+                        type="radio" name="ans65" value=4> D：重度 <input type="radio" name="ans65"
+                                                                       value=5> E：你完了 </label>
+                </li>
+                <li class="list-group-item col-xs-12" style="text-align:center;">
+                    66.睡得不稳不深<br><label><input type="radio" name="ans66" value=1> A:无影响<input
+                        type="radio" name="ans66" value=2> B:轻度 <input type="radio" name="ans66"
+                                                                       value=3> C:中度 <input
+                        type="radio" name="ans66" value=4> D：重度 <input type="radio" name="ans66"
+                                                                       value=5> E：你完了 </label>
+                </li>
+                <li class="list-group-item col-xs-12" style="text-align:center;">
+                    67.有想摔坏或破坏东西的冲动<br><label><input type="radio" name="ans67" value=1> A:无影响<input
+                        type="radio" name="ans67" value=2> B:轻度 <input type="radio" name="ans67"
+                                                                       value=3> C:中度 <input
+                        type="radio" name="ans67" value=4> D：重度 <input type="radio" name="ans67"
+                                                                       value=5> E：你完了 </label>
+                </li>
+                <li class="list-group-item col-xs-12" style="text-align:center;">
+                    68.有一些别人没有的想法或念头<br><label><input type="radio" name="ans68" value=1> A:无影响<input
+                        type="radio" name="ans68" value=2> B:轻度 <input type="radio" name="ans68"
+                                                                       value=3> C:中度 <input
+                        type="radio" name="ans68" value=4> D：重度 <input type="radio" name="ans68"
+                                                                       value=5> E：你完了 </label>
+                </li>
+                <li class="list-group-item col-xs-12" style="text-align:center;">
+                    69.感到对别人神经过敏<br><label><input type="radio" name="ans69" value=1> A:无影响<input
+                        type="radio" name="ans69" value=2> B:轻度 <input type="radio" name="ans69"
+                                                                       value=3> C:中度 <input
+                        type="radio" name="ans69" value=4> D：重度 <input type="radio" name="ans69"
+                                                                       value=5> E：你完了 </label>
+                </li>
+                <li class="list-group-item col-xs-12" style="text-align:center;">
+                    70.在商店或电影院等人多的地方感到不自在<br><label><input type="radio" name="ans70" value=1>
+                    A:无影响<input type="radio" name="ans70" value=2> B:轻度 <input type="radio"
+                                                                               name="ans70" value=3>
+                    C:中度 <input type="radio" name="ans70" value=4> D：重度 <input type="radio"
+                                                                               name="ans70" value=5>
+                    E：你完了 </label>
+                </li>
+                <li class="list-group-item col-xs-12" style="text-align:center;">
+                    71.感到任何事情都很困难<br><label><input type="radio" name="ans71" value=1> A:无影响<input
+                        type="radio" name="ans71" value=2> B:轻度 <input type="radio" name="ans71"
+                                                                       value=3> C:中度 <input
+                        type="radio" name="ans71" value=4> D：重度 <input type="radio" name="ans71"
+                                                                       value=5> E：你完了 </label>
+                </li>
+                <li class="list-group-item col-xs-12" style="text-align:center;">
+                    72.一阵阵恐惧或惊恐<br><label><input type="radio" name="ans72" value=1> A:无影响<input
+                        type="radio" name="ans72" value=2> B:轻度 <input type="radio" name="ans72"
+                                                                       value=3> C:中度 <input
+                        type="radio" name="ans72" value=4> D：重度 <input type="radio" name="ans72"
+                                                                       value=5> E：你完了 </label>
+                </li>
+                <li class="list-group-item col-xs-12" style="text-align:center;">
+                    73.感到在公共场合吃东西很不舒服<br><label><input type="radio" name="ans73" value=1>
+                    A:无影响<input type="radio" name="ans73" value=2> B:轻度 <input type="radio"
+                                                                               name="ans73" value=3>
+                    C:中度 <input type="radio" name="ans73" value=4> D：重度 <input type="radio"
+                                                                               name="ans73" value=5>
+                    E：你完了 </label>
+                </li>
+                <li class="list-group-item col-xs-12" style="text-align:center;">
+                    74.经常与人争论<br><label><input type="radio" name="ans74" value=1> A:无影响<input
+                        type="radio" name="ans74" value=2> B:轻度 <input type="radio" name="ans74"
+                                                                       value=3> C:中度 <input
+                        type="radio" name="ans74" value=4> D：重度 <input type="radio" name="ans74"
+                                                                       value=5> E：你完了 </label>
+                </li>
+                <li class="list-group-item col-xs-12" style="text-align:center;">
+                    75.单独一人时神经很紧张<br><label><input type="radio" name="ans75" value=1> A:无影响<input
+                        type="radio" name="ans75" value=2> B:轻度 <input type="radio" name="ans75"
+                                                                       value=3> C:中度 <input
+                        type="radio" name="ans75" value=4> D：重度 <input type="radio" name="ans75"
+                                                                       value=5> E：你完了 </label>
+                </li>
+                <li class="list-group-item col-xs-12" style="text-align:center;">
+                    76.别人对您的成绩没有做出恰当的评价<br><label><input type="radio" name="ans76" value=1>
+                    A:无影响<input type="radio" name="ans76" value=2> B:轻度 <input type="radio"
+                                                                               name="ans76" value=3>
+                    C:中度 <input type="radio" name="ans76" value=4> D：重度 <input type="radio"
+                                                                               name="ans76" value=5>
+                    E：你完了 </label>
+                </li>
+                <li class="list-group-item col-xs-12" style="text-align:center;">
+                    77.即使和别人坐在一起也感到孤独<br><label><input type="radio" name="ans77" value=1>
+                    A:无影响<input type="radio" name="ans77" value=2> B:轻度 <input type="radio"
+                                                                               name="ans77" value=3>
+                    C:中度 <input type="radio" name="ans77" value=4> D：重度 <input type="radio"
+                                                                               name="ans77" value=5>
+                    E：你完了 </label>
+                </li>
+                <li class="list-group-item col-xs-12" style="text-align:center;">
+                    78.感到坐立不安心神不宁<br><label><input type="radio" name="ans78" value=1> A:无影响<input
+                        type="radio" name="ans78" value=2> B:轻度 <input type="radio" name="ans78"
+                                                                       value=3> C:中度 <input
+                        type="radio" name="ans78" value=4> D：重度 <input type="radio" name="ans78"
+                                                                       value=5> E：你完了 </label>
+                </li>
+                <li class="list-group-item col-xs-12" style="text-align:center;">
+                    79.感到自己没有什么价值<br><label><input type="radio" name="ans79" value=1> A:无影响<input
+                        type="radio" name="ans79" value=2> B:轻度 <input type="radio" name="ans79"
+                                                                       value=3> C:中度 <input
+                        type="radio" name="ans79" value=4> D：重度 <input type="radio" name="ans79"
+                                                                       value=5> E：你完了 </label>
+                </li>
+                <li class="list-group-item col-xs-12" style="text-align:center;">
+                    80.感到熟悉的东西变成陌生或不像是真的<br><label><input type="radio" name="ans80" value=1>
+                    A:无影响<input type="radio" name="ans80" value=2> B:轻度 <input type="radio"
+                                                                               name="ans80" value=3>
+                    C:中度 <input type="radio" name="ans80" value=4> D：重度 <input type="radio"
+                                                                               name="ans80" value=5>
+                    E：你完了 </label>
+                </li>
+                <li class="list-group-item col-xs-12" style="text-align:center;">
+                    81.大叫或摔东西<br><label><input type="radio" name="ans81" value=1> A:无影响<input
+                        type="radio" name="ans81" value=2> B:轻度 <input type="radio" name="ans81"
+                                                                       value=3> C:中度 <input
+                        type="radio" name="ans81" value=4> D：重度 <input type="radio" name="ans81"
+                                                                       value=5> E：你完了 </label>
+                </li>
+                <li class="list-group-item col-xs-12" style="text-align:center;">
+                    82.害怕会在公共场合昏倒<br><label><input type="radio" name="ans82" value=1> A:无影响<input
+                        type="radio" name="ans82" value=2> B:轻度 <input type="radio" name="ans82"
+                                                                       value=3> C:中度 <input
+                        type="radio" name="ans82" value=4> D：重度 <input type="radio" name="ans82"
+                                                                       value=5> E：你完了 </label>
+                </li>
+                <li class="list-group-item col-xs-12" style="text-align:center;">
+                    83.感到别人想占您的便宜<br><label><input type="radio" name="ans83" value=1> A:无影响<input
+                        type="radio" name="ans83" value=2> B:轻度 <input type="radio" name="ans83"
+                                                                       value=3> C:中度 <input
+                        type="radio" name="ans83" value=4> D：重度 <input type="radio" name="ans83"
+                                                                       value=5> E：你完了 </label>
+                </li>
+                <li class="list-group-item col-xs-12" style="text-align:center;">
+                    84.为一些有关"性"的想法而很苦恼<br><label><input type="radio" name="ans84" value=1>
+                    A:无影响<input type="radio" name="ans84" value=2> B:轻度 <input type="radio"
+                                                                               name="ans84" value=3>
+                    C:中度 <input type="radio" name="ans84" value=4> D：重度 <input type="radio"
+                                                                               name="ans84" value=5>
+                    E：你完了 </label>
+                </li>
+                <li class="list-group-item col-xs-12" style="text-align:center;">
+                    85.认为应该因为自己的过错而受到惩罚<br><label><input type="radio" name="ans85" value=1>
+                    A:无影响<input type="radio" name="ans85" value=2> B:轻度 <input type="radio"
+                                                                               name="ans85" value=3>
+                    C:中度 <input type="radio" name="ans85" value=4> D：重度 <input type="radio"
+                                                                               name="ans85" value=5>
+                    E：你完了 </label>
+                </li>
+                <li class="list-group-item col-xs-12" style="text-align:center;">
+                    86.感到要赶快把事情做完<br><label><input type="radio" name="ans86" value=1> A:无影响<input
+                        type="radio" name="ans86" value=2> B:轻度 <input type="radio" name="ans86"
+                                                                       value=3> C:中度 <input
+                        type="radio" name="ans86" value=4> D：重度 <input type="radio" name="ans86"
+                                                                       value=5> E：你完了 </label>
+                </li>
+                <li class="list-group-item col-xs-12" style="text-align:center;">
+                    87.感到自己的身体有严重的问题<br><label><input type="radio" name="ans87" value=1> A:无影响<input
+                        type="radio" name="ans87" value=2> B:轻度 <input type="radio" name="ans87"
+                                                                       value=3> C:中度 <input
+                        type="radio" name="ans87" value=4> D：重度 <input type="radio" name="ans87"
+                                                                       value=5> E：你完了 </label>
+                </li>
+                <li class="list-group-item col-xs-12" style="text-align:center;">
+                    88.从未感到和其他人很亲近<br><label><input type="radio" name="ans88" value=1> A:无影响<input
+                        type="radio" name="ans88" value=2> B:轻度 <input type="radio" name="ans88"
+                                                                       value=3> C:中度 <input
+                        type="radio" name="ans88" value=4> D：重度 <input type="radio" name="ans88"
+                                                                       value=5> E：你完了 </label>
+                </li>
+                <li class="list-group-item col-xs-12" style="text-align:center;">
+                    89.感到自己有罪<br><label><input type="radio" name="ans89" value=1> A:无影响<input
+                        type="radio" name="ans89" value=2> B:轻度 <input type="radio" name="ans89"
+                                                                       value=3> C:中度 <input
+                        type="radio" name="ans89" value=4> D：重度 <input type="radio" name="ans89"
+                                                                       value=5> E：你完了 </label>
+                </li>
+                <li class="list-group-item col-xs-12" style="text-align:center;">
+                    90.感到自己的脑子有毛病<br><label><input type="radio" name="ans90" value=1> A:无影响<input
+                        type="radio" name="ans90" value=2> B:轻度 <input type="radio" name="ans90"
+                                                                       value=3> C:中度 <input
+                        type="radio" name="ans90" value=4> D：重度 <input type="radio" name="ans90"
+                                                                       value=5> E：你完了 </label>
+                </li>
+            </ul>
+        </div>
+        <div class="col-xs-12" style="text-align: center;">
+            <button class="btn btn-default submitAnswer">提交</button>
+        </div>
     </div>
-  </div>
-  <div class="col-xs-2 col-sm-2">
-  </div>
+</div>
+<div class="col-xs-2 col-sm-2">
+</div>
 </body>
 </html>

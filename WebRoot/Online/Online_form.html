@@ -49,6 +49,7 @@
             }
         });
         $(document).on('click', '#insertBlank', function () {
+            var isValidUserName = false;
             var url = window.location.href.split('?');
             var str = url[1].split('=');
             var activityNum = str[1];
@@ -56,32 +57,41 @@
             var userId = $("#userId").val();
             var userPhone = $("#userPhone").val();
             var userDesc = $("#userDesc").val();
-            $.ajax({
-                       url: '/appointment/order',
-                       type: 'POST',
-                       dataType: 'json',
-                       data: {
-                           activityId: activityNum,
-                           userName: userName,
-                           userId: userId,
-                           telephone: userPhone,
-                           desc: userDesc
-                       },
-                       success: function (data) {
-                           if (data.status == true) {
-                               alert("预约成功");
-                               window.location.href = "Online_index.html";
-                           }
-                           else {
-                               alert("请重新提交");
-                           }
-                       },
-                       error: function (XMLHttpRequest, textStatus, errorThrown) {
-                           alert(XMLHttpRequest.responseText);
-                           alert(XMLHttpRequest.readyState);
-                           alert(textStatus);
-                       },
-                   });
+
+            if (userName.length < 1) {
+                $("#user_name_appointment-msg").html("姓名为空！");
+            } else {
+                isValidUserName = true;
+            }
+
+            if (isValidUserName) {
+                $.ajax({
+                           url: '/appointment/order',
+                           type: 'POST',
+                           dataType: 'json',
+                           data: {
+                               activityId: activityNum,
+                               userName: userName,
+                               userId: userId,
+                               telephone: userPhone,
+                               desc: userDesc
+                           },
+                           success: function (data) {
+                               if (data.status == true) {
+                                   alert("预约成功");
+                                   window.location.href = "Online_index.html";
+                               }
+                               else {
+                                   alert("请重新提交");
+                               }
+                           },
+                           error: function (XMLHttpRequest, textStatus, errorThrown) {
+                               alert(XMLHttpRequest.responseText);
+                               alert(XMLHttpRequest.readyState);
+                               alert(textStatus);
+                           },
+                       });
+            }
         });
     </script>
 </head>
@@ -156,6 +166,7 @@
         </div>
         <div class="col-xs-6 col-md-6">
             <input class="form-control" rows="1" id="userName">
+            <p id="user_name_appointment-msg" class="bg-warning"></p>
         </div>
         <div class="col-xs-3 col-md-3">
         </div>
